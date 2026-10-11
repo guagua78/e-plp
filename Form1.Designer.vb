@@ -337,7 +337,7 @@ Partial Class Form1
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(618, 663)
+        Me.Label5.Location = New System.Drawing.Point(539, 659)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(76, 20)
         Me.Label5.TabIndex = 21
@@ -346,7 +346,7 @@ Partial Class Form1
         'txtPassword
         '
         Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(622, 686)
+        Me.txtPassword.Location = New System.Drawing.Point(543, 682)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(185, 27)
         Me.txtPassword.TabIndex = 22
@@ -355,7 +355,7 @@ Partial Class Form1
         'txtConfirmPass
         '
         Me.txtConfirmPass.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConfirmPass.Location = New System.Drawing.Point(843, 686)
+        Me.txtConfirmPass.Location = New System.Drawing.Point(764, 682)
         Me.txtConfirmPass.Name = "txtConfirmPass"
         Me.txtConfirmPass.Size = New System.Drawing.Size(185, 27)
         Me.txtConfirmPass.TabIndex = 24
@@ -366,7 +366,7 @@ Partial Class Form1
         Me.Label13.AutoSize = True
         Me.Label13.BackColor = System.Drawing.Color.Transparent
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(839, 663)
+        Me.Label13.Location = New System.Drawing.Point(760, 659)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(137, 20)
         Me.Label13.TabIndex = 23
@@ -376,7 +376,7 @@ Partial Class Form1
         '
         Me.chckShowPass.AutoSize = True
         Me.chckShowPass.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chckShowPass.Location = New System.Drawing.Point(1050, 692)
+        Me.chckShowPass.Location = New System.Drawing.Point(971, 688)
         Me.chckShowPass.Name = "chckShowPass"
         Me.chckShowPass.Size = New System.Drawing.Size(46, 21)
         Me.chckShowPass.TabIndex = 25
