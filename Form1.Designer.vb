@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+Partial Class frmRegister
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,184 +22,199 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblFname = New System.Windows.Forms.Label()
+        Me.lbltext = New System.Windows.Forms.Label()
+        Me.pbPLPbuilding = New System.Windows.Forms.PictureBox()
+        Me.lblCreateYAcc = New System.Windows.Forms.Label()
+        Me.lblSignup = New System.Windows.Forms.Label()
         Me.lblStudNum = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblEmailAdd = New System.Windows.Forms.Label()
         Me.txtStudNum = New System.Windows.Forms.TextBox()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.txtFirstName = New System.Windows.Forms.TextBox()
         Me.txtMidName = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblMname = New System.Windows.Forms.Label()
         Me.txtLastName = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblLname = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cmbSuffix = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lblYrLevel = New System.Windows.Forms.Label()
         Me.cmbYearLevel = New System.Windows.Forms.ComboBox()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.lblCollege = New System.Windows.Forms.Label()
         Me.cmbCollege = New System.Windows.Forms.ComboBox()
         Me.pnlPrograms = New System.Windows.Forms.Panel()
-        Me.Label12 = New System.Windows.Forms.Label()
+        Me.lblPrograms = New System.Windows.Forms.Label()
         Me.rdoProg4 = New System.Windows.Forms.RadioButton()
         Me.rdoProg3 = New System.Windows.Forms.RadioButton()
         Me.rdoProg2 = New System.Windows.Forms.RadioButton()
         Me.rdoProg1 = New System.Windows.Forms.RadioButton()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblPassword = New System.Windows.Forms.Label()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.txtConfirmPass = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.lblCPassword = New System.Windows.Forms.Label()
         Me.chckShowPass = New System.Windows.Forms.CheckBox()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbPLPbuilding, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlPrograms.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblFname
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(540, 350)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(84, 17)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "FIRST NAME"
+        Me.lblFname.AutoSize = True
+        Me.lblFname.BackColor = System.Drawing.Color.Transparent
+        Me.lblFname.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFname.Location = New System.Drawing.Point(810, 538)
+        Me.lblFname.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFname.Name = "lblFname"
+        Me.lblFname.Size = New System.Drawing.Size(130, 28)
+        Me.lblFname.TabIndex = 0
+        Me.lblFname.Text = "FIRST NAME"
         '
-        'Label2
+        'lbltext
         '
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(230, 245)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(252, 85)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Build your verified digital academic footprint."
+        Me.lbltext.BackColor = System.Drawing.Color.Transparent
+        Me.lbltext.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltext.Location = New System.Drawing.Point(345, 377)
+        Me.lbltext.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbltext.Name = "lbltext"
+        Me.lbltext.Size = New System.Drawing.Size(378, 131)
+        Me.lbltext.TabIndex = 1
+        Me.lbltext.Text = "Build your verified digital academic footprint."
         '
-        'PictureBox1
+        'pbPLPbuilding
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(235, 370)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(231, 189)
-        Me.PictureBox1.TabIndex = 2
-        Me.PictureBox1.TabStop = False
+        Me.pbPLPbuilding.Location = New System.Drawing.Point(352, 569)
+        Me.pbPLPbuilding.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.pbPLPbuilding.Name = "pbPLPbuilding"
+        Me.pbPLPbuilding.Size = New System.Drawing.Size(346, 291)
+        Me.pbPLPbuilding.TabIndex = 2
+        Me.pbPLPbuilding.TabStop = False
         '
-        'Label3
+        'lblCreateYAcc
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(497, 221)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(214, 30)
-        Me.Label3.TabIndex = 3
-        Me.Label3.Text = "Create Your Account"
+        Me.lblCreateYAcc.AutoSize = True
+        Me.lblCreateYAcc.BackColor = System.Drawing.Color.Transparent
+        Me.lblCreateYAcc.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCreateYAcc.Location = New System.Drawing.Point(746, 340)
+        Me.lblCreateYAcc.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblCreateYAcc.Name = "lblCreateYAcc"
+        Me.lblCreateYAcc.Size = New System.Drawing.Size(325, 45)
+        Me.lblCreateYAcc.TabIndex = 3
+        Me.lblCreateYAcc.Text = "Create Your Account"
         '
-        'Label4
+        'lblSignup
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(498, 251)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(454, 17)
-        Me.Label4.TabIndex = 4
-        Me.Label4.Text = "Sign up to start building your academic e-portfolio with your student profile."
+        Me.lblSignup.AutoSize = True
+        Me.lblSignup.BackColor = System.Drawing.Color.Transparent
+        Me.lblSignup.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSignup.Location = New System.Drawing.Point(747, 386)
+        Me.lblSignup.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSignup.Name = "lblSignup"
+        Me.lblSignup.Size = New System.Drawing.Size(682, 28)
+        Me.lblSignup.TabIndex = 4
+        Me.lblSignup.Text = "Sign up to start building your academic e-portfolio with your student profile."
         '
         'lblStudNum
         '
         Me.lblStudNum.AutoSize = True
         Me.lblStudNum.BackColor = System.Drawing.Color.Transparent
         Me.lblStudNum.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStudNum.Location = New System.Drawing.Point(540, 293)
+        Me.lblStudNum.Location = New System.Drawing.Point(810, 451)
+        Me.lblStudNum.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStudNum.Name = "lblStudNum"
-        Me.lblStudNum.Size = New System.Drawing.Size(125, 17)
+        Me.lblStudNum.Size = New System.Drawing.Size(195, 28)
         Me.lblStudNum.TabIndex = 5
         Me.lblStudNum.Text = "STUDENT NUMBER"
         '
-        'Label6
+        'lblEmailAdd
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(840, 293)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(109, 17)
-        Me.Label6.TabIndex = 6
-        Me.Label6.Text = "EMAIL ADDRESS"
+        Me.lblEmailAdd.AutoSize = True
+        Me.lblEmailAdd.BackColor = System.Drawing.Color.Transparent
+        Me.lblEmailAdd.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEmailAdd.Location = New System.Drawing.Point(1260, 451)
+        Me.lblEmailAdd.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblEmailAdd.Name = "lblEmailAdd"
+        Me.lblEmailAdd.Size = New System.Drawing.Size(168, 28)
+        Me.lblEmailAdd.TabIndex = 6
+        Me.lblEmailAdd.Text = "EMAIL ADDRESS"
         '
         'txtStudNum
         '
         Me.txtStudNum.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStudNum.Location = New System.Drawing.Point(543, 313)
+        Me.txtStudNum.Location = New System.Drawing.Point(814, 482)
+        Me.txtStudNum.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtStudNum.Name = "txtStudNum"
-        Me.txtStudNum.Size = New System.Drawing.Size(264, 27)
+        Me.txtStudNum.Size = New System.Drawing.Size(394, 37)
         Me.txtStudNum.TabIndex = 7
         '
         'txtEmail
         '
         Me.txtEmail.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmail.Location = New System.Drawing.Point(846, 313)
+        Me.txtEmail.Location = New System.Drawing.Point(1269, 482)
+        Me.txtEmail.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(405, 27)
+        Me.txtEmail.Size = New System.Drawing.Size(606, 37)
         Me.txtEmail.TabIndex = 8
         '
         'txtFirstName
         '
         Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFirstName.Location = New System.Drawing.Point(544, 370)
+        Me.txtFirstName.Location = New System.Drawing.Point(816, 569)
+        Me.txtFirstName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(264, 27)
+        Me.txtFirstName.Size = New System.Drawing.Size(394, 37)
         Me.txtFirstName.TabIndex = 9
         '
         'txtMidName
         '
         Me.txtMidName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMidName.Location = New System.Drawing.Point(542, 417)
+        Me.txtMidName.Location = New System.Drawing.Point(813, 642)
+        Me.txtMidName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtMidName.Name = "txtMidName"
-        Me.txtMidName.Size = New System.Drawing.Size(264, 27)
+        Me.txtMidName.Size = New System.Drawing.Size(394, 37)
         Me.txtMidName.TabIndex = 11
         '
-        'Label7
+        'lblMname
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(539, 399)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(89, 15)
-        Me.Label7.TabIndex = 10
-        Me.Label7.Text = "MIDDLE NAME"
+        Me.lblMname.AutoSize = True
+        Me.lblMname.BackColor = System.Drawing.Color.Transparent
+        Me.lblMname.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMname.Location = New System.Drawing.Point(808, 614)
+        Me.lblMname.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblMname.Name = "lblMname"
+        Me.lblMname.Size = New System.Drawing.Size(139, 25)
+        Me.lblMname.TabIndex = 10
+        Me.lblMname.Text = "MIDDLE NAME"
         '
         'txtLastName
         '
         Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLastName.Location = New System.Drawing.Point(542, 467)
+        Me.txtLastName.Location = New System.Drawing.Point(813, 718)
+        Me.txtLastName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtLastName.Name = "txtLastName"
-        Me.txtLastName.Size = New System.Drawing.Size(264, 27)
+        Me.txtLastName.Size = New System.Drawing.Size(394, 37)
         Me.txtLastName.TabIndex = 13
         '
-        'Label8
+        'lblLname
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(540, 447)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(81, 17)
-        Me.Label8.TabIndex = 12
-        Me.Label8.Text = "LAST NAME"
+        Me.lblLname.AutoSize = True
+        Me.lblLname.BackColor = System.Drawing.Color.Transparent
+        Me.lblLname.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLname.Location = New System.Drawing.Point(810, 688)
+        Me.lblLname.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLname.Name = "lblLname"
+        Me.lblLname.Size = New System.Drawing.Size(125, 28)
+        Me.lblLname.TabIndex = 12
+        Me.lblLname.Text = "LAST NAME"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.BackColor = System.Drawing.Color.Transparent
         Me.Label9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(540, 498)
+        Me.Label9.Location = New System.Drawing.Point(810, 766)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(51, 17)
+        Me.Label9.Size = New System.Drawing.Size(76, 28)
         Me.Label9.TabIndex = 14
         Me.Label9.Text = "SUFFIX"
         '
@@ -209,21 +224,23 @@ Partial Class Form1
         Me.cmbSuffix.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSuffix.FormattingEnabled = True
         Me.cmbSuffix.Items.AddRange(New Object() {"(None)", "Jr.", "Sr.", "II.", "III.", "IV.", "V."})
-        Me.cmbSuffix.Location = New System.Drawing.Point(542, 518)
+        Me.cmbSuffix.Location = New System.Drawing.Point(813, 797)
+        Me.cmbSuffix.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmbSuffix.Name = "cmbSuffix"
-        Me.cmbSuffix.Size = New System.Drawing.Size(266, 28)
+        Me.cmbSuffix.Size = New System.Drawing.Size(397, 39)
         Me.cmbSuffix.TabIndex = 15
         '
-        'Label10
+        'lblYrLevel
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.BackColor = System.Drawing.Color.Transparent
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(841, 350)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(81, 17)
-        Me.Label10.TabIndex = 16
-        Me.Label10.Text = "YEAR LEVEL"
+        Me.lblYrLevel.AutoSize = True
+        Me.lblYrLevel.BackColor = System.Drawing.Color.Transparent
+        Me.lblYrLevel.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblYrLevel.Location = New System.Drawing.Point(1262, 538)
+        Me.lblYrLevel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblYrLevel.Name = "lblYrLevel"
+        Me.lblYrLevel.Size = New System.Drawing.Size(123, 28)
+        Me.lblYrLevel.TabIndex = 16
+        Me.lblYrLevel.Text = "YEAR LEVEL"
         '
         'cmbYearLevel
         '
@@ -231,21 +248,23 @@ Partial Class Form1
         Me.cmbYearLevel.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbYearLevel.FormattingEnabled = True
         Me.cmbYearLevel.Items.AddRange(New Object() {"1st Year", "2nd Year", "3rd Year", "4th Year"})
-        Me.cmbYearLevel.Location = New System.Drawing.Point(846, 370)
+        Me.cmbYearLevel.Location = New System.Drawing.Point(1269, 569)
+        Me.cmbYearLevel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmbYearLevel.Name = "cmbYearLevel"
-        Me.cmbYearLevel.Size = New System.Drawing.Size(405, 28)
+        Me.cmbYearLevel.Size = New System.Drawing.Size(606, 39)
         Me.cmbYearLevel.TabIndex = 17
         '
-        'Label11
+        'lblCollege
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.BackColor = System.Drawing.Color.Transparent
-        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(842, 401)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(63, 17)
-        Me.Label11.TabIndex = 18
-        Me.Label11.Text = "COLLEGE"
+        Me.lblCollege.AutoSize = True
+        Me.lblCollege.BackColor = System.Drawing.Color.Transparent
+        Me.lblCollege.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCollege.Location = New System.Drawing.Point(1263, 617)
+        Me.lblCollege.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblCollege.Name = "lblCollege"
+        Me.lblCollege.Size = New System.Drawing.Size(95, 28)
+        Me.lblCollege.TabIndex = 18
+        Me.lblCollege.Text = "COLLEGE"
         '
         'cmbCollege
         '
@@ -253,44 +272,48 @@ Partial Class Form1
         Me.cmbCollege.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbCollege.FormattingEnabled = True
         Me.cmbCollege.Items.AddRange(New Object() {"CAS", "CBA", "CCS", "COED", "COE", "CIHM", "CON"})
-        Me.cmbCollege.Location = New System.Drawing.Point(846, 421)
+        Me.cmbCollege.Location = New System.Drawing.Point(1269, 648)
+        Me.cmbCollege.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmbCollege.Name = "cmbCollege"
-        Me.cmbCollege.Size = New System.Drawing.Size(405, 28)
+        Me.cmbCollege.Size = New System.Drawing.Size(606, 39)
         Me.cmbCollege.TabIndex = 19
         '
         'pnlPrograms
         '
         Me.pnlPrograms.BackColor = System.Drawing.Color.Transparent
-        Me.pnlPrograms.Controls.Add(Me.Label12)
+        Me.pnlPrograms.Controls.Add(Me.lblPrograms)
         Me.pnlPrograms.Controls.Add(Me.rdoProg4)
         Me.pnlPrograms.Controls.Add(Me.rdoProg3)
         Me.pnlPrograms.Controls.Add(Me.rdoProg2)
         Me.pnlPrograms.Controls.Add(Me.rdoProg1)
         Me.pnlPrograms.Enabled = False
         Me.pnlPrograms.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pnlPrograms.Location = New System.Drawing.Point(846, 455)
+        Me.pnlPrograms.Location = New System.Drawing.Point(1269, 700)
+        Me.pnlPrograms.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.pnlPrograms.Name = "pnlPrograms"
-        Me.pnlPrograms.Size = New System.Drawing.Size(406, 174)
+        Me.pnlPrograms.Size = New System.Drawing.Size(609, 268)
         Me.pnlPrograms.TabIndex = 20
         Me.pnlPrograms.Visible = False
         '
-        'Label12
+        'lblPrograms
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(3, 7)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(77, 20)
-        Me.Label12.TabIndex = 21
-        Me.Label12.Text = "Programs"
+        Me.lblPrograms.AutoSize = True
+        Me.lblPrograms.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPrograms.Location = New System.Drawing.Point(4, 11)
+        Me.lblPrograms.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPrograms.Name = "lblPrograms"
+        Me.lblPrograms.Size = New System.Drawing.Size(117, 31)
+        Me.lblPrograms.TabIndex = 21
+        Me.lblPrograms.Text = "Programs"
         '
         'rdoProg4
         '
         Me.rdoProg4.AutoSize = True
         Me.rdoProg4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoProg4.Location = New System.Drawing.Point(7, 140)
+        Me.rdoProg4.Location = New System.Drawing.Point(10, 215)
+        Me.rdoProg4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.rdoProg4.Name = "rdoProg4"
-        Me.rdoProg4.Size = New System.Drawing.Size(104, 21)
+        Me.rdoProg4.Size = New System.Drawing.Size(158, 32)
         Me.rdoProg4.TabIndex = 3
         Me.rdoProg4.TabStop = True
         Me.rdoProg4.Text = "RadioButton4"
@@ -300,9 +323,10 @@ Partial Class Form1
         '
         Me.rdoProg3.AutoSize = True
         Me.rdoProg3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoProg3.Location = New System.Drawing.Point(7, 105)
+        Me.rdoProg3.Location = New System.Drawing.Point(10, 162)
+        Me.rdoProg3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.rdoProg3.Name = "rdoProg3"
-        Me.rdoProg3.Size = New System.Drawing.Size(104, 21)
+        Me.rdoProg3.Size = New System.Drawing.Size(158, 32)
         Me.rdoProg3.TabIndex = 2
         Me.rdoProg3.TabStop = True
         Me.rdoProg3.Text = "RadioButton3"
@@ -312,9 +336,10 @@ Partial Class Form1
         '
         Me.rdoProg2.AutoSize = True
         Me.rdoProg2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoProg2.Location = New System.Drawing.Point(7, 69)
+        Me.rdoProg2.Location = New System.Drawing.Point(10, 106)
+        Me.rdoProg2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.rdoProg2.Name = "rdoProg2"
-        Me.rdoProg2.Size = New System.Drawing.Size(104, 21)
+        Me.rdoProg2.Size = New System.Drawing.Size(158, 32)
         Me.rdoProg2.TabIndex = 1
         Me.rdoProg2.TabStop = True
         Me.rdoProg2.Text = "RadioButton2"
@@ -324,103 +349,112 @@ Partial Class Form1
         '
         Me.rdoProg1.AutoSize = True
         Me.rdoProg1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoProg1.Location = New System.Drawing.Point(7, 33)
+        Me.rdoProg1.Location = New System.Drawing.Point(10, 51)
+        Me.rdoProg1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.rdoProg1.Name = "rdoProg1"
-        Me.rdoProg1.Size = New System.Drawing.Size(104, 21)
+        Me.rdoProg1.Size = New System.Drawing.Size(158, 32)
         Me.rdoProg1.TabIndex = 0
         Me.rdoProg1.TabStop = True
         Me.rdoProg1.Text = "RadioButton1"
         Me.rdoProg1.UseVisualStyleBackColor = True
         '
-        'Label5
+        'lblPassword
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(539, 659)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(76, 20)
-        Me.Label5.TabIndex = 21
-        Me.Label5.Text = "Password"
+        Me.lblPassword.AutoSize = True
+        Me.lblPassword.BackColor = System.Drawing.Color.Transparent
+        Me.lblPassword.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPassword.Location = New System.Drawing.Point(808, 1014)
+        Me.lblPassword.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPassword.Name = "lblPassword"
+        Me.lblPassword.Size = New System.Drawing.Size(114, 31)
+        Me.lblPassword.TabIndex = 21
+        Me.lblPassword.Text = "Password"
         '
         'txtPassword
         '
         Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(543, 682)
+        Me.txtPassword.Location = New System.Drawing.Point(814, 1049)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(185, 27)
+        Me.txtPassword.Size = New System.Drawing.Size(276, 37)
         Me.txtPassword.TabIndex = 22
         Me.txtPassword.UseSystemPasswordChar = True
         '
         'txtConfirmPass
         '
         Me.txtConfirmPass.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConfirmPass.Location = New System.Drawing.Point(764, 682)
+        Me.txtConfirmPass.Location = New System.Drawing.Point(1146, 1049)
+        Me.txtConfirmPass.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtConfirmPass.Name = "txtConfirmPass"
-        Me.txtConfirmPass.Size = New System.Drawing.Size(185, 27)
+        Me.txtConfirmPass.Size = New System.Drawing.Size(276, 37)
         Me.txtConfirmPass.TabIndex = 24
         Me.txtConfirmPass.UseSystemPasswordChar = True
         '
-        'Label13
+        'lblCPassword
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.BackColor = System.Drawing.Color.Transparent
-        Me.Label13.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(760, 659)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(137, 20)
-        Me.Label13.TabIndex = 23
-        Me.Label13.Text = "Confirm Password"
+        Me.lblCPassword.AutoSize = True
+        Me.lblCPassword.BackColor = System.Drawing.Color.Transparent
+        Me.lblCPassword.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCPassword.Location = New System.Drawing.Point(1140, 1014)
+        Me.lblCPassword.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblCPassword.Name = "lblCPassword"
+        Me.lblCPassword.Size = New System.Drawing.Size(208, 31)
+        Me.lblCPassword.TabIndex = 23
+        Me.lblCPassword.Text = "Confirm Password"
         '
         'chckShowPass
         '
         Me.chckShowPass.AutoSize = True
         Me.chckShowPass.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chckShowPass.Location = New System.Drawing.Point(971, 688)
+        Me.chckShowPass.Location = New System.Drawing.Point(1456, 1058)
+        Me.chckShowPass.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.chckShowPass.Name = "chckShowPass"
-        Me.chckShowPass.Size = New System.Drawing.Size(46, 21)
+        Me.chckShowPass.Size = New System.Drawing.Size(66, 32)
         Me.chckShowPass.TabIndex = 25
         Me.chckShowPass.Text = "👁"
         Me.chckShowPass.UseVisualStyleBackColor = True
         '
-        'Form1
+        'frmRegister
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScroll = True
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1473, 941)
+        Me.ClientSize = New System.Drawing.Size(1924, 1050)
         Me.Controls.Add(Me.chckShowPass)
         Me.Controls.Add(Me.txtConfirmPass)
-        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.lblCPassword)
         Me.Controls.Add(Me.txtPassword)
-        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.lblPassword)
         Me.Controls.Add(Me.pnlPrograms)
         Me.Controls.Add(Me.cmbCollege)
-        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.lblCollege)
         Me.Controls.Add(Me.cmbYearLevel)
-        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.lblYrLevel)
         Me.Controls.Add(Me.cmbSuffix)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.txtLastName)
-        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.lblLname)
         Me.Controls.Add(Me.txtMidName)
-        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.lblMname)
         Me.Controls.Add(Me.txtFirstName)
         Me.Controls.Add(Me.txtEmail)
         Me.Controls.Add(Me.txtStudNum)
-        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.lblEmailAdd)
         Me.Controls.Add(Me.lblStudNum)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblSignup)
+        Me.Controls.Add(Me.lblCreateYAcc)
+        Me.Controls.Add(Me.pbPLPbuilding)
+        Me.Controls.Add(Me.lbltext)
+        Me.Controls.Add(Me.lblFname)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.MaximizeBox = False
-        Me.Name = "Form1"
+        Me.Name = "frmRegister"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form1"
+        Me.Text = "Registration Form"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbPLPbuilding, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlPrograms.ResumeLayout(False)
         Me.pnlPrograms.PerformLayout()
         Me.ResumeLayout(False)
@@ -428,35 +462,35 @@ Partial Class Form1
 
     End Sub
 
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblFname As Label
+    Friend WithEvents lbltext As Label
+    Friend WithEvents pbPLPbuilding As PictureBox
+    Friend WithEvents lblCreateYAcc As Label
+    Friend WithEvents lblSignup As Label
     Friend WithEvents lblStudNum As Label
-    Friend WithEvents Label6 As Label
+    Friend WithEvents lblEmailAdd As Label
     Friend WithEvents txtStudNum As TextBox
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents txtFirstName As TextBox
     Friend WithEvents txtMidName As TextBox
-    Friend WithEvents Label7 As Label
+    Friend WithEvents lblMname As Label
     Friend WithEvents txtLastName As TextBox
-    Friend WithEvents Label8 As Label
+    Friend WithEvents lblLname As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents cmbSuffix As ComboBox
-    Friend WithEvents Label10 As Label
+    Friend WithEvents lblYrLevel As Label
     Friend WithEvents cmbYearLevel As ComboBox
-    Friend WithEvents Label11 As Label
+    Friend WithEvents lblCollege As Label
     Friend WithEvents cmbCollege As ComboBox
     Friend WithEvents pnlPrograms As Panel
     Friend WithEvents rdoProg4 As RadioButton
     Friend WithEvents rdoProg3 As RadioButton
     Friend WithEvents rdoProg2 As RadioButton
     Friend WithEvents rdoProg1 As RadioButton
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents lblPrograms As Label
+    Friend WithEvents lblPassword As Label
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents txtConfirmPass As TextBox
-    Friend WithEvents Label13 As Label
+    Friend WithEvents lblCPassword As Label
     Friend WithEvents chckShowPass As CheckBox
 End Class
