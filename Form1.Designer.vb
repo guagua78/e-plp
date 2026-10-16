@@ -326,7 +326,7 @@ Partial Class frmRegister
         Me.pnlRegisterCard.ForeColor = System.Drawing.Color.DarkGreen
         Me.pnlRegisterCard.Location = New System.Drawing.Point(706, 169)
         Me.pnlRegisterCard.Name = "pnlRegisterCard"
-        Me.pnlRegisterCard.Size = New System.Drawing.Size(1051, 773)
+        Me.pnlRegisterCard.Size = New System.Drawing.Size(1047, 773)
         Me.pnlRegisterCard.TabIndex = 30
         '
         'PictureBox3
