@@ -98,4 +98,44 @@
         txtPassword.UseSystemPasswordChar = Not showPassword
         txtConfirmPass.UseSystemPasswordChar = Not showPassword
     End Sub
+
+    Private Sub pnlRegisterCard_Paint(sender As Object, e As PaintEventArgs) Handles pnlRegisterCard.Paint
+
+    End Sub
+
+    Private Sub lblCPassword_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+
+    End Sub
+
+    Private Sub cmbSuffix_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSuffix.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txtLastName_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
+
+    End Sub
+
+    Private Sub Label12_Click(sender As Object, e As EventArgs) Handles Label12.Click
+
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
+    End Sub
 End Class
