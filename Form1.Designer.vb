@@ -28,13 +28,7 @@ Partial Class frmRegister
         Me.lblYrLevel = New System.Windows.Forms.Label()
         Me.cmbYearLevel = New System.Windows.Forms.ComboBox()
         Me.lblCollege = New System.Windows.Forms.Label()
-        Me.cmbCollege = New System.Windows.Forms.ComboBox()
-        Me.pnlPrograms = New System.Windows.Forms.Panel()
-        Me.lblPrograms = New System.Windows.Forms.Label()
-        Me.rdoProg4 = New System.Windows.Forms.RadioButton()
-        Me.rdoProg3 = New System.Windows.Forms.RadioButton()
-        Me.rdoProg2 = New System.Windows.Forms.RadioButton()
-        Me.rdoProg1 = New System.Windows.Forms.RadioButton()
+        Me.cmbProgram = New System.Windows.Forms.ComboBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.txtConfirmPass = New System.Windows.Forms.TextBox()
         Me.chckShowPass = New System.Windows.Forms.CheckBox()
@@ -43,6 +37,8 @@ Partial Class frmRegister
         Me.Label12 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlRegisterCard = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtMidName = New System.Windows.Forms.TextBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -55,16 +51,17 @@ Partial Class frmRegister
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.txtLastName = New System.Windows.Forms.TextBox()
+        Me.txtFirstName = New System.Windows.Forms.TextBox()
         Me.txtStudentNum = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.pnlPrograms.SuspendLayout()
+        Me.btnLogin = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlRegisterCard.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label9
@@ -72,7 +69,7 @@ Partial Class frmRegister
         Me.Label9.AutoSize = True
         Me.Label9.BackColor = System.Drawing.Color.Transparent
         Me.Label9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(58, 381)
+        Me.Label9.Location = New System.Drawing.Point(68, 457)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(66, 23)
@@ -85,10 +82,10 @@ Partial Class frmRegister
         Me.cmbSuffix.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSuffix.FormattingEnabled = True
         Me.cmbSuffix.Items.AddRange(New Object() {"(None)", "Jr.", "Sr.", "II.", "III.", "IV.", "V."})
-        Me.cmbSuffix.Location = New System.Drawing.Point(62, 408)
+        Me.cmbSuffix.Location = New System.Drawing.Point(62, 484)
         Me.cmbSuffix.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbSuffix.Name = "cmbSuffix"
-        Me.cmbSuffix.Size = New System.Drawing.Size(353, 33)
+        Me.cmbSuffix.Size = New System.Drawing.Size(394, 33)
         Me.cmbSuffix.TabIndex = 15
         '
         'lblYrLevel
@@ -123,106 +120,26 @@ Partial Class frmRegister
         Me.lblCollege.Location = New System.Drawing.Point(482, 313)
         Me.lblCollege.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblCollege.Name = "lblCollege"
-        Me.lblCollege.Size = New System.Drawing.Size(82, 23)
+        Me.lblCollege.Size = New System.Drawing.Size(95, 23)
         Me.lblCollege.TabIndex = 18
-        Me.lblCollege.Text = "COLLEGE"
+        Me.lblCollege.Text = "PROGRAM"
         '
-        'cmbCollege
+        'cmbProgram
         '
-        Me.cmbCollege.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbCollege.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbCollege.FormattingEnabled = True
-        Me.cmbCollege.Items.AddRange(New Object() {"CAS", "CBA", "CCS", "COED", "COE", "CIHM", "CON"})
-        Me.cmbCollege.Location = New System.Drawing.Point(483, 338)
-        Me.cmbCollege.Margin = New System.Windows.Forms.Padding(4)
-        Me.cmbCollege.Name = "cmbCollege"
-        Me.cmbCollege.Size = New System.Drawing.Size(539, 33)
-        Me.cmbCollege.TabIndex = 19
-        '
-        'pnlPrograms
-        '
-        Me.pnlPrograms.BackColor = System.Drawing.Color.Transparent
-        Me.pnlPrograms.Controls.Add(Me.lblPrograms)
-        Me.pnlPrograms.Controls.Add(Me.rdoProg4)
-        Me.pnlPrograms.Controls.Add(Me.rdoProg3)
-        Me.pnlPrograms.Controls.Add(Me.rdoProg2)
-        Me.pnlPrograms.Controls.Add(Me.rdoProg1)
-        Me.pnlPrograms.Enabled = False
-        Me.pnlPrograms.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pnlPrograms.Location = New System.Drawing.Point(477, 381)
-        Me.pnlPrograms.Margin = New System.Windows.Forms.Padding(4)
-        Me.pnlPrograms.Name = "pnlPrograms"
-        Me.pnlPrograms.Size = New System.Drawing.Size(545, 223)
-        Me.pnlPrograms.TabIndex = 20
-        Me.pnlPrograms.Visible = False
-        '
-        'lblPrograms
-        '
-        Me.lblPrograms.AutoSize = True
-        Me.lblPrograms.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPrograms.Location = New System.Drawing.Point(4, 9)
-        Me.lblPrograms.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblPrograms.Name = "lblPrograms"
-        Me.lblPrograms.Size = New System.Drawing.Size(99, 25)
-        Me.lblPrograms.TabIndex = 21
-        Me.lblPrograms.Text = "Programs"
-        '
-        'rdoProg4
-        '
-        Me.rdoProg4.AutoSize = True
-        Me.rdoProg4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoProg4.Location = New System.Drawing.Point(9, 172)
-        Me.rdoProg4.Margin = New System.Windows.Forms.Padding(4)
-        Me.rdoProg4.Name = "rdoProg4"
-        Me.rdoProg4.Size = New System.Drawing.Size(135, 27)
-        Me.rdoProg4.TabIndex = 3
-        Me.rdoProg4.TabStop = True
-        Me.rdoProg4.Text = "RadioButton4"
-        Me.rdoProg4.UseVisualStyleBackColor = True
-        '
-        'rdoProg3
-        '
-        Me.rdoProg3.AutoSize = True
-        Me.rdoProg3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoProg3.Location = New System.Drawing.Point(9, 130)
-        Me.rdoProg3.Margin = New System.Windows.Forms.Padding(4)
-        Me.rdoProg3.Name = "rdoProg3"
-        Me.rdoProg3.Size = New System.Drawing.Size(135, 27)
-        Me.rdoProg3.TabIndex = 2
-        Me.rdoProg3.TabStop = True
-        Me.rdoProg3.Text = "RadioButton3"
-        Me.rdoProg3.UseVisualStyleBackColor = True
-        '
-        'rdoProg2
-        '
-        Me.rdoProg2.AutoSize = True
-        Me.rdoProg2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoProg2.Location = New System.Drawing.Point(9, 85)
-        Me.rdoProg2.Margin = New System.Windows.Forms.Padding(4)
-        Me.rdoProg2.Name = "rdoProg2"
-        Me.rdoProg2.Size = New System.Drawing.Size(135, 27)
-        Me.rdoProg2.TabIndex = 1
-        Me.rdoProg2.TabStop = True
-        Me.rdoProg2.Text = "RadioButton2"
-        Me.rdoProg2.UseVisualStyleBackColor = True
-        '
-        'rdoProg1
-        '
-        Me.rdoProg1.AutoSize = True
-        Me.rdoProg1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoProg1.Location = New System.Drawing.Point(9, 41)
-        Me.rdoProg1.Margin = New System.Windows.Forms.Padding(4)
-        Me.rdoProg1.Name = "rdoProg1"
-        Me.rdoProg1.Size = New System.Drawing.Size(135, 27)
-        Me.rdoProg1.TabIndex = 0
-        Me.rdoProg1.TabStop = True
-        Me.rdoProg1.Text = "RadioButton1"
-        Me.rdoProg1.UseVisualStyleBackColor = True
+        Me.cmbProgram.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbProgram.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbProgram.FormattingEnabled = True
+        Me.cmbProgram.Items.AddRange(New Object() {"Bachelor of Science in Information Technology", "Bachelor of Science in Computer Science"})
+        Me.cmbProgram.Location = New System.Drawing.Point(483, 338)
+        Me.cmbProgram.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmbProgram.Name = "cmbProgram"
+        Me.cmbProgram.Size = New System.Drawing.Size(539, 33)
+        Me.cmbProgram.TabIndex = 19
         '
         'txtPassword
         '
         Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(61, 481)
+        Me.txtPassword.Location = New System.Drawing.Point(247, 571)
         Me.txtPassword.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(246, 32)
@@ -232,7 +149,7 @@ Partial Class frmRegister
         'txtConfirmPass
         '
         Me.txtConfirmPass.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtConfirmPass.Location = New System.Drawing.Point(61, 559)
+        Me.txtConfirmPass.Location = New System.Drawing.Point(501, 571)
         Me.txtConfirmPass.Margin = New System.Windows.Forms.Padding(4)
         Me.txtConfirmPass.Name = "txtConfirmPass"
         Me.txtConfirmPass.Size = New System.Drawing.Size(246, 32)
@@ -243,7 +160,7 @@ Partial Class frmRegister
         '
         Me.chckShowPass.AutoSize = True
         Me.chckShowPass.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chckShowPass.Location = New System.Drawing.Point(343, 563)
+        Me.chckShowPass.Location = New System.Drawing.Point(755, 576)
         Me.chckShowPass.Margin = New System.Windows.Forms.Padding(4)
         Me.chckShowPass.Name = "chckShowPass"
         Me.chckShowPass.Size = New System.Drawing.Size(56, 27)
@@ -297,6 +214,8 @@ Partial Class frmRegister
         'pnlRegisterCard
         '
         Me.pnlRegisterCard.BackColor = System.Drawing.Color.White
+        Me.pnlRegisterCard.Controls.Add(Me.Label6)
+        Me.pnlRegisterCard.Controls.Add(Me.txtMidName)
         Me.pnlRegisterCard.Controls.Add(Me.PictureBox3)
         Me.pnlRegisterCard.Controls.Add(Me.PictureBox2)
         Me.pnlRegisterCard.Controls.Add(Me.Label11)
@@ -306,9 +225,8 @@ Partial Class frmRegister
         Me.pnlRegisterCard.Controls.Add(Me.txtConfirmPass)
         Me.pnlRegisterCard.Controls.Add(Me.Label9)
         Me.pnlRegisterCard.Controls.Add(Me.Label1)
-        Me.pnlRegisterCard.Controls.Add(Me.pnlPrograms)
         Me.pnlRegisterCard.Controls.Add(Me.Label8)
-        Me.pnlRegisterCard.Controls.Add(Me.cmbCollege)
+        Me.pnlRegisterCard.Controls.Add(Me.cmbProgram)
         Me.pnlRegisterCard.Controls.Add(Me.lblCollege)
         Me.pnlRegisterCard.Controls.Add(Me.txtPassword)
         Me.pnlRegisterCard.Controls.Add(Me.Label7)
@@ -319,15 +237,35 @@ Partial Class frmRegister
         Me.pnlRegisterCard.Controls.Add(Me.cmbYearLevel)
         Me.pnlRegisterCard.Controls.Add(Me.lblYrLevel)
         Me.pnlRegisterCard.Controls.Add(Me.Label14)
-        Me.pnlRegisterCard.Controls.Add(Me.TextBox2)
-        Me.pnlRegisterCard.Controls.Add(Me.TextBox3)
-        Me.pnlRegisterCard.Controls.Add(Me.TextBox4)
+        Me.pnlRegisterCard.Controls.Add(Me.txtEmail)
+        Me.pnlRegisterCard.Controls.Add(Me.txtLastName)
+        Me.pnlRegisterCard.Controls.Add(Me.txtFirstName)
         Me.pnlRegisterCard.Controls.Add(Me.txtStudentNum)
         Me.pnlRegisterCard.ForeColor = System.Drawing.Color.DarkGreen
         Me.pnlRegisterCard.Location = New System.Drawing.Point(706, 169)
         Me.pnlRegisterCard.Name = "pnlRegisterCard"
         Me.pnlRegisterCard.Size = New System.Drawing.Size(1047, 773)
         Me.pnlRegisterCard.TabIndex = 30
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.DarkGreen
+        Me.Label6.Location = New System.Drawing.Point(58, 384)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(119, 23)
+        Me.Label6.TabIndex = 27
+        Me.Label6.Text = "Middle Name"
+        '
+        'txtMidName
+        '
+        Me.txtMidName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMidName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMidName.Location = New System.Drawing.Point(62, 410)
+        Me.txtMidName.Name = "txtMidName"
+        Me.txtMidName.Size = New System.Drawing.Size(393, 34)
+        Me.txtMidName.TabIndex = 26
         '
         'PictureBox3
         '
@@ -379,7 +317,7 @@ Partial Class frmRegister
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(58, 532)
+        Me.Label1.Location = New System.Drawing.Point(498, 544)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(188, 23)
         Me.Label1.TabIndex = 15
@@ -389,7 +327,7 @@ Partial Class frmRegister
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(57, 454)
+        Me.Label8.Location = New System.Drawing.Point(243, 544)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(105, 23)
         Me.Label8.TabIndex = 14
@@ -460,32 +398,32 @@ Partial Class frmRegister
         Me.Label14.TabIndex = 8
         Me.Label14.Text = "Create Your Account"
         '
-        'TextBox2
+        'txtEmail
         '
-        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(482, 187)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(406, 34)
-        Me.TextBox2.TabIndex = 4
+        Me.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtEmail.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmail.Location = New System.Drawing.Point(482, 187)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(406, 34)
+        Me.txtEmail.TabIndex = 4
         '
-        'TextBox3
+        'txtLastName
         '
-        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(62, 338)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(393, 34)
-        Me.TextBox3.TabIndex = 2
+        Me.txtLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLastName.Location = New System.Drawing.Point(62, 338)
+        Me.txtLastName.Name = "txtLastName"
+        Me.txtLastName.Size = New System.Drawing.Size(393, 34)
+        Me.txtLastName.TabIndex = 2
         '
-        'TextBox4
+        'txtFirstName
         '
-        Me.TextBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(61, 263)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(395, 34)
-        Me.TextBox4.TabIndex = 1
+        Me.txtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFirstName.Location = New System.Drawing.Point(61, 263)
+        Me.txtFirstName.Name = "txtFirstName"
+        Me.txtFirstName.Size = New System.Drawing.Size(395, 34)
+        Me.txtFirstName.TabIndex = 1
         '
         'txtStudentNum
         '
@@ -500,10 +438,20 @@ Partial Class frmRegister
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.SeaGreen
+        Me.Panel1.Controls.Add(Me.btnLogin)
         Me.Panel1.Location = New System.Drawing.Point(0, -14)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(2120, 127)
         Me.Panel1.TabIndex = 31
+        '
+        'btnLogin
+        '
+        Me.btnLogin.Location = New System.Drawing.Point(1669, 44)
+        Me.btnLogin.Name = "btnLogin"
+        Me.btnLogin.Size = New System.Drawing.Size(84, 57)
+        Me.btnLogin.TabIndex = 0
+        Me.btnLogin.Text = "Log In"
+        Me.btnLogin.UseVisualStyleBackColor = True
         '
         'frmRegister
         '
@@ -513,7 +461,7 @@ Partial Class frmRegister
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.LightGray
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1924, 1055)
+        Me.ClientSize = New System.Drawing.Size(1924, 1076)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.pnlRegisterCard)
         Me.Controls.Add(Me.Label13)
@@ -527,13 +475,12 @@ Partial Class frmRegister
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Registration Form"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.pnlPrograms.ResumeLayout(False)
-        Me.pnlPrograms.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlRegisterCard.ResumeLayout(False)
         Me.pnlRegisterCard.PerformLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -542,13 +489,7 @@ Partial Class frmRegister
     Friend WithEvents lblYrLevel As Label
     Friend WithEvents cmbYearLevel As ComboBox
     Friend WithEvents lblCollege As Label
-    Friend WithEvents cmbCollege As ComboBox
-    Friend WithEvents pnlPrograms As Panel
-    Friend WithEvents rdoProg4 As RadioButton
-    Friend WithEvents rdoProg3 As RadioButton
-    Friend WithEvents rdoProg2 As RadioButton
-    Friend WithEvents rdoProg1 As RadioButton
-    Friend WithEvents lblPrograms As Label
+    Friend WithEvents cmbProgram As ComboBox
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents txtConfirmPass As TextBox
     Friend WithEvents chckShowPass As CheckBox
@@ -569,9 +510,12 @@ Partial Class frmRegister
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label14 As Label
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents txtEmail As TextBox
+    Friend WithEvents txtLastName As TextBox
+    Friend WithEvents txtFirstName As TextBox
     Friend WithEvents txtStudentNum As TextBox
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txtMidName As TextBox
+    Friend WithEvents btnLogin As Button
 End Class

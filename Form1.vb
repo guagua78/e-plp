@@ -1,141 +1,124 @@
-﻿Public Class frmRegister
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmRegister
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Populate PLP Colleges
-        cmbCollege.Items.Clear()
-        cmbCollege.Items.AddRange(New Object() {
-            "College of Arts and Sciences (CAS)",
-            "College of Business and Accountancy (CBA)",
-            "College of Computer Studies (CCS)",
-            "College of Education (COED)",
-            "College of Engineering (COE)",
-            "College of International Hospitality Management (CIHM)",
-            "College of Nursing (CON)"
-        })
-
-        ' Keep program section hidden initially
-        pnlPrograms.Visible = False
-        pnlPrograms.Enabled = False
-    End Sub
-
-    Private Sub cmbCollege_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCollege.SelectedIndexChanged
-        ' Reset states
-        rdoProg1.Checked = False : rdoProg2.Checked = False
-        rdoProg3.Checked = False : rdoProg4.Checked = False
-
-        rdoProg1.Visible = False : rdoProg2.Visible = False
-        rdoProg3.Visible = False : rdoProg4.Visible = False
-
-        Dim selectedCollege As String = cmbCollege.Text
-
-        If String.IsNullOrWhiteSpace(selectedCollege) Then
-            pnlPrograms.Visible = False
-            pnlPrograms.Enabled = False
-            Return
-        Else
-            pnlPrograms.Visible = True
-            pnlPrograms.Enabled = True
+        ' Default program selection (optional)
+        If cmbProgram.Items.Count > 0 Then
+            cmbProgram.SelectedIndex = 0
         End If
-
-        ' Map PLP Programs to Selected College
-        Select Case True
-            Case selectedCollege.Contains("CAS")
-                rdoProg1.Text = "Bachelor of Arts in Psychology (AB Psych)"
-                rdoProg1.Visible = True
-
-            Case selectedCollege.Contains("CBA")
-                rdoProg1.Text = "Bachelor of Science in Accountancy (BSA)"
-                rdoProg2.Text = "BSBA major in Marketing Management (BSBA MM)"
-                rdoProg3.Text = "Bachelor of Science in Entrepreneurship (BS Entrep)"
-                rdoProg1.Visible = True
-                rdoProg2.Visible = True
-                rdoProg3.Visible = True
-
-            Case selectedCollege.Contains("CCS")
-                rdoProg1.Text = "Bachelor of Science in Information Technology (BSIT)"
-                rdoProg2.Text = "Bachelor of Science in Computer Science (BSCS)"
-                rdoProg1.Visible = True
-                rdoProg2.Visible = True
-
-            Case selectedCollege.Contains("COED")
-                rdoProg1.Text = "Bachelor of Elementary Education (BEED)"
-                rdoProg2.Text = "BSED major in English (BSED English)"
-                rdoProg3.Text = "BSED major in Filipino (BSED Filipino)"
-                rdoProg4.Text = "BSED major in Mathematics (BSED Mathematics)"
-                rdoProg1.Visible = True
-                rdoProg2.Visible = True
-                rdoProg3.Visible = True
-                rdoProg4.Visible = True
-
-            Case selectedCollege.Contains("COE") AndAlso Not selectedCollege.Contains("COED")
-                rdoProg1.Text = "BS in Electronics Engineering (BSECE)"
-                rdoProg1.Visible = True
-
-            Case selectedCollege.Contains("CIHM")
-                rdoProg1.Text = "BS in Hospitality Management (BSHM)"
-                rdoProg1.Visible = True
-
-            Case selectedCollege.Contains("CON")
-                rdoProg1.Text = "Bachelor of Science in Nursing (BSN)"
-                rdoProg1.Visible = True
-        End Select
     End Sub
-
-    Private Function GetSelectedProgram() As String
-        If Not pnlPrograms.Enabled Then Return String.Empty
-
-        If rdoProg1.Checked AndAlso rdoProg1.Visible Then Return rdoProg1.Text
-        If rdoProg2.Checked AndAlso rdoProg2.Visible Then Return rdoProg2.Text
-        If rdoProg3.Checked AndAlso rdoProg3.Visible Then Return rdoProg3.Text
-        If rdoProg4.Checked AndAlso rdoProg4.Visible Then Return rdoProg4.Text
-
-        Return String.Empty
-    End Function
 
     Private Sub chkShowPassword_CheckedChanged(sender As Object, e As EventArgs) Handles chckShowPass.CheckedChanged
-        ' Toggle system password character for both textboxes
         Dim showPassword As Boolean = chckShowPass.Checked
-
         txtPassword.UseSystemPasswordChar = Not showPassword
         txtConfirmPass.UseSystemPasswordChar = Not showPassword
     End Sub
 
-    Private Sub pnlRegisterCard_Paint(sender As Object, e As PaintEventArgs) Handles pnlRegisterCard.Paint
+    Private Sub btnRegister_Click(sender As Object, e As EventArgs) Handles btnRegister.Click
+        Try
+            Dim studentNum As String = txtStudentNum.Text.Trim()
+            Dim email As String = txtEmail.Text.Trim().ToLower()
+            Dim firstName As String = txtFirstName.Text.Trim()
+            Dim middleName As String = txtMidName.Text.Trim()
+            Dim lastName As String = txtLastName.Text.Trim()
 
+            ' Suffix handling
+            Dim suffixVal As String = ""
+            If cmbSuffix.SelectedIndex > 0 Then
+                suffixVal = cmbSuffix.SelectedItem.ToString().Trim()
+                If suffixVal.Equals("(None)", StringComparison.OrdinalIgnoreCase) Then suffixVal = ""
+            End If
+
+            ' Read selected program directly from cmbProgram
+            Dim degreeProgram As String = If(cmbProgram.SelectedItem IsNot Nothing, cmbProgram.SelectedItem.ToString(), "")
+            Dim yearLevel As String = If(cmbYearLevel.SelectedItem IsNot Nothing, cmbYearLevel.SelectedItem.ToString(), "")
+            Dim password As String = txtPassword.Text
+            Dim confirmPwd As String = txtConfirmPass.Text
+
+            ' Hardcode College since the UI input was removed
+            Dim college As String = "College of Computer Studies (CCS)"
+
+            ' 1. Validations
+            If String.IsNullOrWhiteSpace(studentNum) OrElse String.IsNullOrWhiteSpace(email) OrElse
+           String.IsNullOrWhiteSpace(firstName) OrElse String.IsNullOrWhiteSpace(lastName) Then
+                MessageBox.Show("Please fill out all required name and contact fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            If Not email.EndsWith("@plpasig.edu.ph") Then
+                MessageBox.Show("Please enter a valid official PLP webmail address (@plpasig.edu.ph).", "Invalid Email Format", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            If String.IsNullOrWhiteSpace(degreeProgram) Then
+                MessageBox.Show("Please select your Degree Program.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            If String.IsNullOrWhiteSpace(yearLevel) Then
+                MessageBox.Show("Please select your Year Level.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            If password.Length < 8 Then
+                MessageBox.Show("Password must be at least 8 characters long.", "Weak Password", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            If password <> confirmPwd Then
+                MessageBox.Show("Passwords do not match.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            ' 2. Hash Password
+            Dim salt As String = BCrypt.Net.BCrypt.GenerateSalt(11)
+            Dim hashedPassword As String = BCrypt.Net.BCrypt.HashPassword(password, salt)
+
+            ' 3. Database Insertion into eportfoliodb
+            Using conn As MySqlConnection = database.GetConnection()
+                If conn IsNot Nothing Then
+                    Dim query As String = "INSERT INTO students (student_number, first_name, middle_name, suffix, last_name, email, password_hash, college, degree_program, year_level) " &
+                                      "VALUES (@student_number, @first_name, @middle_name, @suffix, @last_name, @email, @password_hash, @college, @degree_program, @year_level)"
+
+                    Using cmd As New MySqlCommand(query, conn)
+                        cmd.Parameters.AddWithValue("@student_number", studentNum)
+                        cmd.Parameters.AddWithValue("@first_name", firstName)
+                        cmd.Parameters.AddWithValue("@middle_name", middleName)
+                        cmd.Parameters.AddWithValue("@suffix", suffixVal)
+                        cmd.Parameters.AddWithValue("@last_name", lastName)
+                        cmd.Parameters.AddWithValue("@email", email)
+                        cmd.Parameters.AddWithValue("@password_hash", hashedPassword)
+                        cmd.Parameters.AddWithValue("@college", college) ' <-- Satisfies MySQL column constraint
+                        cmd.Parameters.AddWithValue("@degree_program", degreeProgram)
+                        cmd.Parameters.AddWithValue("@year_level", yearLevel)
+
+                        cmd.ExecuteNonQuery()
+
+                        MessageBox.Show("Account successfully created! Redirecting to login...", "Registration Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                        Dim loginForm As New frmLogin()
+                        loginForm.Show()
+                        Me.Hide()
+                    End Using
+                End If
+            End Using
+
+        Catch ex As MySqlException
+            If ex.Number = 1062 Then
+                MessageBox.Show("A student record with this Student Number or Email already exists.", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show("Database Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
-    Private Sub lblCPassword_Click(sender As Object, e As EventArgs)
-
+    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+        Dim loginForm As New frmLogin()
+        loginForm.Show()
+        Me.Hide()
     End Sub
 
-    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
-
-    End Sub
-
-    Private Sub cmbSuffix_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSuffix.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub txtLastName_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-
-    End Sub
-
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
-
-    End Sub
-
-    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
-
-    End Sub
-
-    Private Sub Label12_Click(sender As Object, e As EventArgs) Handles Label12.Click
-
-    End Sub
-
-    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
-
-    End Sub
 End Class
