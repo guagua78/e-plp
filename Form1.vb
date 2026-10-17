@@ -89,7 +89,7 @@ Public Class frmRegister
                         cmd.Parameters.AddWithValue("@last_name", lastName)
                         cmd.Parameters.AddWithValue("@email", email)
                         cmd.Parameters.AddWithValue("@password_hash", hashedPassword)
-                        cmd.Parameters.AddWithValue("@college", college) ' <-- Satisfies MySQL column constraint
+                        cmd.Parameters.AddWithValue("@college", college)
                         cmd.Parameters.AddWithValue("@degree_program", degreeProgram)
                         cmd.Parameters.AddWithValue("@year_level", yearLevel)
 

@@ -39,11 +39,10 @@ Public Class frmLogin
                             If reader.Read() Then
                                 Dim storedHash As String = reader("password_hash").ToString()
 
-                                ' 3. Verify BCrypt password hash
                                 If BCrypt.Net.BCrypt.Verify(passwordInput, storedHash) Then
                                     ' Set Session Variables in Globals.vb
                                     CurrentStudentNumber = reader("student_number").ToString()
-                                    CurrentUserFullName = $"{reader("first_name")} {reader("last_name")}"
+                                    CurrentUserFullName = $"{reader("first_name")} {reader("last_name")}".Trim()
                                     CurrentUserEmail = reader("email").ToString()
                                     CurrentUserCollege = reader("college").ToString()
                                     CurrentUserProgram = reader("degree_program").ToString()
@@ -51,7 +50,12 @@ Public Class frmLogin
 
                                     MessageBox.Show($"Welcome back, {CurrentUserFullName}!", "Authentication Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+                                    ' Launch Main Dashboard Form
+                                    Dim mainDashboard As New maindashboard()
+                                    mainDashboard.Show()
 
+                                    ' Hide Login Window
+                                    Me.Hide()
                                 Else
                                     MessageBox.Show("Invalid password. Please try again.", "Authentication Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 End If
