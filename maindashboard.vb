@@ -133,7 +133,11 @@ Public Class maindashboard
             Dim selectedId As Integer = Convert.ToInt32(dgvPortfolio.Rows(e.RowIndex).Cells("ID").Value)
             Dim viewForm As New frmViewEntry()
             viewForm.SelectedEntryID = selectedId
-            viewForm.ShowDialog()
+
+            ' Open modal and refresh dashboard as soon as it closes
+            If viewForm.ShowDialog() = DialogResult.OK Then
+                RefreshDashboard()
+            End If
         End If
     End Sub
 
@@ -165,20 +169,71 @@ Public Class maindashboard
 
     Private Sub LoadCompetencyProgress()
         Try
+            ' Clear existing card blocks
+            flpProgressCards.Controls.Clear()
+
             Using conn As MySqlConnection = database.GetConnection()
                 If conn IsNot Nothing Then
-                    Dim query As String = "SELECT c.category_name AS 'Skill Competency', " &
-                                          "COUNT(pe.entry_id) AS 'Records Logged' " &
-                                          "FROM categories c " &
-                                          "LEFT JOIN portfolio_entries pe ON c.category_id = pe.category_id AND pe.student_number = @stud " &
-                                          "GROUP BY c.category_id, c.category_name"
+                    Dim query As String = "SELECT c.category_name, COUNT(pe.entry_id) AS total_logged " &
+                                      "FROM categories c " &
+                                      "LEFT JOIN portfolio_entries pe ON c.category_id = pe.category_id AND pe.student_number = @stud " &
+                                      "GROUP BY c.category_id, c.category_name " &
+                                      "ORDER BY c.category_id ASC"
 
                     Using cmd As New MySqlCommand(query, conn)
                         cmd.Parameters.AddWithValue("@stud", CurrentStudentNumber)
-                        Dim adapter As New MySqlDataAdapter(cmd)
-                        Dim table As New DataTable()
-                        adapter.Fill(table)
-                        dgvProgressSummary.DataSource = table
+                        Using rdr As MySqlDataReader = cmd.ExecuteReader()
+                            While rdr.Read()
+                                Dim catName As String = rdr("category_name").ToString()
+                                Dim countLogged As Integer = Convert.ToInt32(rdr("total_logged"))
+
+                                ' Create Card Block Container
+                                Dim pnlCard As New Panel() With {
+                                .Size = New Size(170, 75),
+                                .Margin = New Padding(6),
+                                .BorderStyle = BorderStyle.FixedSingle,
+                                .Tag = catName
+                            }
+
+                                ' Active/Inactive Styling
+                                If countLogged > 0 Then
+                                    pnlCard.BackColor = Color.FromArgb(240, 248, 243) ' Light Green Tint
+                                Else
+                                    pnlCard.BackColor = Color.FromArgb(250, 250, 250) ' Soft Gray
+                                End If
+
+                                ' Competency Title Label
+                                Dim lblTitle As New Label() With {
+                                .Text = catName,
+                                .Font = New Font("Segoe UI", 9.0F, FontStyle.Bold),
+                                .ForeColor = Color.FromArgb(10, 40, 25),
+                                .Location = New Point(10, 10),
+                                .Size = New Size(150, 20),
+                                .AutoEllipsis = True
+                            }
+
+                                ' Logged Count Badge Label
+                                Dim lblCount As New Label() With {
+                                .Text = If(countLogged = 1, "1 Record Logged", $"{countLogged} Records Logged"),
+                                .Font = New Font("Segoe UI", 8.0F, If(countLogged > 0, FontStyle.Bold, FontStyle.Regular)),
+                                .ForeColor = If(countLogged > 0, Color.FromArgb(24, 88, 54), Color.Gray),
+                                .Location = New Point(10, 38),
+                                .Size = New Size(150, 20)
+                            }
+
+                                ' Add controls to block panel
+                                pnlCard.Controls.Add(lblTitle)
+                                pnlCard.Controls.Add(lblCount)
+
+                                ' Optional Click-to-Filter Action when clicking a block
+                                AddHandler pnlCard.Click, Sub(s, e) FilterByCompetencyName(catName)
+                                AddHandler lblTitle.Click, Sub(s, e) FilterByCompetencyName(catName)
+                                AddHandler lblCount.Click, Sub(s, e) FilterByCompetencyName(catName)
+
+                                ' Add panel block to flow layout
+                                flpProgressCards.Controls.Add(pnlCard)
+                            End While
+                        End Using
                     End Using
                 End If
             End Using

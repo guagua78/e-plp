@@ -17,6 +17,7 @@ Partial Class maindashboard
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim dataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnNavEditProfile = New System.Windows.Forms.Button()
@@ -39,17 +40,20 @@ Partial Class maindashboard
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.lblGreeting = New System.Windows.Forms.Label()
         Me.pnlMainContainer = New System.Windows.Forms.Panel()
-        Me.lblPortfolioTitle = New System.Windows.Forms.Label()
-        Me.lblSummaryTitle = New System.Windows.Forms.Label()
+        Me.pnlPortfolioCard = New System.Windows.Forms.Panel()
         Me.dgvPortfolio = New System.Windows.Forms.DataGridView()
-        Me.dgvProgressSummary = New System.Windows.Forms.DataGridView()
+        Me.lblPortfolioTitle = New System.Windows.Forms.Label()
+        Me.pnlSummaryCard = New System.Windows.Forms.Panel()
+        Me.flpProgressCards = New System.Windows.Forms.FlowLayoutPanel()
+        Me.lblSummaryTitle = New System.Windows.Forms.Label()
         Me.pnlSidebar.SuspendLayout()
         Me.pnlCompetenciesSubMenu.SuspendLayout()
         Me.pnlSidebarHeader.SuspendLayout()
         Me.pnlTopHeader.SuspendLayout()
         Me.pnlMainContainer.SuspendLayout()
+        Me.pnlPortfolioCard.SuspendLayout()
         CType(Me.dgvPortfolio, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dgvProgressSummary, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlSummaryCard.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlSidebar
@@ -344,10 +348,8 @@ Partial Class maindashboard
         'pnlMainContainer
         '
         Me.pnlMainContainer.BackColor = System.Drawing.Color.FromArgb(CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(243, Byte), Integer))
-        Me.pnlMainContainer.Controls.Add(Me.lblPortfolioTitle)
-        Me.pnlMainContainer.Controls.Add(Me.lblSummaryTitle)
-        Me.pnlMainContainer.Controls.Add(Me.dgvPortfolio)
-        Me.pnlMainContainer.Controls.Add(Me.dgvProgressSummary)
+        Me.pnlMainContainer.Controls.Add(Me.pnlPortfolioCard)
+        Me.pnlMainContainer.Controls.Add(Me.pnlSummaryCard)
         Me.pnlMainContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMainContainer.Location = New System.Drawing.Point(240, 65)
         Me.pnlMainContainer.Name = "pnlMainContainer"
@@ -355,62 +357,92 @@ Partial Class maindashboard
         Me.pnlMainContainer.Size = New System.Drawing.Size(960, 655)
         Me.pnlMainContainer.TabIndex = 2
         '
-        'lblPortfolioTitle
+        'pnlSummaryCard
         '
-        Me.lblPortfolioTitle.AutoSize = True
-        Me.lblPortfolioTitle.Font = New System.Drawing.Font("Segoe UI", 10.5!, System.Drawing.FontStyle.Bold)
-        Me.lblPortfolioTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
-        Me.lblPortfolioTitle.Location = New System.Drawing.Point(20, 215)
-        Me.lblPortfolioTitle.Name = "lblPortfolioTitle"
-        Me.lblPortfolioTitle.Size = New System.Drawing.Size(252, 25)
-        Me.lblPortfolioTitle.TabIndex = 3
-        Me.lblPortfolioTitle.Text = "Submitted Artifacts Records"
+        Me.pnlSummaryCard.BackColor = System.Drawing.Color.White
+        Me.pnlSummaryCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlSummaryCard.Controls.Add(Me.flpProgressCards)
+        Me.pnlSummaryCard.Controls.Add(Me.lblSummaryTitle)
+        Me.pnlSummaryCard.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlSummaryCard.Location = New System.Drawing.Point(20, 20)
+        Me.pnlSummaryCard.Name = "pnlSummaryCard"
+        Me.pnlSummaryCard.Padding = New System.Windows.Forms.Padding(12)
+        Me.pnlSummaryCard.Size = New System.Drawing.Size(920, 180)
+        Me.pnlSummaryCard.TabIndex = 1
         '
         'lblSummaryTitle
         '
         Me.lblSummaryTitle.AutoSize = True
-        Me.lblSummaryTitle.Font = New System.Drawing.Font("Segoe UI", 10.5!, System.Drawing.FontStyle.Bold)
+        Me.lblSummaryTitle.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblSummaryTitle.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
         Me.lblSummaryTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
-        Me.lblSummaryTitle.Location = New System.Drawing.Point(20, 15)
+        Me.lblSummaryTitle.Location = New System.Drawing.Point(12, 12)
         Me.lblSummaryTitle.Name = "lblSummaryTitle"
-        Me.lblSummaryTitle.Size = New System.Drawing.Size(322, 25)
-        Me.lblSummaryTitle.TabIndex = 2
+        Me.lblSummaryTitle.Size = New System.Drawing.Size(322, 23)
+        Me.lblSummaryTitle.TabIndex = 0
         Me.lblSummaryTitle.Text = "Skill Competency Progress Summary"
+        '
+        'flpProgressCards
+        '
+        Me.flpProgressCards.AutoScroll = True
+        Me.flpProgressCards.BackColor = System.Drawing.Color.Transparent
+        Me.flpProgressCards.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flpProgressCards.Location = New System.Drawing.Point(12, 35)
+        Me.flpProgressCards.Name = "flpProgressCards"
+        Me.flpProgressCards.Size = New System.Drawing.Size(894, 131)
+        Me.flpProgressCards.TabIndex = 1
+        '
+        'pnlPortfolioCard
+        '
+        Me.pnlPortfolioCard.BackColor = System.Drawing.Color.White
+        Me.pnlPortfolioCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlPortfolioCard.Controls.Add(Me.dgvPortfolio)
+        Me.pnlPortfolioCard.Controls.Add(Me.lblPortfolioTitle)
+        Me.pnlPortfolioCard.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlPortfolioCard.Location = New System.Drawing.Point(20, 215)
+        Me.pnlPortfolioCard.Name = "pnlPortfolioCard"
+        Me.pnlPortfolioCard.Padding = New System.Windows.Forms.Padding(12)
+        Me.pnlPortfolioCard.Size = New System.Drawing.Size(920, 420)
+        Me.pnlPortfolioCard.TabIndex = 2
+        '
+        'lblPortfolioTitle
+        '
+        Me.lblPortfolioTitle.AutoSize = True
+        Me.lblPortfolioTitle.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblPortfolioTitle.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.lblPortfolioTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        Me.lblPortfolioTitle.Location = New System.Drawing.Point(12, 12)
+        Me.lblPortfolioTitle.Name = "lblPortfolioTitle"
+        Me.lblPortfolioTitle.Size = New System.Drawing.Size(252, 23)
+        Me.lblPortfolioTitle.TabIndex = 0
+        Me.lblPortfolioTitle.Text = "Submitted Artifacts Records"
         '
         'dgvPortfolio
         '
         Me.dgvPortfolio.AllowUserToAddRows = False
         Me.dgvPortfolio.AllowUserToDeleteRows = False
-        Me.dgvPortfolio.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvPortfolio.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvPortfolio.BackgroundColor = System.Drawing.Color.White
-        Me.dgvPortfolio.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPortfolio.Location = New System.Drawing.Point(23, 245)
+        Me.dgvPortfolio.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvPortfolio.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        dataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPortfolio.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1
+        Me.dgvPortfolio.ColumnHeadersHeight = 32
+        Me.dgvPortfolio.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvPortfolio.EnableHeadersVisualStyles = False
+        Me.dgvPortfolio.Location = New System.Drawing.Point(12, 35)
         Me.dgvPortfolio.Name = "dgvPortfolio"
         Me.dgvPortfolio.ReadOnly = True
-        Me.dgvPortfolio.RowHeadersWidth = 51
+        Me.dgvPortfolio.RowHeadersVisible = False
         Me.dgvPortfolio.RowTemplate.Height = 28
-        Me.dgvPortfolio.Size = New System.Drawing.Size(915, 385)
+        Me.dgvPortfolio.Size = New System.Drawing.Size(894, 371)
         Me.dgvPortfolio.TabIndex = 1
-        '
-        'dgvProgressSummary
-        '
-        Me.dgvProgressSummary.AllowUserToAddRows = False
-        Me.dgvProgressSummary.AllowUserToDeleteRows = False
-        Me.dgvProgressSummary.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvProgressSummary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvProgressSummary.BackgroundColor = System.Drawing.Color.White
-        Me.dgvProgressSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProgressSummary.Location = New System.Drawing.Point(23, 45)
-        Me.dgvProgressSummary.Name = "dgvProgressSummary"
-        Me.dgvProgressSummary.ReadOnly = True
-        Me.dgvProgressSummary.RowHeadersWidth = 51
-        Me.dgvProgressSummary.RowTemplate.Height = 28
-        Me.dgvProgressSummary.Size = New System.Drawing.Size(915, 155)
-        Me.dgvProgressSummary.TabIndex = 0
         '
         'maindashboard
         '
@@ -429,9 +461,11 @@ Partial Class maindashboard
         Me.pnlTopHeader.ResumeLayout(False)
         Me.pnlTopHeader.PerformLayout()
         Me.pnlMainContainer.ResumeLayout(False)
-        Me.pnlMainContainer.PerformLayout()
+        Me.pnlPortfolioCard.ResumeLayout(False)
+        Me.pnlPortfolioCard.PerformLayout()
         CType(Me.dgvPortfolio, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dgvProgressSummary, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlSummaryCard.ResumeLayout(False)
+        Me.pnlSummaryCard.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -458,8 +492,10 @@ Partial Class maindashboard
     Friend WithEvents cmbCategoryFilter As System.Windows.Forms.ComboBox
     Friend WithEvents btnAddEntry As System.Windows.Forms.Button
     Friend WithEvents pnlMainContainer As System.Windows.Forms.Panel
-    Friend WithEvents dgvProgressSummary As System.Windows.Forms.DataGridView
-    Friend WithEvents dgvPortfolio As System.Windows.Forms.DataGridView
+    Friend WithEvents pnlSummaryCard As System.Windows.Forms.Panel
     Friend WithEvents lblSummaryTitle As System.Windows.Forms.Label
+    Friend WithEvents flpProgressCards As System.Windows.Forms.FlowLayoutPanel
+    Friend WithEvents pnlPortfolioCard As System.Windows.Forms.Panel
     Friend WithEvents lblPortfolioTitle As System.Windows.Forms.Label
+    Friend WithEvents dgvPortfolio As System.Windows.Forms.DataGridView
 End Class
