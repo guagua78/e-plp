@@ -35,7 +35,7 @@ Partial Class frmAddEntry
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        ' lblFormTitle
+        'lblFormTitle
         '
         Me.lblFormTitle.AutoSize = True
         Me.lblFormTitle.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
@@ -46,7 +46,7 @@ Partial Class frmAddEntry
         Me.lblFormTitle.TabIndex = 0
         Me.lblFormTitle.Text = "Add Portfolio Entry"
         '
-        ' lblTitle
+        'lblTitle
         '
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
@@ -56,7 +56,7 @@ Partial Class frmAddEntry
         Me.lblTitle.TabIndex = 1
         Me.lblTitle.Text = "Accomplishment Title *"
         '
-        ' txtTitle
+        'txtTitle
         '
         Me.txtTitle.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.txtTitle.Location = New System.Drawing.Point(25, 95)
@@ -64,7 +64,7 @@ Partial Class frmAddEntry
         Me.txtTitle.Size = New System.Drawing.Size(530, 30)
         Me.txtTitle.TabIndex = 2
         '
-        ' lblCategory
+        'lblCategory
         '
         Me.lblCategory.AutoSize = True
         Me.lblCategory.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
@@ -74,7 +74,7 @@ Partial Class frmAddEntry
         Me.lblCategory.TabIndex = 3
         Me.lblCategory.Text = "Skill Competency *"
         '
-        ' cmbCategory
+        'cmbCategory
         '
         Me.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCategory.Font = New System.Drawing.Font("Segoe UI", 10.0!)
@@ -84,7 +84,7 @@ Partial Class frmAddEntry
         Me.cmbCategory.Size = New System.Drawing.Size(250, 31)
         Me.cmbCategory.TabIndex = 4
         '
-        ' lblActivityType
+        'lblActivityType
         '
         Me.lblActivityType.AutoSize = True
         Me.lblActivityType.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
@@ -94,7 +94,7 @@ Partial Class frmAddEntry
         Me.lblActivityType.TabIndex = 5
         Me.lblActivityType.Text = "Activity Type *"
         '
-        ' cmbActivityType
+        'cmbActivityType
         '
         Me.cmbActivityType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbActivityType.Font = New System.Drawing.Font("Segoe UI", 10.0!)
@@ -104,7 +104,7 @@ Partial Class frmAddEntry
         Me.cmbActivityType.Size = New System.Drawing.Size(250, 31)
         Me.cmbActivityType.TabIndex = 6
         '
-        ' lblDateCompleted
+        'lblDateCompleted
         '
         Me.lblDateCompleted.AutoSize = True
         Me.lblDateCompleted.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
@@ -114,7 +114,7 @@ Partial Class frmAddEntry
         Me.lblDateCompleted.TabIndex = 7
         Me.lblDateCompleted.Text = "Date Completed *"
         '
-        ' dtpDateCompleted
+        'dtpDateCompleted
         '
         Me.dtpDateCompleted.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.dtpDateCompleted.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
@@ -123,7 +123,7 @@ Partial Class frmAddEntry
         Me.dtpDateCompleted.Size = New System.Drawing.Size(250, 30)
         Me.dtpDateCompleted.TabIndex = 8
         '
-        ' lblDescription
+        'lblDescription
         '
         Me.lblDescription.AutoSize = True
         Me.lblDescription.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
@@ -133,7 +133,7 @@ Partial Class frmAddEntry
         Me.lblDescription.TabIndex = 9
         Me.lblDescription.Text = "Description / Details"
         '
-        ' txtDescription
+        'txtDescription
         '
         Me.txtDescription.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.txtDescription.Location = New System.Drawing.Point(25, 305)
@@ -142,7 +142,7 @@ Partial Class frmAddEntry
         Me.txtDescription.Size = New System.Drawing.Size(530, 90)
         Me.txtDescription.TabIndex = 10
         '
-        ' lblAttachment
+        'lblAttachment
         '
         Me.lblAttachment.AutoSize = True
         Me.lblAttachment.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
@@ -152,7 +152,7 @@ Partial Class frmAddEntry
         Me.lblAttachment.TabIndex = 11
         Me.lblAttachment.Text = "Proof / Evidence File"
         '
-        ' btnBrowse
+        'btnBrowse
         '
         Me.btnBrowse.BackColor = System.Drawing.Color.LightGray
         Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -164,7 +164,7 @@ Partial Class frmAddEntry
         Me.btnBrowse.Text = "Browse File..."
         Me.btnBrowse.UseVisualStyleBackColor = False
         '
-        ' lblFilePath
+        'lblFilePath
         '
         Me.lblFilePath.AutoSize = True
         Me.lblFilePath.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Italic)
@@ -175,7 +175,7 @@ Partial Class frmAddEntry
         Me.lblFilePath.TabIndex = 13
         Me.lblFilePath.Text = "No file attached yet"
         '
-        ' btnSave
+        'btnSave
         '
         Me.btnSave.BackColor = System.Drawing.Color.DarkGreen
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -188,7 +188,7 @@ Partial Class frmAddEntry
         Me.btnSave.Text = "Save Entry"
         Me.btnSave.UseVisualStyleBackColor = False
         '
-        ' btnCancel
+        'btnCancel
         '
         Me.btnCancel.BackColor = System.Drawing.Color.Gray
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -201,7 +201,7 @@ Partial Class frmAddEntry
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
         '
-        ' frmAddEntry
+        'frmAddEntry
         '
         Me.ClientSize = New System.Drawing.Size(580, 560)
         Me.Controls.Add(Me.btnCancel)
