@@ -81,8 +81,8 @@ Public Class frmRegister
 
                     Dim passwordHash As String = BCrypt.Net.BCrypt.HashPassword(password)
 
-                    Dim insertQuery As String = "INSERT INTO students (student_number, email, first_name, middle_name, last_name, suffix, program, year_level, password_hash) " &
-                                                "VALUES (@stud, @email, @fname, @mname, @lname, @suffix, @program, @year, @passHash)"
+                    Dim insertQuery As String = "INSERT INTO students (student_number, email, first_name, middle_name, last_name, suffix, degree_program, year_level, password_hash) " &
+                            "VALUES (@stud, @email, @fname, @mname, @lname, @suffix, @program, @year, @passHash)"
 
                     Using insertCmd As New MySqlCommand(insertQuery, conn)
                         insertCmd.Parameters.AddWithValue("@stud", studentNum)
@@ -100,9 +100,10 @@ Public Class frmRegister
 
                     MessageBox.Show("Account registered successfully! You may now log in.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+                    ' Navigate to login screen without terminating the app thread
                     Dim loginForm As New frmLogin()
                     loginForm.Show()
-                    Me.Close()
+                    Me.Hide() ' Keeps the primary application process running
                 End If
             End Using
         Catch ex As Exception

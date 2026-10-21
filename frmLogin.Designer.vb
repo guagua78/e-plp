@@ -18,17 +18,17 @@ Partial Class frmLogin
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.pnlCenterCard = New System.Windows.Forms.Panel()
-        Me.pbLoginBG = New System.Windows.Forms.PictureBox()
-        Me.txtUsername = New System.Windows.Forms.TextBox()
-        Me.txtPass = New System.Windows.Forms.TextBox()
-        Me.lblStudNum = New System.Windows.Forms.Label()
-        Me.lblPassword = New System.Windows.Forms.Label()
-        Me.lblLogin = New System.Windows.Forms.Label()
-        Me.btnLogin = New System.Windows.Forms.Button()
-        Me.lblSubLogin = New System.Windows.Forms.Label()
-        Me.chckShowPass = New System.Windows.Forms.CheckBox()
-        Me.lblPLPHeader = New System.Windows.Forms.Label()
         Me.lnkRegister = New System.Windows.Forms.LinkLabel()
+        Me.lblPLPHeader = New System.Windows.Forms.Label()
+        Me.chckShowPass = New System.Windows.Forms.CheckBox()
+        Me.lblSubLogin = New System.Windows.Forms.Label()
+        Me.btnLogin = New System.Windows.Forms.Button()
+        Me.lblLogin = New System.Windows.Forms.Label()
+        Me.lblPassword = New System.Windows.Forms.Label()
+        Me.lblStudNum = New System.Windows.Forms.Label()
+        Me.txtPass = New System.Windows.Forms.TextBox()
+        Me.txtUsername = New System.Windows.Forms.TextBox()
+        Me.pbLoginBG = New System.Windows.Forms.PictureBox()
         Me.pnlCenterCard.SuspendLayout()
         CType(Me.pbLoginBG, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -53,69 +53,50 @@ Partial Class frmLogin
         Me.pnlCenterCard.Size = New System.Drawing.Size(1000, 660)
         Me.pnlCenterCard.TabIndex = 0
         '
-        'pbLoginBG
+        'lnkRegister
         '
-        Me.pbLoginBG.BackgroundImage = Global.e_plp.My.Resources.Resources.Pamantasan_ng_Lungsod_ng_Pasig__3_
-        Me.pbLoginBG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pbLoginBG.Image = Global.e_plp.My.Resources.Resources.Pamantasan_ng_Lungsod_ng_Pasig__3_
-        Me.pbLoginBG.Location = New System.Drawing.Point(0, 0)
-        Me.pbLoginBG.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.pbLoginBG.Name = "pbLoginBG"
-        Me.pbLoginBG.Size = New System.Drawing.Size(1000, 600)
-        Me.pbLoginBG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pbLoginBG.TabIndex = 1
-        Me.pbLoginBG.TabStop = False
+        Me.lnkRegister.AutoSize = True
+        Me.lnkRegister.Font = New System.Drawing.Font("Segoe UI", 9.5!)
+        Me.lnkRegister.Location = New System.Drawing.Point(430, 615)
+        Me.lnkRegister.Name = "lnkRegister"
+        Me.lnkRegister.Size = New System.Drawing.Size(145, 21)
+        Me.lnkRegister.TabIndex = 29
+        Me.lnkRegister.TabStop = True
+        Me.lnkRegister.Text = "Register As Student"
         '
-        'txtUsername
+        'lblPLPHeader
         '
-        Me.txtUsername.Font = New System.Drawing.Font("Segoe UI", 11.5!)
-        Me.txtUsername.Location = New System.Drawing.Point(45, 275)
-        Me.txtUsername.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(320, 33)
-        Me.txtUsername.TabIndex = 2
+        Me.lblPLPHeader.AutoSize = True
+        Me.lblPLPHeader.BackColor = System.Drawing.Color.White
+        Me.lblPLPHeader.Font = New System.Drawing.Font("Segoe UI", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPLPHeader.Location = New System.Drawing.Point(36, 22)
+        Me.lblPLPHeader.Name = "lblPLPHeader"
+        Me.lblPLPHeader.Size = New System.Drawing.Size(276, 46)
+        Me.lblPLPHeader.TabIndex = 28
+        Me.lblPLPHeader.Text = "E-PLPORTFOLIO"
         '
-        'txtPass
+        'chckShowPass
         '
-        Me.txtPass.Font = New System.Drawing.Font("Segoe UI", 11.5!)
-        Me.txtPass.Location = New System.Drawing.Point(45, 380)
-        Me.txtPass.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.txtPass.Name = "txtPass"
-        Me.txtPass.Size = New System.Drawing.Size(320, 33)
-        Me.txtPass.TabIndex = 3
+        Me.chckShowPass.AutoSize = True
+        Me.chckShowPass.BackColor = System.Drawing.Color.White
+        Me.chckShowPass.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
+        Me.chckShowPass.Location = New System.Drawing.Point(375, 385)
+        Me.chckShowPass.Name = "chckShowPass"
+        Me.chckShowPass.Size = New System.Drawing.Size(55, 25)
+        Me.chckShowPass.TabIndex = 27
+        Me.chckShowPass.Text = "👁"
+        Me.chckShowPass.UseVisualStyleBackColor = False
         '
-        'lblStudNum
+        'lblSubLogin
         '
-        Me.lblStudNum.AutoSize = True
-        Me.lblStudNum.BackColor = System.Drawing.Color.White
-        Me.lblStudNum.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblStudNum.Location = New System.Drawing.Point(40, 248)
-        Me.lblStudNum.Name = "lblStudNum"
-        Me.lblStudNum.Size = New System.Drawing.Size(267, 21)
-        Me.lblStudNum.TabIndex = 6
-        Me.lblStudNum.Text = "STUDENT NUMBER / PLP EMAIL"
-        '
-        'lblPassword
-        '
-        Me.lblPassword.AutoSize = True
-        Me.lblPassword.BackColor = System.Drawing.Color.White
-        Me.lblPassword.Font = New System.Drawing.Font("Segoe UI", 10.5!, System.Drawing.FontStyle.Bold)
-        Me.lblPassword.Location = New System.Drawing.Point(40, 350)
-        Me.lblPassword.Name = "lblPassword"
-        Me.lblPassword.Size = New System.Drawing.Size(91, 25)
-        Me.lblPassword.TabIndex = 22
-        Me.lblPassword.Text = "Password"
-        '
-        'lblLogin
-        '
-        Me.lblLogin.AutoSize = True
-        Me.lblLogin.BackColor = System.Drawing.Color.White
-        Me.lblLogin.Font = New System.Drawing.Font("Segoe UI", 17.0!, System.Drawing.FontStyle.Bold)
-        Me.lblLogin.Location = New System.Drawing.Point(38, 115)
-        Me.lblLogin.Name = "lblLogin"
-        Me.lblLogin.Size = New System.Drawing.Size(287, 40)
-        Me.lblLogin.TabIndex = 23
-        Me.lblLogin.Text = "Login your Account"
+        Me.lblSubLogin.AutoSize = True
+        Me.lblSubLogin.BackColor = System.Drawing.Color.White
+        Me.lblSubLogin.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Italic)
+        Me.lblSubLogin.Location = New System.Drawing.Point(44, 155)
+        Me.lblSubLogin.Name = "lblSubLogin"
+        Me.lblSubLogin.Size = New System.Drawing.Size(247, 40)
+        Me.lblSubLogin.TabIndex = 26
+        Me.lblSubLogin.Text = "Welcome Back!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please enter your details to sign in."
         '
         'btnLogin
         '
@@ -128,50 +109,69 @@ Partial Class frmLogin
         Me.btnLogin.Text = "LOGIN"
         Me.btnLogin.UseVisualStyleBackColor = True
         '
-        'lblSubLogin
+        'lblLogin
         '
-        Me.lblSubLogin.AutoSize = True
-        Me.lblSubLogin.BackColor = System.Drawing.Color.White
-        Me.lblSubLogin.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Italic)
-        Me.lblSubLogin.Location = New System.Drawing.Point(42, 165)
-        Me.lblSubLogin.Name = "lblSubLogin"
-        Me.lblSubLogin.Size = New System.Drawing.Size(247, 40)
-        Me.lblSubLogin.TabIndex = 26
-        Me.lblSubLogin.Text = "Welcome Back!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please enter your details to sign in."
+        Me.lblLogin.AutoSize = True
+        Me.lblLogin.BackColor = System.Drawing.Color.White
+        Me.lblLogin.Font = New System.Drawing.Font("Segoe UI", 17.0!, System.Drawing.FontStyle.Bold)
+        Me.lblLogin.Location = New System.Drawing.Point(38, 94)
+        Me.lblLogin.Name = "lblLogin"
+        Me.lblLogin.Size = New System.Drawing.Size(287, 40)
+        Me.lblLogin.TabIndex = 23
+        Me.lblLogin.Text = "Login your Account"
         '
-        'chckShowPass
+        'lblPassword
         '
-        Me.chckShowPass.AutoSize = True
-        Me.chckShowPass.BackColor = System.Drawing.Color.White
-        Me.chckShowPass.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.chckShowPass.Location = New System.Drawing.Point(375, 385)
-        Me.chckShowPass.Name = "chckShowPass"
-        Me.chckShowPass.Size = New System.Drawing.Size(52, 25)
-        Me.chckShowPass.TabIndex = 27
-        Me.chckShowPass.Text = "👁"
-        Me.chckShowPass.UseVisualStyleBackColor = False
+        Me.lblPassword.AutoSize = True
+        Me.lblPassword.BackColor = System.Drawing.Color.White
+        Me.lblPassword.Font = New System.Drawing.Font("Segoe UI", 10.5!, System.Drawing.FontStyle.Bold)
+        Me.lblPassword.Location = New System.Drawing.Point(40, 350)
+        Me.lblPassword.Name = "lblPassword"
+        Me.lblPassword.Size = New System.Drawing.Size(92, 25)
+        Me.lblPassword.TabIndex = 22
+        Me.lblPassword.Text = "Password"
         '
-        'lblPLPHeader
+        'lblStudNum
         '
-        Me.lblPLPHeader.AutoSize = True
-        Me.lblPLPHeader.BackColor = System.Drawing.Color.White
-        Me.lblPLPHeader.Font = New System.Drawing.Font("Segoe UI", 14.5!, System.Drawing.FontStyle.Bold)
-        Me.lblPLPHeader.Location = New System.Drawing.Point(38, 30)
-        Me.lblPLPHeader.Name = "lblPLPHeader"
-        Me.lblPLPHeader.Size = New System.Drawing.Size(465, 33)
-        Me.lblPLPHeader.TabIndex = 28
-        Me.lblPLPHeader.Text = "PAMANTASAN NG LUNGSOD NG PASIG"
+        Me.lblStudNum.AutoSize = True
+        Me.lblStudNum.BackColor = System.Drawing.Color.White
+        Me.lblStudNum.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
+        Me.lblStudNum.Location = New System.Drawing.Point(40, 248)
+        Me.lblStudNum.Name = "lblStudNum"
+        Me.lblStudNum.Size = New System.Drawing.Size(251, 21)
+        Me.lblStudNum.TabIndex = 6
+        Me.lblStudNum.Text = "STUDENT NUMBER / PLP EMAIL"
         '
-        'lnkRegister
+        'txtPass
         '
-        Me.lnkRegister.AutoSize = True
-        Me.lnkRegister.Font = New System.Drawing.Font("Segoe UI", 9.5!)
-        Me.lnkRegister.Location = New System.Drawing.Point(430, 615)
-        Me.lnkRegister.Name = "lnkRegister"
-        Me.lnkRegister.Size = New System.Drawing.Size(148, 21)
-        Me.lnkRegister.TabIndex = 29
-        Me.lnkRegister.TabStop = True
-        Me.lnkRegister.Text = "Register As Student"
+        Me.txtPass.Font = New System.Drawing.Font("Segoe UI", 11.5!)
+        Me.txtPass.Location = New System.Drawing.Point(45, 380)
+        Me.txtPass.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtPass.Name = "txtPass"
+        Me.txtPass.Size = New System.Drawing.Size(320, 33)
+        Me.txtPass.TabIndex = 3
+        '
+        'txtUsername
+        '
+        Me.txtUsername.Font = New System.Drawing.Font("Segoe UI", 11.5!)
+        Me.txtUsername.Location = New System.Drawing.Point(45, 275)
+        Me.txtUsername.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(320, 33)
+        Me.txtUsername.TabIndex = 2
+        '
+        'pbLoginBG
+        '
+        Me.pbLoginBG.BackgroundImage = Global.e_plp.My.Resources.Resources.Pamantasan_ng_Lungsod_ng_Pasig__3_
+        Me.pbLoginBG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pbLoginBG.Image = Global.e_plp.My.Resources.Resources.Pamantasan_ng_Lungsod_ng_Pasig__3_
+        Me.pbLoginBG.Location = New System.Drawing.Point(0, 0)
+        Me.pbLoginBG.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.pbLoginBG.Name = "pbLoginBG"
+        Me.pbLoginBG.Size = New System.Drawing.Size(1000, 600)
+        Me.pbLoginBG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pbLoginBG.TabIndex = 1
+        Me.pbLoginBG.TabStop = False
         '
         'frmLogin
         '
