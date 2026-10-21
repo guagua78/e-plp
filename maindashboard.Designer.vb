@@ -17,7 +17,7 @@ Partial Class maindashboard
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnNavEditProfile = New System.Windows.Forms.Button()
@@ -48,6 +48,7 @@ Partial Class maindashboard
         Me.flpProgressCards = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblSummaryTitle = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnGenerateReport = New System.Windows.Forms.Button()
         Me.pnlSidebar.SuspendLayout()
         Me.pnlCompetenciesSubMenu.SuspendLayout()
         Me.pnlSidebarHeader.SuspendLayout()
@@ -62,6 +63,7 @@ Partial Class maindashboard
         '
         Me.pnlSidebar.AutoScroll = True
         Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        Me.pnlSidebar.Controls.Add(Me.btnGenerateReport)
         Me.pnlSidebar.Controls.Add(Me.btnLogout)
         Me.pnlSidebar.Controls.Add(Me.btnNavEditProfile)
         Me.pnlSidebar.Controls.Add(Me.pnlCompetenciesSubMenu)
@@ -392,14 +394,14 @@ Partial Class maindashboard
         Me.dgvPortfolio.BackgroundColor = System.Drawing.Color.White
         Me.dgvPortfolio.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvPortfolio.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPortfolio.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPortfolio.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvPortfolio.ColumnHeadersHeight = 32
         Me.dgvPortfolio.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvPortfolio.EnableHeadersVisualStyles = False
@@ -468,6 +470,22 @@ Partial Class maindashboard
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "Label1"
         '
+        'btnGenerateReport
+        '
+        Me.btnGenerateReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.btnGenerateReport.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.btnGenerateReport.FlatAppearance.BorderSize = 0
+        Me.btnGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGenerateReport.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
+        Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
+        Me.btnGenerateReport.Location = New System.Drawing.Point(0, 585)
+        Me.btnGenerateReport.Name = "btnGenerateReport"
+        Me.btnGenerateReport.Size = New System.Drawing.Size(240, 45)
+        Me.btnGenerateReport.TabIndex = 6
+        Me.btnGenerateReport.Text = "📄 Generate Portfolio Report (PDF)"
+        Me.btnGenerateReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnGenerateReport.UseVisualStyleBackColor = False
+        '
         'maindashboard
         '
         Me.ClientSize = New System.Drawing.Size(1200, 720)
@@ -524,4 +542,5 @@ Partial Class maindashboard
     Friend WithEvents dgvPortfolio As System.Windows.Forms.DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents btnGenerateReport As Button
 End Class

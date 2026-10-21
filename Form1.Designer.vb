@@ -103,7 +103,7 @@ Partial Class frmRegister
         Me.lblAlreadyReg.AutoSize = True
         Me.lblAlreadyReg.Font = New System.Drawing.Font("Segoe UI", 9.5!)
         Me.lblAlreadyReg.ForeColor = System.Drawing.Color.PowderBlue
-        Me.lblAlreadyReg.Location = New System.Drawing.Point(940, 27)
+        Me.lblAlreadyReg.Location = New System.Drawing.Point(968, 27)
         Me.lblAlreadyReg.Name = "lblAlreadyReg"
         Me.lblAlreadyReg.Size = New System.Drawing.Size(144, 21)
         Me.lblAlreadyReg.TabIndex = 3
