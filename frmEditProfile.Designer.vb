@@ -36,7 +36,7 @@ Partial Class frmEditProfile
         '
         Me.lblFormTitle.AutoSize = True
         Me.lblFormTitle.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lblFormTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.lblFormTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(45, Byte), Integer))
         Me.lblFormTitle.Location = New System.Drawing.Point(20, 20)
         Me.lblFormTitle.Name = "lblFormTitle"
         Me.lblFormTitle.Size = New System.Drawing.Size(236, 32)
@@ -145,7 +145,7 @@ Partial Class frmEditProfile
         '
         'btnSaveProfile
         '
-        Me.btnSaveProfile.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnSaveProfile.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(45, Byte), Integer))
         Me.btnSaveProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveProfile.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
         Me.btnSaveProfile.ForeColor = System.Drawing.Color.White

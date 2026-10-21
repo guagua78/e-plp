@@ -13,9 +13,28 @@ Public Class maindashboard
         btnAddEntry.BringToFront()
         pnlCompetenciesSubMenu.BringToFront()
 
+
+        ' Set default dropdown filter option
+        If cmbCategoryFilter.Items.Count > 0 Then
+            cmbCategoryFilter.SelectedIndex = 0 ' Selects "All Skill Competencies"
+        End If
+
         ' Populate Category Dropdown and Refresh Data
         PopulateCategoryFilter()
         RefreshDashboard()
+    End Sub
+    Private Sub txtSearch_Enter(sender As Object, e As EventArgs) Handles txtSearch.Enter
+        If txtSearch.Text = "Search artifact title..." Then
+            txtSearch.Text = ""
+            txtSearch.ForeColor = Color.Black
+        End If
+    End Sub
+
+    Private Sub txtSearch_Leave(sender As Object, e As EventArgs) Handles txtSearch.Leave
+        If String.IsNullOrWhiteSpace(txtSearch.Text) Then
+            txtSearch.Text = "Search artifact title..."
+            txtSearch.ForeColor = Color.Gray
+        End If
     End Sub
     Private Sub btnAddEntry_Click(sender As Object, e As EventArgs) Handles btnAddEntry.Click
         Dim addForm As New frmAddEntry()

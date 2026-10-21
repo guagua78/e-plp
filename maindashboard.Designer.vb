@@ -17,7 +17,7 @@ Partial Class maindashboard
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnNavEditProfile = New System.Windows.Forms.Button()
@@ -35,6 +35,7 @@ Partial Class maindashboard
         Me.lblSubBrand = New System.Windows.Forms.Label()
         Me.lblAppBrand = New System.Windows.Forms.Label()
         Me.pnlTopHeader = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.btnAddEntry = New System.Windows.Forms.Button()
         Me.cmbCategoryFilter = New System.Windows.Forms.ComboBox()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -46,6 +47,7 @@ Partial Class maindashboard
         Me.pnlSummaryCard = New System.Windows.Forms.Panel()
         Me.flpProgressCards = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblSummaryTitle = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlSidebar.SuspendLayout()
         Me.pnlCompetenciesSubMenu.SuspendLayout()
         Me.pnlSidebarHeader.SuspendLayout()
@@ -290,6 +292,7 @@ Partial Class maindashboard
         'pnlTopHeader
         '
         Me.pnlTopHeader.BackColor = System.Drawing.Color.White
+        Me.pnlTopHeader.Controls.Add(Me.Label2)
         Me.pnlTopHeader.Controls.Add(Me.btnAddEntry)
         Me.pnlTopHeader.Controls.Add(Me.cmbCategoryFilter)
         Me.pnlTopHeader.Controls.Add(Me.txtSearch)
@@ -299,6 +302,17 @@ Partial Class maindashboard
         Me.pnlTopHeader.Name = "pnlTopHeader"
         Me.pnlTopHeader.Size = New System.Drawing.Size(960, 65)
         Me.pnlTopHeader.TabIndex = 1
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.ForeColor = System.Drawing.Color.Gray
+        Me.Label2.Location = New System.Drawing.Point(572, 24)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(125, 16)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "Search Artifact Title:"
         '
         'btnAddEntry
         '
@@ -378,14 +392,14 @@ Partial Class maindashboard
         Me.dgvPortfolio.BackgroundColor = System.Drawing.Color.White
         Me.dgvPortfolio.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvPortfolio.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPortfolio.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPortfolio.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.dgvPortfolio.ColumnHeadersHeight = 32
         Me.dgvPortfolio.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvPortfolio.EnableHeadersVisualStyles = False
@@ -445,6 +459,15 @@ Partial Class maindashboard
         Me.lblSummaryTitle.TabIndex = 0
         Me.lblSummaryTitle.Text = "Skill Competency Progress Summary"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(284, 21)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(48, 16)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "Label1"
+        '
         'maindashboard
         '
         Me.ClientSize = New System.Drawing.Size(1200, 720)
@@ -499,4 +522,6 @@ Partial Class maindashboard
     Friend WithEvents pnlPortfolioCard As System.Windows.Forms.Panel
     Friend WithEvents lblPortfolioTitle As System.Windows.Forms.Label
     Friend WithEvents dgvPortfolio As System.Windows.Forms.DataGridView
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
 End Class
