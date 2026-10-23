@@ -7,7 +7,7 @@ Public Class maindashboard
 
     ' Dynamic chart & grid view mode state variables
     Private chartLabels As New List(Of String)()
-    Private chartSubLabels As New List(Of String)() ' Stores month/year or raw month strings for filtering
+    Private chartSubLabels As New List(Of String)() ' Stores course name or raw month strings
     Private chartValues As New List(Of Integer)()
     Private activeFilterCategoryName As String = "All Skill Competencies"
     Private currentChartViewMode As Integer = 1 ' 1 = Competency / Activity View, 2 = Academic Subject View
@@ -299,11 +299,11 @@ Public Class maindashboard
         Dim query As String = ""
 
         If currentChartViewMode = 2 Then
-            ' 📚 ACADEMIC SUBJECTS VIEW: Course Code + Month/Year
+            ' 📚 ACADEMIC SUBJECTS VIEW: Course Code + Course Name Sublabel
             lblChartTitle.Text = "Academic Subject Accomplishments & Progress"
 
             query = "SELECT c.course_code AS label_name, " &
-                    "MAX(pe.date_completed) AS max_date, " &
+                    "c.course_name AS sub_label, " &
                     "COUNT(pe.entry_id) AS total_entries " &
                     "FROM courses c " &
                     "INNER JOIN portfolio_entries pe ON pe.course_code = c.course_code " &
@@ -326,11 +326,11 @@ Public Class maindashboard
                         "GROUP BY DATE_FORMAT(date_completed, '%Y-%m'), DATE_FORMAT(date_completed, '%b %Y') " &
                         "ORDER BY DATE_FORMAT(date_completed, '%Y-%m') ASC"
             Else
-                ' Specific Category: X-axis primary label is Activity Type + Month/Year
+                ' Specific Category: X-axis primary label is Activity Type
                 lblChartTitle.Text = $"{activeFilterCategoryName} — Activity Breakdown & Progress"
 
                 query = "SELECT at.type_name AS label_name, " &
-                        "MAX(pe.date_completed) AS max_date, " &
+                        "'' AS sub_label, " &
                         "COUNT(pe.entry_id) AS total_entries " &
                         "FROM activity_types at " &
                         "LEFT JOIN portfolio_entries pe ON at.activity_type_id = pe.activity_type_id AND pe.student_number = @stud AND pe.category_id = @catId " &
@@ -358,9 +358,8 @@ Public Class maindashboard
 
                                 If currentChartViewMode = 1 AndAlso selectedCatId = 0 Then
                                     chartSubLabels.Add(reader("raw_month").ToString())
-                                ElseIf Not IsDBNull(reader("max_date")) AndAlso reader("max_date") IsNot Nothing Then
-                                    Dim dt As DateTime = Convert.ToDateTime(reader("max_date"))
-                                    chartSubLabels.Add(dt.ToString("MMM yyyy"))
+                                ElseIf currentChartViewMode = 2 Then
+                                    chartSubLabels.Add(reader("sub_label").ToString())
                                 Else
                                     chartSubLabels.Add("")
                                 End If
@@ -446,11 +445,11 @@ Public Class maindashboard
                 g.DrawString(labelStr, fontX, Brushes.DimGray, barX + ((barWidth - lblSize.Width) / 2.0F), pnlChartCard.Height - marginBottom + 4)
             End Using
 
-            ' Draw Secondary Sub-Label (Month and Year only for Course/Activity modes)
-            Dim selectedCatId As Integer = If(cmbCategoryFilter.SelectedValue IsNot Nothing AndAlso TypeOf cmbCategoryFilter.SelectedValue Is Integer, Convert.ToInt32(cmbCategoryFilter.SelectedValue), 0)
-            If (currentChartViewMode = 2 OrElse selectedCatId > 0) AndAlso i < chartSubLabels.Count AndAlso Not String.IsNullOrEmpty(chartSubLabels(i)) Then
+            ' Draw Secondary Course Name Sub-Label if in Academic Courses View
+            If currentChartViewMode = 2 AndAlso i < chartSubLabels.Count AndAlso Not String.IsNullOrEmpty(chartSubLabels(i)) Then
                 Using fontSubX As New System.Drawing.Font("Segoe UI", 7.5!, FontStyle.Regular)
                     Dim subLabelStr As String = chartSubLabels(i)
+                    If subLabelStr.Length > 15 Then subLabelStr = subLabelStr.Substring(0, 12) & "..."
                     Dim subLblSize As SizeF = g.MeasureString(subLabelStr, fontSubX)
                     g.DrawString(subLabelStr, fontSubX, Brushes.Gray, barX + ((barWidth - subLblSize.Width) / 2.0F), pnlChartCard.Height - marginBottom + 18)
                 End Using
@@ -565,7 +564,7 @@ Public Class maindashboard
     End Sub
 
     ' -------------------------------------------------------------
-    ' PDF REPORT GENERATION HANDLER
+    ' PDF REPORT GENERATION HANDLER WITH PERSONAL STATEMENT & DESCRIPTIONS
     ' -------------------------------------------------------------
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
         Dim saveFileDialog As New SaveFileDialog()
@@ -593,8 +592,9 @@ Public Class maindashboard
         Dim textColor As New BaseColor(40, 40, 40)
         Dim headerFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, primaryColor)
         Dim subHeaderFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, primaryColor)
-        Dim bodyFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA, 10, textColor)
-        Dim boldFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, textColor)
+        Dim bodyFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA, 9.5F, textColor)
+        Dim introFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 10, textColor)
+        Dim boldFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 9.5F, textColor)
 
         Dim title As New Paragraph("E-PORTFOLIO ACCOMPLISHMENT REPORT", headerFont)
         title.Alignment = Element.ALIGN_CENTER
@@ -619,27 +619,55 @@ Public Class maindashboard
                     cmd.Parameters.AddWithValue("@stud", studentNumber)
                     Using reader As MySqlDataReader = cmd.ExecuteReader()
                         If reader.Read() Then
+                            Dim studentName As String = reader("full_name").ToString()
+                            Dim studentNo As String = reader("student_number").ToString()
+                            Dim college As String = reader("college").ToString()
+                            Dim degreeProgram As String = reader("degree_program").ToString()
+                            Dim yearLevel As String = reader("year_level").ToString()
+                            Dim email As String = reader("email").ToString()
+
+                            ' Student Profile Info Table
                             Dim profileTable As New PdfPTable(2)
                             profileTable.WidthPercentage = 100
                             profileTable.SetWidths(New Single() {1.5F, 3.5F})
 
-                            AddTableRow(profileTable, "Student Name:", reader("full_name").ToString(), boldFont, bodyFont)
-                            AddTableRow(profileTable, "Student No.:", reader("student_number").ToString(), boldFont, bodyFont)
-                            AddTableRow(profileTable, "College:", reader("college").ToString(), boldFont, bodyFont)
-                            AddTableRow(profileTable, "Program:", reader("degree_program").ToString(), boldFont, bodyFont)
-                            AddTableRow(profileTable, "Year Level:", reader("year_level").ToString(), boldFont, bodyFont)
-                            AddTableRow(profileTable, "Email Address:", reader("email").ToString(), boldFont, bodyFont)
+                            AddTableRow(profileTable, "Student Name:", studentName, boldFont, bodyFont)
+                            AddTableRow(profileTable, "Student No.:", studentNo, boldFont, bodyFont)
+                            AddTableRow(profileTable, "College:", college, boldFont, bodyFont)
+                            AddTableRow(profileTable, "Program:", degreeProgram, boldFont, bodyFont)
+                            AddTableRow(profileTable, "Year Level:", yearLevel, boldFont, bodyFont)
+                            AddTableRow(profileTable, "Email Address:", email, boldFont, bodyFont)
 
                             doc.Add(profileTable)
+                            doc.Add(New Paragraph(" "))
+
+                            ' -------------------------------------------------------------
+                            ' PERSONAL STUDENT INTRODUCTORY STATEMENT
+                            ' -------------------------------------------------------------
+                            Dim introBox As New PdfPTable(1)
+                            introBox.WidthPercentage = 100
+
+                            Dim introText As String = $"I am {studentName}, a {yearLevel} {degreeProgram} student under the {college} at Pamantasan ng Lungsod ng Pasig. " &
+                                                       $"This document presents my curated portfolio of academic accomplishments, technical projects, certifications, " &
+                                                       $"and competency developments recorded in the E-PLP Student E-Portfolio System."
+
+                            Dim introCell As New PdfPCell(New Phrase(introText, introFont))
+                            introCell.BackgroundColor = New BaseColor(240, 248, 243)
+                            introCell.BorderColor = primaryColor
+                            introCell.Padding = 10.0F
+                            introBox.AddCell(introCell)
+
+                            doc.Add(introBox)
                         End If
                     End Using
                 End Using
 
                 doc.Add(New Paragraph(" "))
-                doc.Add(New Paragraph("PORTFOLIO ACCOMPLISHMENTS & ENTRIES", subHeaderFont))
+                doc.Add(New Paragraph("PORTFOLIO ACCOMPLISHMENTS & ARTIFACT DESCRIPTIONS", subHeaderFont))
                 doc.Add(New Paragraph(" "))
 
-                Dim queryItems As String = "SELECT pe.title, c.category_name, at.type_name, pe.date_completed " &
+                ' Query includes pe.description to render full artifact details
+                Dim queryItems As String = "SELECT pe.title, pe.description, c.category_name, IFNULL(pe.course_code, 'N/A') AS course_code, at.type_name, pe.date_completed " &
                                            "FROM portfolio_entries pe " &
                                            "INNER JOIN categories c ON pe.category_id = c.category_id " &
                                            "INNER JOIN activity_types at ON pe.activity_type_id = at.activity_type_id " &
@@ -648,22 +676,35 @@ Public Class maindashboard
                     cmdItems.Parameters.AddWithValue("@stud", studentNumber)
                     Using readerItems As MySqlDataReader = cmdItems.ExecuteReader()
 
-                        Dim itemsTable As New PdfPTable(4)
+                        Dim itemsTable As New PdfPTable(5)
                         itemsTable.WidthPercentage = 100
-                        itemsTable.SetWidths(New Single() {3.0F, 2.0F, 2.0F, 1.5F})
+                        itemsTable.SetWidths(New Single() {2.2F, 3.5F, 1.8F, 1.3F, 1.2F})
 
-                        AddTableHeaderCell(itemsTable, "Title / Artifact", primaryColor)
+                        AddTableHeaderCell(itemsTable, "Artifact Title", primaryColor)
+                        AddTableHeaderCell(itemsTable, "Description / Details", primaryColor)
                         AddTableHeaderCell(itemsTable, "Skill Competency", primaryColor)
                         AddTableHeaderCell(itemsTable, "Activity Type", primaryColor)
-                        AddTableHeaderCell(itemsTable, "Date Completed", primaryColor)
+                        AddTableHeaderCell(itemsTable, "Date", primaryColor)
 
                         Dim hasItems As Boolean = False
                         While readerItems.Read()
                             hasItems = True
-                            itemsTable.AddCell(New PdfPCell(New Phrase(readerItems("title").ToString(), bodyFont)))
+
+                            ' Title
+                            itemsTable.AddCell(New PdfPCell(New Phrase(readerItems("title").ToString(), boldFont)))
+
+                            ' Description / Details
+                            Dim descStr As String = readerItems("description").ToString()
+                            If String.IsNullOrWhiteSpace(descStr) Then descStr = "No detailed description provided."
+                            itemsTable.AddCell(New PdfPCell(New Phrase(descStr, bodyFont)))
+
+                            ' Competency
                             itemsTable.AddCell(New PdfPCell(New Phrase(readerItems("category_name").ToString(), bodyFont)))
+
+                            ' Activity Type
                             itemsTable.AddCell(New PdfPCell(New Phrase(readerItems("type_name").ToString(), bodyFont)))
 
+                            ' Date
                             Dim dateVal As String = ""
                             If Not IsDBNull(readerItems("date_completed")) Then
                                 dateVal = Convert.ToDateTime(readerItems("date_completed")).ToString("yyyy-MM-dd")
@@ -673,7 +714,7 @@ Public Class maindashboard
 
                         If Not hasItems Then
                             Dim emptyCell As New PdfPCell(New Phrase("No accomplishments logged yet.", bodyFont))
-                            emptyCell.Colspan = 4
+                            emptyCell.Colspan = 5
                             emptyCell.HorizontalAlignment = Element.ALIGN_CENTER
                             emptyCell.Padding = 10.0F
                             itemsTable.AddCell(emptyCell)
@@ -705,7 +746,7 @@ Public Class maindashboard
     End Sub
 
     Private Sub AddTableHeaderCell(table As PdfPTable, headerText As String, bgColor As BaseColor)
-        Dim cellFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.WHITE)
+        Dim cellFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 9.5F, BaseColor.WHITE)
         Dim cell As New PdfPCell(New Phrase(headerText, cellFont))
         cell.BackgroundColor = bgColor
         cell.HorizontalAlignment = Element.ALIGN_CENTER
