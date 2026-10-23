@@ -17,174 +17,202 @@ Partial Class frmAddEntry
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblFormTitle = New System.Windows.Forms.Label()
+        Me.lblFormHeader = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.lblCategory = New System.Windows.Forms.Label()
         Me.cmbCategory = New System.Windows.Forms.ComboBox()
         Me.lblActivityType = New System.Windows.Forms.Label()
         Me.cmbActivityType = New System.Windows.Forms.ComboBox()
+        Me.lblCourseCode = New System.Windows.Forms.Label()
+        Me.cmbCourseCode = New System.Windows.Forms.ComboBox()
         Me.lblDateCompleted = New System.Windows.Forms.Label()
         Me.dtpDateCompleted = New System.Windows.Forms.DateTimePicker()
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.txtDescription = New System.Windows.Forms.TextBox()
-        Me.lblAttachment = New System.Windows.Forms.Label()
+        Me.lblProofHeader = New System.Windows.Forms.Label()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.lblFilePath = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'lblFormTitle
+        'lblFormHeader
         '
-        Me.lblFormTitle.AutoSize = True
-        Me.lblFormTitle.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lblFormTitle.ForeColor = System.Drawing.Color.DarkGreen
-        Me.lblFormTitle.Location = New System.Drawing.Point(20, 20)
-        Me.lblFormTitle.Name = "lblFormTitle"
-        Me.lblFormTitle.Size = New System.Drawing.Size(280, 32)
-        Me.lblFormTitle.TabIndex = 0
-        Me.lblFormTitle.Text = "Add Portfolio Entry"
+        Me.lblFormHeader.AutoSize = True
+        Me.lblFormHeader.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Bold)
+        Me.lblFormHeader.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(54, Byte), Integer))
+        Me.lblFormHeader.Location = New System.Drawing.Point(18, 10)
+        Me.lblFormHeader.Name = "lblFormHeader"
+        Me.lblFormHeader.Size = New System.Drawing.Size(243, 35)
+        Me.lblFormHeader.TabIndex = 0
+        Me.lblFormHeader.Text = "Add Portfolio Entry"
         '
         'lblTitle
         '
         Me.lblTitle.AutoSize = True
-        Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblTitle.Location = New System.Drawing.Point(24, 68)
+        Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        Me.lblTitle.Location = New System.Drawing.Point(19, 58)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(182, 21)
+        Me.lblTitle.Size = New System.Drawing.Size(173, 20)
         Me.lblTitle.TabIndex = 1
         Me.lblTitle.Text = "Accomplishment Title *"
         '
         'txtTitle
         '
         Me.txtTitle.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.txtTitle.Location = New System.Drawing.Point(25, 95)
+        Me.txtTitle.Location = New System.Drawing.Point(23, 82)
         Me.txtTitle.Name = "txtTitle"
-        Me.txtTitle.Size = New System.Drawing.Size(530, 30)
+        Me.txtTitle.Size = New System.Drawing.Size(718, 30)
         Me.txtTitle.TabIndex = 2
         '
         'lblCategory
         '
         Me.lblCategory.AutoSize = True
-        Me.lblCategory.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblCategory.Location = New System.Drawing.Point(24, 138)
+        Me.lblCategory.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lblCategory.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        Me.lblCategory.Location = New System.Drawing.Point(19, 123)
         Me.lblCategory.Name = "lblCategory"
-        Me.lblCategory.Size = New System.Drawing.Size(155, 21)
+        Me.lblCategory.Size = New System.Drawing.Size(139, 20)
         Me.lblCategory.TabIndex = 3
         Me.lblCategory.Text = "Skill Competency *"
         '
         'cmbCategory
         '
         Me.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbCategory.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cmbCategory.Font = New System.Drawing.Font("Segoe UI", 9.5!)
         Me.cmbCategory.FormattingEnabled = True
-        Me.cmbCategory.Location = New System.Drawing.Point(25, 165)
+        Me.cmbCategory.Location = New System.Drawing.Point(24, 146)
         Me.cmbCategory.Name = "cmbCategory"
-        Me.cmbCategory.Size = New System.Drawing.Size(250, 31)
+        Me.cmbCategory.Size = New System.Drawing.Size(254, 29)
         Me.cmbCategory.TabIndex = 4
         '
         'lblActivityType
         '
         Me.lblActivityType.AutoSize = True
-        Me.lblActivityType.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblActivityType.Location = New System.Drawing.Point(300, 138)
+        Me.lblActivityType.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lblActivityType.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        Me.lblActivityType.Location = New System.Drawing.Point(386, 123)
         Me.lblActivityType.Name = "lblActivityType"
-        Me.lblActivityType.Size = New System.Drawing.Size(120, 21)
+        Me.lblActivityType.Size = New System.Drawing.Size(111, 20)
         Me.lblActivityType.TabIndex = 5
         Me.lblActivityType.Text = "Activity Type *"
         '
         'cmbActivityType
         '
         Me.cmbActivityType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbActivityType.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cmbActivityType.Font = New System.Drawing.Font("Segoe UI", 9.5!)
         Me.cmbActivityType.FormattingEnabled = True
-        Me.cmbActivityType.Location = New System.Drawing.Point(305, 165)
+        Me.cmbActivityType.Location = New System.Drawing.Point(390, 146)
         Me.cmbActivityType.Name = "cmbActivityType"
-        Me.cmbActivityType.Size = New System.Drawing.Size(250, 31)
+        Me.cmbActivityType.Size = New System.Drawing.Size(351, 29)
         Me.cmbActivityType.TabIndex = 6
+        '
+        'lblCourseCode
+        '
+        Me.lblCourseCode.AutoSize = True
+        Me.lblCourseCode.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lblCourseCode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        Me.lblCourseCode.Location = New System.Drawing.Point(19, 188)
+        Me.lblCourseCode.Name = "lblCourseCode"
+        Me.lblCourseCode.Size = New System.Drawing.Size(199, 20)
+        Me.lblCourseCode.TabIndex = 7
+        Me.lblCourseCode.Text = "Academic Subject / Course:"
+        '
+        'cmbCourseCode
+        '
+        Me.cmbCourseCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbCourseCode.Font = New System.Drawing.Font("Segoe UI", 9.5!)
+        Me.cmbCourseCode.FormattingEnabled = True
+        Me.cmbCourseCode.Location = New System.Drawing.Point(23, 211)
+        Me.cmbCourseCode.Name = "cmbCourseCode"
+        Me.cmbCourseCode.Size = New System.Drawing.Size(525, 29)
+        Me.cmbCourseCode.TabIndex = 8
         '
         'lblDateCompleted
         '
         Me.lblDateCompleted.AutoSize = True
-        Me.lblDateCompleted.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblDateCompleted.Location = New System.Drawing.Point(24, 210)
+        Me.lblDateCompleted.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lblDateCompleted.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        Me.lblDateCompleted.Location = New System.Drawing.Point(566, 188)
         Me.lblDateCompleted.Name = "lblDateCompleted"
-        Me.lblDateCompleted.Size = New System.Drawing.Size(142, 21)
-        Me.lblDateCompleted.TabIndex = 7
-        Me.lblDateCompleted.Text = "Date Completed *"
+        Me.lblDateCompleted.Size = New System.Drawing.Size(126, 20)
+        Me.lblDateCompleted.TabIndex = 9
+        Me.lblDateCompleted.Text = "Date Completed:"
         '
         'dtpDateCompleted
         '
-        Me.dtpDateCompleted.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.dtpDateCompleted.Font = New System.Drawing.Font("Segoe UI", 9.5!)
         Me.dtpDateCompleted.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpDateCompleted.Location = New System.Drawing.Point(25, 235)
+        Me.dtpDateCompleted.Location = New System.Drawing.Point(570, 211)
         Me.dtpDateCompleted.Name = "dtpDateCompleted"
-        Me.dtpDateCompleted.Size = New System.Drawing.Size(250, 30)
-        Me.dtpDateCompleted.TabIndex = 8
+        Me.dtpDateCompleted.Size = New System.Drawing.Size(171, 29)
+        Me.dtpDateCompleted.TabIndex = 10
         '
         'lblDescription
         '
         Me.lblDescription.AutoSize = True
-        Me.lblDescription.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblDescription.Location = New System.Drawing.Point(24, 280)
+        Me.lblDescription.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lblDescription.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        Me.lblDescription.Location = New System.Drawing.Point(19, 253)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(176, 21)
-        Me.lblDescription.TabIndex = 9
+        Me.lblDescription.Size = New System.Drawing.Size(152, 20)
+        Me.lblDescription.TabIndex = 11
         Me.lblDescription.Text = "Description / Details"
         '
         'txtDescription
         '
-        Me.txtDescription.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.txtDescription.Location = New System.Drawing.Point(25, 305)
+        Me.txtDescription.Font = New System.Drawing.Font("Segoe UI", 9.5!)
+        Me.txtDescription.Location = New System.Drawing.Point(23, 276)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(530, 90)
-        Me.txtDescription.TabIndex = 10
+        Me.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDescription.Size = New System.Drawing.Size(721, 80)
+        Me.txtDescription.TabIndex = 12
         '
-        'lblAttachment
+        'lblProofHeader
         '
-        Me.lblAttachment.AutoSize = True
-        Me.lblAttachment.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
-        Me.lblAttachment.Location = New System.Drawing.Point(24, 410)
-        Me.lblAttachment.Name = "lblAttachment"
-        Me.lblAttachment.Size = New System.Drawing.Size(200, 21)
-        Me.lblAttachment.TabIndex = 11
-        Me.lblAttachment.Text = "Proof / Evidence File"
+        Me.lblProofHeader.AutoSize = True
+        Me.lblProofHeader.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lblProofHeader.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        Me.lblProofHeader.Location = New System.Drawing.Point(19, 370)
+        Me.lblProofHeader.Name = "lblProofHeader"
+        Me.lblProofHeader.Size = New System.Drawing.Size(152, 20)
+        Me.lblProofHeader.TabIndex = 13
+        Me.lblProofHeader.Text = "Proof / Evidence File"
         '
         'btnBrowse
         '
-        Me.btnBrowse.BackColor = System.Drawing.Color.LightGray
-        Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBrowse.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.btnBrowse.Location = New System.Drawing.Point(25, 435)
+        Me.btnBrowse.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.btnBrowse.Location = New System.Drawing.Point(23, 393)
         Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(130, 32)
-        Me.btnBrowse.TabIndex = 12
+        Me.btnBrowse.Size = New System.Drawing.Size(213, 32)
+        Me.btnBrowse.TabIndex = 14
         Me.btnBrowse.Text = "Browse File..."
-        Me.btnBrowse.UseVisualStyleBackColor = False
+        Me.btnBrowse.UseVisualStyleBackColor = True
         '
         'lblFilePath
         '
         Me.lblFilePath.AutoSize = True
-        Me.lblFilePath.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Italic)
-        Me.lblFilePath.ForeColor = System.Drawing.Color.DimGray
-        Me.lblFilePath.Location = New System.Drawing.Point(165, 440)
+        Me.lblFilePath.Font = New System.Drawing.Font("Segoe UI", 8.5!, System.Drawing.FontStyle.Italic)
+        Me.lblFilePath.ForeColor = System.Drawing.Color.Gray
+        Me.lblFilePath.Location = New System.Drawing.Point(242, 400)
         Me.lblFilePath.Name = "lblFilePath"
-        Me.lblFilePath.Size = New System.Drawing.Size(145, 20)
-        Me.lblFilePath.TabIndex = 13
+        Me.lblFilePath.Size = New System.Drawing.Size(134, 20)
+        Me.lblFilePath.TabIndex = 15
         Me.lblFilePath.Text = "No file attached yet"
         '
         'btnSave
         '
-        Me.btnSave.BackColor = System.Drawing.Color.DarkGreen
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(54, Byte), Integer))
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnSave.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
         Me.btnSave.ForeColor = System.Drawing.Color.White
-        Me.btnSave.Location = New System.Drawing.Point(305, 495)
+        Me.btnSave.Location = New System.Drawing.Point(361, 445)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(120, 40)
-        Me.btnSave.TabIndex = 14
+        Me.btnSave.Size = New System.Drawing.Size(187, 38)
+        Me.btnSave.TabIndex = 16
         Me.btnSave.Text = "Save Entry"
         Me.btnSave.UseVisualStyleBackColor = False
         '
@@ -192,34 +220,39 @@ Partial Class frmAddEntry
         '
         Me.btnCancel.BackColor = System.Drawing.Color.Gray
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
         Me.btnCancel.ForeColor = System.Drawing.Color.White
-        Me.btnCancel.Location = New System.Drawing.Point(435, 495)
+        Me.btnCancel.Location = New System.Drawing.Point(570, 445)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(120, 40)
-        Me.btnCancel.TabIndex = 15
+        Me.btnCancel.Size = New System.Drawing.Size(174, 38)
+        Me.btnCancel.TabIndex = 17
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
         '
         'frmAddEntry
         '
-        Me.ClientSize = New System.Drawing.Size(580, 560)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(775, 515)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.lblFilePath)
         Me.Controls.Add(Me.btnBrowse)
-        Me.Controls.Add(Me.lblAttachment)
+        Me.Controls.Add(Me.lblProofHeader)
         Me.Controls.Add(Me.txtDescription)
         Me.Controls.Add(Me.lblDescription)
         Me.Controls.Add(Me.dtpDateCompleted)
         Me.Controls.Add(Me.lblDateCompleted)
+        Me.Controls.Add(Me.cmbCourseCode)
+        Me.Controls.Add(Me.lblCourseCode)
         Me.Controls.Add(Me.cmbActivityType)
         Me.Controls.Add(Me.lblActivityType)
         Me.Controls.Add(Me.cmbCategory)
         Me.Controls.Add(Me.lblCategory)
         Me.Controls.Add(Me.txtTitle)
         Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.lblFormTitle)
+        Me.Controls.Add(Me.lblFormHeader)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -231,18 +264,20 @@ Partial Class frmAddEntry
 
     End Sub
 
-    Friend WithEvents lblFormTitle As System.Windows.Forms.Label
+    Friend WithEvents lblFormHeader As System.Windows.Forms.Label
     Friend WithEvents lblTitle As System.Windows.Forms.Label
     Friend WithEvents txtTitle As System.Windows.Forms.TextBox
     Friend WithEvents lblCategory As System.Windows.Forms.Label
     Friend WithEvents cmbCategory As System.Windows.Forms.ComboBox
     Friend WithEvents lblActivityType As System.Windows.Forms.Label
     Friend WithEvents cmbActivityType As System.Windows.Forms.ComboBox
+    Friend WithEvents lblCourseCode As System.Windows.Forms.Label
+    Friend WithEvents cmbCourseCode As System.Windows.Forms.ComboBox
     Friend WithEvents lblDateCompleted As System.Windows.Forms.Label
     Friend WithEvents dtpDateCompleted As System.Windows.Forms.DateTimePicker
     Friend WithEvents lblDescription As System.Windows.Forms.Label
     Friend WithEvents txtDescription As System.Windows.Forms.TextBox
-    Friend WithEvents lblAttachment As System.Windows.Forms.Label
+    Friend WithEvents lblProofHeader As System.Windows.Forms.Label
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents lblFilePath As System.Windows.Forms.Label
     Friend WithEvents btnSave As System.Windows.Forms.Button

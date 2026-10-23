@@ -5,26 +5,29 @@ Imports iTextSharp.text.pdf
 
 Public Class maindashboard
 
+    ' Dynamic chart & grid view mode state variables
+    Private chartLabels As New List(Of String)()
+    Private chartSubLabels As New List(Of String)() ' Stores month/year or raw month strings for filtering
+    Private chartValues As New List(Of Integer)()
+    Private activeFilterCategoryName As String = "All Skill Competencies"
+    Private currentChartViewMode As Integer = 1 ' 1 = Competency / Activity View, 2 = Academic Subject View
+
+    ' Interactive chart bar click tracking
+    Private barBounds As New List(Of RectangleF)()
+
     Private Sub maindashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Set Sidebar Brand and Student Identity Header
         lblGreeting.Text = "Hello, " & CurrentUserFullName & "!"
 
-        ' Ensure sub-menu panel sits properly inside container
         pnlCompetenciesSubMenu.BringToFront()
-
         btnAddEntry.BringToFront()
-        pnlCompetenciesSubMenu.BringToFront()
 
-        ' Set default dropdown filter option
-        If cmbCategoryFilter.Items.Count > 0 Then
-            cmbCategoryFilter.SelectedIndex = 0 ' Selects "All Skill Competencies"
-        End If
-
-        ' Populate Category Dropdown and Refresh Data
         PopulateCategoryFilter()
         RefreshDashboard()
     End Sub
 
+    ' -------------------------------------------------------------
+    ' SEARCH PLACEHOLDER HANDLERS
+    ' -------------------------------------------------------------
     Private Sub txtSearch_Enter(sender As Object, e As EventArgs) Handles txtSearch.Enter
         If txtSearch.Text = "Search artifact title..." Then
             txtSearch.Text = ""
@@ -47,16 +50,12 @@ Public Class maindashboard
     End Sub
 
     ' -------------------------------------------------------------
-    ' SIDEBAR COLLAPSED / EXPANDED TOGGLE LOGIC
+    ' SIDEBAR NAVIGATION & CATEGORY TOGGLE
     ' -------------------------------------------------------------
     Private Sub btnToggleCompetencies_Click(sender As Object, e As EventArgs) Handles btnToggleCompetencies.Click
-        ' Show or hide the sub-menu panel
         pnlCompetenciesSubMenu.Visible = Not pnlCompetenciesSubMenu.Visible
     End Sub
 
-    ' -------------------------------------------------------------
-    ' POPULATE CATEGORY FILTER DROPDOWN
-    ' -------------------------------------------------------------
     Private Sub PopulateCategoryFilter()
         Try
             Using conn As MySqlConnection = database.GetConnection()
@@ -66,7 +65,6 @@ Public Class maindashboard
                     Dim catTable As New DataTable()
                     catAdapter.Fill(catTable)
 
-                    ' Add "All Categories" default option at position 0
                     Dim dr As DataRow = catTable.NewRow()
                     dr("category_id") = 0
                     dr("category_name") = "All Skill Competencies"
@@ -78,26 +76,30 @@ Public Class maindashboard
                 End If
             End Using
         Catch ex As Exception
-            ' Silently catch on initial load
         End Try
     End Sub
 
-    ' -------------------------------------------------------------
-    ' SIDEBAR NAVIGATION BUTTON ACTIONS
-    ' -------------------------------------------------------------
-
-    ' Main Dashboard Overview Tab
     Private Sub btnNavDashboard_Click(sender As Object, e As EventArgs) Handles btnNavDashboard.Click
         If cmbCategoryFilter.Items.Count > 0 Then cmbCategoryFilter.SelectedIndex = 0
         txtSearch.Clear()
-        FilterPortfolioEntries()
+        currentChartViewMode = 1
+        btnViewCompetencyChart.BackColor = Color.FromArgb(24, 88, 54)
+        btnViewCompetencyChart.ForeColor = Color.White
+        btnViewAcademicChart.BackColor = Color.Gainsboro
+        btnViewAcademicChart.ForeColor = Color.DarkSlateGray
+        RefreshDashboard()
     End Sub
 
-    ' Filter Table by Specific Skill Competency Sub-Buttons
     Private Sub FilterByCompetencyName(categoryName As String)
         txtSearch.Clear()
 
-        ' Select matching option in dropdown to trigger real-time filtering
+        ' Switch back to Competency Mode when a skill category is selected
+        currentChartViewMode = 1
+        btnViewCompetencyChart.BackColor = Color.FromArgb(24, 88, 54)
+        btnViewCompetencyChart.ForeColor = Color.White
+        btnViewAcademicChart.BackColor = Color.Gainsboro
+        btnViewAcademicChart.ForeColor = Color.DarkSlateGray
+
         If cmbCategoryFilter.DataSource IsNot Nothing Then
             For i As Integer = 0 To cmbCategoryFilter.Items.Count - 1
                 Dim row As DataRowView = TryCast(cmbCategoryFilter.Items(i), DataRowView)
@@ -138,38 +140,428 @@ Public Class maindashboard
     End Sub
 
     ' -------------------------------------------------------------
-    ' SEARCH & DROPDOWN FILTER EVENT HANDLERS
+    ' TOGGLE SWITCHER HANDLERS (COMPETENCIES VS ACADEMIC COURSES)
     ' -------------------------------------------------------------
+    Private Sub btnViewCompetencyChart_Click(sender As Object, e As EventArgs) Handles btnViewCompetencyChart.Click
+        currentChartViewMode = 1
+        btnViewCompetencyChart.BackColor = Color.FromArgb(24, 88, 54)
+        btnViewCompetencyChart.ForeColor = Color.White
+        btnViewAcademicChart.BackColor = Color.Gainsboro
+        btnViewAcademicChart.ForeColor = Color.DarkSlateGray
+
+        lblPortfolioTitle.Text = "Submitted Artifacts Records (Competencies View)"
+        LoadProgressChart(CurrentStudentNumber)
+        FilterPortfolioEntries()
+    End Sub
+
+    Private Sub btnViewAcademicChart_Click(sender As Object, e As EventArgs) Handles btnViewAcademicChart.Click
+        currentChartViewMode = 2
+        btnViewAcademicChart.BackColor = Color.FromArgb(24, 88, 54)
+        btnViewAcademicChart.ForeColor = Color.White
+        btnViewCompetencyChart.BackColor = Color.Gainsboro
+        btnViewCompetencyChart.ForeColor = Color.DarkSlateGray
+
+        lblPortfolioTitle.Text = "Submitted Artifacts Records (Academic Courses View)"
+        LoadProgressChart(CurrentStudentNumber)
+        FilterPortfolioEntries()
+    End Sub
+
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
         FilterPortfolioEntries()
     End Sub
 
     Private Sub cmbCategoryFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCategoryFilter.SelectedIndexChanged
+        If cmbCategoryFilter.SelectedItem IsNot Nothing Then
+            Dim row As DataRowView = TryCast(cmbCategoryFilter.SelectedItem, DataRowView)
+            If row IsNot Nothing Then
+                activeFilterCategoryName = row("category_name").ToString()
+            End If
+        End If
+
         FilterPortfolioEntries()
+        LoadProgressChart(CurrentStudentNumber)
     End Sub
 
-    ' -------------------------------------------------------------
-    ' DOUBLE-CLICK ROW TO VIEW ENTRY DETAILS & PROOF FILE
-    ' -------------------------------------------------------------
     Private Sub dgvPortfolio_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPortfolio.CellDoubleClick
         If e.RowIndex >= 0 Then
             Dim selectedId As Integer = Convert.ToInt32(dgvPortfolio.Rows(e.RowIndex).Cells("ID").Value)
             Dim viewForm As New frmViewEntry()
             viewForm.SelectedEntryID = selectedId
 
-            ' Open modal and refresh dashboard as soon as it closes
             If viewForm.ShowDialog() = DialogResult.OK Then
                 RefreshDashboard()
             End If
         End If
     End Sub
 
-    ' Edit Profile Modal
     Private Sub btnNavEditProfile_Click(sender As Object, e As EventArgs) Handles btnNavEditProfile.Click
         Dim editForm As New frmEditProfile()
         If editForm.ShowDialog() = DialogResult.OK Then
             lblGreeting.Text = "Hello, " & CurrentUserFullName & "!"
         End If
+    End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        If MessageBox.Show("Are you sure you want to log out?", "Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            Globals.ClearSession()
+            Dim loginForm As New frmLogin()
+            loginForm.Show()
+            Me.Close()
+        End If
+    End Sub
+
+    ' -------------------------------------------------------------
+    ' DASHBOARD REFRESH LOGIC
+    ' -------------------------------------------------------------
+    Public Sub RefreshDashboard()
+        LoadCompetencyProgress()
+        LoadProgressChart(CurrentStudentNumber)
+        FilterPortfolioEntries()
+    End Sub
+
+    Private Sub LoadCompetencyProgress()
+        Try
+            flpProgressCards.Controls.Clear()
+
+            Using conn As MySqlConnection = database.GetConnection()
+                If conn IsNot Nothing Then
+                    Dim query As String = "SELECT c.category_name, COUNT(pe.entry_id) AS total_logged " &
+                                          "FROM categories c " &
+                                          "LEFT JOIN portfolio_entries pe ON c.category_id = pe.category_id AND pe.student_number = @stud " &
+                                          "GROUP BY c.category_id, c.category_name " &
+                                          "ORDER BY c.category_id ASC"
+
+                    Using cmd As New MySqlCommand(query, conn)
+                        cmd.Parameters.AddWithValue("@stud", CurrentStudentNumber)
+                        Using rdr As MySqlDataReader = cmd.ExecuteReader()
+                            While rdr.Read()
+                                Dim catName As String = rdr("category_name").ToString()
+                                Dim countLogged As Integer = Convert.ToInt32(rdr("total_logged"))
+                                Dim isActiveCat As Boolean = catName.Equals(activeFilterCategoryName, StringComparison.OrdinalIgnoreCase)
+
+                                Dim pnlCard As New Panel() With {
+                                    .Size = New Size(170, 75),
+                                    .Margin = New Padding(6),
+                                    .BorderStyle = BorderStyle.FixedSingle,
+                                    .Tag = catName
+                                }
+
+                                If isActiveCat Then
+                                    pnlCard.BackColor = Color.FromArgb(220, 242, 228)
+                                ElseIf countLogged > 0 Then
+                                    pnlCard.BackColor = Color.FromArgb(240, 248, 243)
+                                Else
+                                    pnlCard.BackColor = Color.FromArgb(250, 250, 250)
+                                End If
+
+                                Dim lblTitle As New Label() With {
+                                    .Text = catName,
+                                    .Font = New System.Drawing.Font("Segoe UI", 9.0F, FontStyle.Bold),
+                                    .ForeColor = Color.FromArgb(10, 40, 25),
+                                    .Location = New Point(10, 10),
+                                    .Size = New Size(150, 20),
+                                    .AutoEllipsis = True
+                                }
+
+                                Dim lblCount As New Label() With {
+                                    .Text = If(countLogged = 1, "1 Record Logged", $"{countLogged} Records Logged"),
+                                    .Font = New System.Drawing.Font("Segoe UI", 8.0F, If(countLogged > 0, FontStyle.Bold, FontStyle.Regular)),
+                                    .ForeColor = If(countLogged > 0, Color.FromArgb(24, 88, 54), Color.Gray),
+                                    .Location = New Point(10, 38),
+                                    .Size = New Size(150, 20)
+                                }
+
+                                pnlCard.Controls.Add(lblTitle)
+                                pnlCard.Controls.Add(lblCount)
+
+                                AddHandler pnlCard.Click, Sub(s, e) FilterByCompetencyName(catName)
+                                AddHandler lblTitle.Click, Sub(s, e) FilterByCompetencyName(catName)
+                                AddHandler lblCount.Click, Sub(s, e) FilterByCompetencyName(catName)
+
+                                flpProgressCards.Controls.Add(pnlCard)
+                            End While
+                        End Using
+                    End Using
+                End If
+            End Using
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    ' -------------------------------------------------------------
+    ' DYNAMIC BAR CHART DATA QUERYING & CUSTOM GDI+ RENDERING
+    ' -------------------------------------------------------------
+    Private Sub LoadProgressChart(studentNum As String)
+        chartLabels.Clear()
+        chartSubLabels.Clear()
+        chartValues.Clear()
+
+        Dim query As String = ""
+
+        If currentChartViewMode = 2 Then
+            ' 📚 ACADEMIC SUBJECTS VIEW: Course Code + Month/Year
+            lblChartTitle.Text = "Academic Subject Accomplishments & Progress"
+
+            query = "SELECT c.course_code AS label_name, " &
+                    "MAX(pe.date_completed) AS max_date, " &
+                    "COUNT(pe.entry_id) AS total_entries " &
+                    "FROM courses c " &
+                    "INNER JOIN portfolio_entries pe ON pe.course_code = c.course_code " &
+                    "WHERE pe.student_number = @stud " &
+                    "GROUP BY c.course_code, c.course_name " &
+                    "ORDER BY total_entries DESC"
+        Else
+            ' 📊 COMPETENCIES / ACTIVITY TYPE VIEW
+            Dim selectedCatId As Integer = If(cmbCategoryFilter.SelectedValue IsNot Nothing AndAlso TypeOf cmbCategoryFilter.SelectedValue Is Integer, Convert.ToInt32(cmbCategoryFilter.SelectedValue), 0)
+
+            If selectedCatId = 0 Then
+                ' Overall view: X-axis primary label is Month/Year
+                lblChartTitle.Text = "Overall Competency Progression Over Time"
+
+                query = "SELECT DATE_FORMAT(date_completed, '%b %Y') AS label_name, " &
+                        "DATE_FORMAT(date_completed, '%Y-%m') AS raw_month, " &
+                        "COUNT(*) AS total_entries " &
+                        "FROM portfolio_entries " &
+                        "WHERE student_number = @stud " &
+                        "GROUP BY DATE_FORMAT(date_completed, '%Y-%m'), DATE_FORMAT(date_completed, '%b %Y') " &
+                        "ORDER BY DATE_FORMAT(date_completed, '%Y-%m') ASC"
+            Else
+                ' Specific Category: X-axis primary label is Activity Type + Month/Year
+                lblChartTitle.Text = $"{activeFilterCategoryName} — Activity Breakdown & Progress"
+
+                query = "SELECT at.type_name AS label_name, " &
+                        "MAX(pe.date_completed) AS max_date, " &
+                        "COUNT(pe.entry_id) AS total_entries " &
+                        "FROM activity_types at " &
+                        "LEFT JOIN portfolio_entries pe ON at.activity_type_id = pe.activity_type_id AND pe.student_number = @stud AND pe.category_id = @catId " &
+                        "GROUP BY at.activity_type_id, at.type_name " &
+                        "ORDER BY total_entries DESC"
+            End If
+        End If
+
+        Try
+            Using conn As MySqlConnection = database.GetConnection()
+                If conn IsNot Nothing Then
+                    Using cmd As New MySqlCommand(query, conn)
+                        cmd.Parameters.AddWithValue("@stud", studentNum)
+
+                        If currentChartViewMode = 1 AndAlso cmbCategoryFilter.SelectedIndex > 0 Then
+                            cmd.Parameters.AddWithValue("@catId", cmbCategoryFilter.SelectedValue)
+                        End If
+
+                        Using reader As MySqlDataReader = cmd.ExecuteReader()
+                            While reader.Read()
+                                chartLabels.Add(reader("label_name").ToString())
+                                chartValues.Add(Convert.ToInt32(reader("total_entries")))
+
+                                Dim selectedCatId As Integer = If(cmbCategoryFilter.SelectedValue IsNot Nothing AndAlso TypeOf cmbCategoryFilter.SelectedValue Is Integer, Convert.ToInt32(cmbCategoryFilter.SelectedValue), 0)
+
+                                If currentChartViewMode = 1 AndAlso selectedCatId = 0 Then
+                                    chartSubLabels.Add(reader("raw_month").ToString())
+                                ElseIf Not IsDBNull(reader("max_date")) AndAlso reader("max_date") IsNot Nothing Then
+                                    Dim dt As DateTime = Convert.ToDateTime(reader("max_date"))
+                                    chartSubLabels.Add(dt.ToString("MMM yyyy"))
+                                Else
+                                    chartSubLabels.Add("")
+                                End If
+                            End While
+                        End Using
+                    End Using
+                End If
+            End Using
+        Catch ex As Exception
+        End Try
+
+        pnlChartCard.Invalidate()
+    End Sub
+
+    Private Sub pnlChartCard_Paint(sender As Object, e As PaintEventArgs) Handles pnlChartCard.Paint
+        Dim g As Graphics = e.Graphics
+        g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+
+        barBounds.Clear()
+
+        Dim marginX As Integer = 50
+        Dim marginTop As Integer = 42
+        Dim marginBottom As Integer = 42
+        Dim drawWidth As Single = pnlChartCard.Width - (marginX * 2)
+        Dim drawHeight As Single = pnlChartCard.Height - marginTop - marginBottom
+
+        If chartValues.Count = 0 OrElse chartValues.Sum() = 0 Then
+            Using fontHint As New System.Drawing.Font("Segoe UI", 9.0!, FontStyle.Italic)
+                Dim emptyMsg As String = If(currentChartViewMode = 2,
+                                           "No artifacts mapped to academic courses yet. Log new entries with course codes to populate this chart.",
+                                           $"No logged entries recorded under '{activeFilterCategoryName}'. Add new artifacts to generate statistics.")
+                g.DrawString(emptyMsg, fontHint, Brushes.Gray, marginX, marginTop + 15)
+            End Using
+            Return
+        End If
+
+        ' Draw background subtle horizontal gridlines
+        Dim maxVal As Single = Math.Max(4, chartValues.Max())
+        Using gridPen As New Pen(Color.FromArgb(235, 238, 236), 1.0F)
+            gridPen.DashStyle = Drawing2D.DashStyle.Dot
+            For stepY As Integer = 1 To 3
+                Dim lineY As Single = (pnlChartCard.Height - marginBottom) - (stepY * (drawHeight / 3))
+                g.DrawLine(gridPen, marginX, lineY, pnlChartCard.Width - marginX, lineY)
+            Next
+        End Using
+
+        Dim itemWidth As Single = drawWidth / chartValues.Count
+        Dim barWidth As Single = Math.Min(itemWidth * 0.55F, 65.0F)
+
+        For i As Integer = 0 To chartValues.Count - 1
+            Dim countVal As Integer = chartValues(i)
+            Dim barHeight As Single = (countVal / maxVal) * drawHeight
+
+            Dim barX As Single = marginX + (i * itemWidth) + ((itemWidth - barWidth) / 2.0F)
+            Dim barY As Single = (pnlChartCard.Height - marginBottom) - barHeight
+
+            ' Store exact bounding rectangle for mouse click hit testing
+            Dim barRect As New RectangleF(barX, barY, barWidth, Math.Max(barHeight, 20.0F))
+            barBounds.Add(barRect)
+
+            ' Render Gradient Bar (Dark Green to Emerald Green)
+            If barHeight > 0 Then
+                Dim renderRect As New RectangleF(barX, barY, barWidth, barHeight)
+                Using barBrush As New Drawing2D.LinearGradientBrush(renderRect, Color.FromArgb(24, 88, 54), Color.FromArgb(45, 125, 80), Drawing2D.LinearGradientMode.Vertical)
+                    g.FillRectangle(barBrush, renderRect)
+                End Using
+
+                Using borderPen As New Pen(Color.FromArgb(10, 40, 25), 1.5F)
+                    g.DrawRectangle(borderPen, barX, barY, barWidth, barHeight)
+                End Using
+
+                Using fontBadge As New System.Drawing.Font("Segoe UI", 8.5!, FontStyle.Bold)
+                    Dim valStr As String = countVal.ToString()
+                    Dim badgeSize As SizeF = g.MeasureString(valStr, fontBadge)
+                    g.DrawString(valStr, fontBadge, Brushes.DarkSlateGray, barX + ((barWidth - badgeSize.Width) / 2.0F), barY - 18)
+                End Using
+            End If
+
+            ' Draw Primary Label (e.g., Jun 2026 / COMP 101)
+            Using fontX As New System.Drawing.Font("Segoe UI", 8.0!, FontStyle.Bold)
+                Dim labelStr As String = chartLabels(i)
+                Dim lblSize As SizeF = g.MeasureString(labelStr, fontX)
+                g.DrawString(labelStr, fontX, Brushes.DimGray, barX + ((barWidth - lblSize.Width) / 2.0F), pnlChartCard.Height - marginBottom + 4)
+            End Using
+
+            ' Draw Secondary Sub-Label (Month and Year only for Course/Activity modes)
+            Dim selectedCatId As Integer = If(cmbCategoryFilter.SelectedValue IsNot Nothing AndAlso TypeOf cmbCategoryFilter.SelectedValue Is Integer, Convert.ToInt32(cmbCategoryFilter.SelectedValue), 0)
+            If (currentChartViewMode = 2 OrElse selectedCatId > 0) AndAlso i < chartSubLabels.Count AndAlso Not String.IsNullOrEmpty(chartSubLabels(i)) Then
+                Using fontSubX As New System.Drawing.Font("Segoe UI", 7.5!, FontStyle.Regular)
+                    Dim subLabelStr As String = chartSubLabels(i)
+                    Dim subLblSize As SizeF = g.MeasureString(subLabelStr, fontSubX)
+                    g.DrawString(subLabelStr, fontSubX, Brushes.Gray, barX + ((barWidth - subLblSize.Width) / 2.0F), pnlChartCard.Height - marginBottom + 18)
+                End Using
+            End If
+        Next
+
+        ' Draw X-Axis Baseline
+        Using axisPen As New Pen(Color.FromArgb(180, 190, 185), 1.5F)
+            g.DrawLine(axisPen, marginX, pnlChartCard.Height - marginBottom, pnlChartCard.Width - marginX, pnlChartCard.Height - marginBottom)
+        End Using
+    End Sub
+
+    ' -------------------------------------------------------------
+    ' INTERACTIVE CHART BAR CLICK HANDLER
+    ' -------------------------------------------------------------
+    Private Sub pnlChartCard_MouseClick(sender As Object, e As MouseEventArgs) Handles pnlChartCard.MouseClick
+        For i As Integer = 0 To barBounds.Count - 1
+            If barBounds(i).Contains(e.Location) Then
+                Dim clickedLabel As String = chartLabels(i)
+
+                If currentChartViewMode = 2 Then
+                    ' Academic View: Filter records by clicked Course Code
+                    lblPortfolioTitle.Text = $"Submitted Artifacts Records — Course: {clickedLabel}"
+                    FilterPortfolioEntries(courseCodeFilter:=clickedLabel)
+                Else
+                    Dim selectedCatId As Integer = If(cmbCategoryFilter.SelectedValue IsNot Nothing AndAlso TypeOf cmbCategoryFilter.SelectedValue Is Integer, Convert.ToInt32(cmbCategoryFilter.SelectedValue), 0)
+
+                    If selectedCatId = 0 Then
+                        ' Overall View: Filter records by clicked Month (e.g., Jun 2026)
+                        Dim rawMonth As String = chartSubLabels(i)
+                        lblPortfolioTitle.Text = $"Submitted Artifacts Records — Month: {clickedLabel}"
+                        FilterPortfolioEntries(monthFilter:=rawMonth)
+                    Else
+                        ' Category View: Filter records by clicked Activity Type
+                        lblPortfolioTitle.Text = $"Submitted Artifacts Records — Activity: {clickedLabel}"
+                        FilterPortfolioEntries(activityTypeFilter:=clickedLabel)
+                    End If
+                End If
+                Exit For
+            End If
+        Next
+    End Sub
+
+    ' -------------------------------------------------------------
+    ' FILTER PORTFOLIO ENTRIES GRID BASED ON SELECTED VIEW MODE & CLICKED BAR
+    ' -------------------------------------------------------------
+    Public Sub FilterPortfolioEntries(Optional monthFilter As String = "", Optional courseCodeFilter As String = "", Optional activityTypeFilter As String = "")
+        Try
+            Using conn As MySqlConnection = database.GetConnection()
+                If conn IsNot Nothing Then
+                    Dim query As String = "SELECT pe.entry_id AS 'ID', pe.title AS 'Title', " &
+                                          "c.category_name AS 'Skill Competency', " &
+                                          "IFNULL(pe.course_code, 'N/A') AS 'Course Code', " &
+                                          "at.type_name AS 'Activity Type', " &
+                                          "pe.date_completed AS 'Date Completed' " &
+                                          "FROM portfolio_entries pe " &
+                                          "INNER JOIN categories c ON pe.category_id = c.category_id " &
+                                          "INNER JOIN activity_types at ON pe.activity_type_id = at.activity_type_id " &
+                                          "WHERE pe.student_number = @stud "
+
+                    ' Interactive Bar Click Filters
+                    If Not String.IsNullOrEmpty(monthFilter) Then
+                        query &= "AND DATE_FORMAT(pe.date_completed, '%Y-%m') = @monthFilter "
+                    End If
+
+                    If Not String.IsNullOrEmpty(courseCodeFilter) Then
+                        query &= "AND pe.course_code = @courseFilter "
+                    End If
+
+                    If Not String.IsNullOrEmpty(activityTypeFilter) Then
+                        query &= "AND at.type_name = @activityFilter "
+                    End If
+
+                    ' Default View Filters
+                    If currentChartViewMode = 2 AndAlso String.IsNullOrEmpty(courseCodeFilter) Then
+                        query &= "AND pe.course_code IS NOT NULL AND pe.course_code <> '' AND pe.course_code <> 'N/A' "
+                    ElseIf cmbCategoryFilter.SelectedIndex > 0 AndAlso String.IsNullOrEmpty(activityTypeFilter) Then
+                        query &= "AND pe.category_id = @catId "
+                    End If
+
+                    If Not String.IsNullOrWhiteSpace(txtSearch.Text) AndAlso txtSearch.Text <> "Search artifact title..." Then
+                        query &= "AND (pe.title LIKE @search OR pe.description LIKE @search OR pe.course_code LIKE @search) "
+                    End If
+
+                    query &= "ORDER BY pe.date_completed DESC"
+
+                    Using cmd As New MySqlCommand(query, conn)
+                        cmd.Parameters.AddWithValue("@stud", CurrentStudentNumber)
+
+                        If Not String.IsNullOrEmpty(monthFilter) Then cmd.Parameters.AddWithValue("@monthFilter", monthFilter)
+                        If Not String.IsNullOrEmpty(courseCodeFilter) Then cmd.Parameters.AddWithValue("@courseFilter", courseCodeFilter)
+                        If Not String.IsNullOrEmpty(activityTypeFilter) Then cmd.Parameters.AddWithValue("@activityFilter", activityTypeFilter)
+
+                        If cmbCategoryFilter.SelectedIndex > 0 Then
+                            cmd.Parameters.AddWithValue("@catId", cmbCategoryFilter.SelectedValue)
+                        End If
+
+                        If Not String.IsNullOrWhiteSpace(txtSearch.Text) AndAlso txtSearch.Text <> "Search artifact title..." Then
+                            cmd.Parameters.AddWithValue("@search", "%" & txtSearch.Text.Trim() & "%")
+                        End If
+
+                        Dim adapter As New MySqlDataAdapter(cmd)
+                        Dim table As New DataTable()
+                        adapter.Fill(table)
+
+                        dgvPortfolio.DataSource = table
+                    End Using
+                End If
+            End Using
+        Catch ex As Exception
+        End Try
     End Sub
 
     ' -------------------------------------------------------------
@@ -184,8 +576,6 @@ Public Class maindashboard
             Try
                 GenerateStudentPortfolioPDF(CurrentStudentNumber, saveFileDialog.FileName)
                 MessageBox.Show("Portfolio Summary Report generated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                ' Open the generated PDF automatically
                 Process.Start(New ProcessStartInfo(saveFileDialog.FileName) With {.UseShellExecute = True})
             Catch ex As Exception
                 MessageBox.Show("Error generating report: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -194,21 +584,18 @@ Public Class maindashboard
     End Sub
 
     Private Sub GenerateStudentPortfolioPDF(studentNumber As String, filePath As String)
-        ' Initialize PDF Document (A4 size, margins)
         Dim doc As New iTextSharp.text.Document(PageSize.A4, 36, 36, 36, 36)
         Dim writer As PdfWriter = PdfWriter.GetInstance(doc, New FileStream(filePath, FileMode.Create))
 
         doc.Open()
 
-        ' Colors (Dark Green & Accent Gray)
-        Dim primaryColor As New BaseColor(27, 59, 43)    ' Dark Green (#1B3B2B)
+        Dim primaryColor As New BaseColor(27, 59, 43)
         Dim textColor As New BaseColor(40, 40, 40)
         Dim headerFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, primaryColor)
         Dim subHeaderFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, primaryColor)
         Dim bodyFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA, 10, textColor)
         Dim boldFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, textColor)
 
-        ' 1. Header Banner
         Dim title As New Paragraph("E-PORTFOLIO ACCOMPLISHMENT REPORT", headerFont)
         title.Alignment = Element.ALIGN_CENTER
         doc.Add(title)
@@ -218,12 +605,10 @@ Public Class maindashboard
         subtitle.SpacingAfter = 15
         doc.Add(subtitle)
 
-        ' Horizontal Line separator
         Dim line As New iTextSharp.text.pdf.draw.LineSeparator(1.0F, 100.0F, primaryColor, Element.ALIGN_CENTER, -1)
         doc.Add(line)
         doc.Add(New Paragraph(" "))
 
-        ' 2. Fetch Student Profile from Database
         Using conn As MySqlConnection = database.GetConnection()
             If conn IsNot Nothing Then
                 Dim queryStudent As String = "SELECT student_number, CONCAT(first_name, ' ', last_name) AS full_name, email, " &
@@ -254,12 +639,11 @@ Public Class maindashboard
                 doc.Add(New Paragraph("PORTFOLIO ACCOMPLISHMENTS & ENTRIES", subHeaderFont))
                 doc.Add(New Paragraph(" "))
 
-                ' 3. Fetch Portfolio Entries Table from Database
                 Dim queryItems As String = "SELECT pe.title, c.category_name, at.type_name, pe.date_completed " &
-                                             "FROM portfolio_entries pe " &
-                                             "INNER JOIN categories c ON pe.category_id = c.category_id " &
-                                             "INNER JOIN activity_types at ON pe.activity_type_id = at.activity_type_id " &
-                                             "WHERE pe.student_number = @stud ORDER BY pe.date_completed DESC"
+                                           "FROM portfolio_entries pe " &
+                                           "INNER JOIN categories c ON pe.category_id = c.category_id " &
+                                           "INNER JOIN activity_types at ON pe.activity_type_id = at.activity_type_id " &
+                                           "WHERE pe.student_number = @stud ORDER BY pe.date_completed DESC"
                 Using cmdItems As New MySqlCommand(queryItems, conn)
                     cmdItems.Parameters.AddWithValue("@stud", studentNumber)
                     Using readerItems As MySqlDataReader = cmdItems.ExecuteReader()
@@ -268,7 +652,6 @@ Public Class maindashboard
                         itemsTable.WidthPercentage = 100
                         itemsTable.SetWidths(New Single() {3.0F, 2.0F, 2.0F, 1.5F})
 
-                        ' Table Headers
                         AddTableHeaderCell(itemsTable, "Title / Artifact", primaryColor)
                         AddTableHeaderCell(itemsTable, "Skill Competency", primaryColor)
                         AddTableHeaderCell(itemsTable, "Activity Type", primaryColor)
@@ -302,16 +685,14 @@ Public Class maindashboard
             End If
         End Using
 
-        ' 4. Footer & Timestamp
         doc.Add(New Paragraph(" "))
-        Dim footer As New Paragraph($"Report Generated on: {DateTime.Now:MMMM dd, yyyy hh:mm tt} | Portfolioboxd E-Portfolio System", FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 8, BaseColor.GRAY))
+        Dim footer As New Paragraph($"Report Generated on: {DateTime.Now:MMMM dd, yyyy hh:mm tt} | E-PLP E-Portfolio System", FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 8, BaseColor.GRAY))
         footer.Alignment = Element.ALIGN_RIGHT
         doc.Add(footer)
 
         doc.Close()
     End Sub
 
-    ' Helper: Add key-value row for student profile
     Private Sub AddTableRow(table As PdfPTable, label As String, value As String, labelFont As iTextSharp.text.Font, valueFont As iTextSharp.text.Font)
         Dim cellLabel As New PdfPCell(New Phrase(label, labelFont))
         cellLabel.Border = iTextSharp.text.Rectangle.NO_BORDER
@@ -323,7 +704,6 @@ Public Class maindashboard
         table.AddCell(cellValue)
     End Sub
 
-    ' Helper: Style header cell for accomplishments table
     Private Sub AddTableHeaderCell(table As PdfPTable, headerText As String, bgColor As BaseColor)
         Dim cellFont As iTextSharp.text.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.WHITE)
         Dim cell As New PdfPCell(New Phrase(headerText, cellFont))
@@ -331,143 +711,6 @@ Public Class maindashboard
         cell.HorizontalAlignment = Element.ALIGN_CENTER
         cell.Padding = 6.0F
         table.AddCell(cell)
-    End Sub
-
-    ' Logout Handler
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        If MessageBox.Show("Are you sure you want to log out?", "Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            Globals.ClearSession()
-            Dim loginForm As New frmLogin()
-            loginForm.Show()
-            Me.Close()
-        End If
-    End Sub
-
-    ' -------------------------------------------------------------
-    ' DASHBOARD DATA QUERYING
-    ' -------------------------------------------------------------
-    Public Sub RefreshDashboard()
-        LoadCompetencyProgress()
-        FilterPortfolioEntries()
-    End Sub
-
-    Private Sub LoadCompetencyProgress()
-        Try
-            ' Clear existing card blocks
-            flpProgressCards.Controls.Clear()
-
-            Using conn As MySqlConnection = database.GetConnection()
-                If conn IsNot Nothing Then
-                    Dim query As String = "SELECT c.category_name, COUNT(pe.entry_id) AS total_logged " &
-                                          "FROM categories c " &
-                                          "LEFT JOIN portfolio_entries pe ON c.category_id = pe.category_id AND pe.student_number = @stud " &
-                                          "GROUP BY c.category_id, c.category_name " &
-                                          "ORDER BY c.category_id ASC"
-
-                    Using cmd As New MySqlCommand(query, conn)
-                        cmd.Parameters.AddWithValue("@stud", CurrentStudentNumber)
-                        Using rdr As MySqlDataReader = cmd.ExecuteReader()
-                            While rdr.Read()
-                                Dim catName As String = rdr("category_name").ToString()
-                                Dim countLogged As Integer = Convert.ToInt32(rdr("total_logged"))
-
-                                ' Create Card Block Container
-                                Dim pnlCard As New Panel() With {
-                                    .Size = New Size(170, 75),
-                                    .Margin = New Padding(6),
-                                    .BorderStyle = BorderStyle.FixedSingle,
-                                    .Tag = catName
-                                }
-
-                                ' Active/Inactive Styling
-                                If countLogged > 0 Then
-                                    pnlCard.BackColor = Color.FromArgb(240, 248, 243) ' Light Green Tint
-                                Else
-                                    pnlCard.BackColor = Color.FromArgb(250, 250, 250) ' Soft Gray
-                                End If
-
-                                ' Competency Title Label
-                                Dim lblTitle As New Label() With {
-                                    .Text = catName,
-                                    .Font = New System.Drawing.Font("Segoe UI", 9.0F, FontStyle.Bold),
-                                    .ForeColor = Color.FromArgb(10, 40, 25),
-                                    .Location = New Point(10, 10),
-                                    .Size = New Size(150, 20),
-                                    .AutoEllipsis = True
-                                }
-
-                                ' Logged Count Badge Label
-                                Dim lblCount As New Label() With {
-                                    .Text = If(countLogged = 1, "1 Record Logged", $"{countLogged} Records Logged"),
-                                    .Font = New System.Drawing.Font("Segoe UI", 8.0F, If(countLogged > 0, FontStyle.Bold, FontStyle.Regular)),
-                                    .ForeColor = If(countLogged > 0, Color.FromArgb(24, 88, 54), Color.Gray),
-                                    .Location = New Point(10, 38),
-                                    .Size = New Size(150, 20)
-                                }
-
-                                ' Add controls to block panel
-                                pnlCard.Controls.Add(lblTitle)
-                                pnlCard.Controls.Add(lblCount)
-
-                                ' Optional Click-to-Filter Action when clicking a block
-                                AddHandler pnlCard.Click, Sub(s, e) FilterByCompetencyName(catName)
-                                AddHandler lblTitle.Click, Sub(s, e) FilterByCompetencyName(catName)
-                                AddHandler lblCount.Click, Sub(s, e) FilterByCompetencyName(catName)
-
-                                ' Add panel block to flow layout
-                                flpProgressCards.Controls.Add(pnlCard)
-                            End While
-                        End Using
-                    End Using
-                End If
-            End Using
-        Catch ex As Exception
-        End Try
-    End Sub
-
-    Public Sub FilterPortfolioEntries()
-        Try
-            Using conn As MySqlConnection = database.GetConnection()
-                If conn IsNot Nothing Then
-                    Dim query As String = "SELECT pe.entry_id AS 'ID', pe.title AS 'Title', " &
-                                          "c.category_name AS 'Skill Competency', at.type_name AS 'Activity Type', " &
-                                          "pe.date_completed AS 'Date Completed' " &
-                                          "FROM portfolio_entries pe " &
-                                          "INNER JOIN categories c ON pe.category_id = c.category_id " &
-                                          "INNER JOIN activity_types at ON pe.activity_type_id = at.activity_type_id " &
-                                          "WHERE pe.student_number = @stud "
-
-                    If cmbCategoryFilter.SelectedIndex > 0 Then
-                        query &= "AND pe.category_id = @catId "
-                    End If
-
-                    If Not String.IsNullOrWhiteSpace(txtSearch.Text) AndAlso txtSearch.Text <> "Search artifact title..." Then
-                        query &= "AND (pe.title LIKE @search OR pe.description LIKE @search) "
-                    End If
-
-                    query &= "ORDER BY pe.date_completed DESC"
-
-                    Using cmd As New MySqlCommand(query, conn)
-                        cmd.Parameters.AddWithValue("@stud", CurrentStudentNumber)
-
-                        If cmbCategoryFilter.SelectedIndex > 0 Then
-                            cmd.Parameters.AddWithValue("@catId", cmbCategoryFilter.SelectedValue)
-                        End If
-
-                        If Not String.IsNullOrWhiteSpace(txtSearch.Text) AndAlso txtSearch.Text <> "Search artifact title..." Then
-                            cmd.Parameters.AddWithValue("@search", "%" & txtSearch.Text.Trim() & "%")
-                        End If
-
-                        Dim adapter As New MySqlDataAdapter(cmd)
-                        Dim table As New DataTable()
-                        adapter.Fill(table)
-
-                        dgvPortfolio.DataSource = table
-                    End Using
-                End If
-            End Using
-        Catch ex As Exception
-        End Try
     End Sub
 
 End Class

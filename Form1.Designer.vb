@@ -411,6 +411,7 @@ Partial Class frmRegister
         'txtStudentNum
         '
         Me.txtStudentNum.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStudentNum.ForeColor = System.Drawing.Color.Black
         Me.txtStudentNum.Location = New System.Drawing.Point(26, 116)
         Me.txtStudentNum.Name = "txtStudentNum"
         Me.txtStudentNum.Size = New System.Drawing.Size(274, 34)
@@ -492,9 +493,9 @@ Partial Class frmRegister
         'picCampus
         '
         Me.picCampus.Image = CType(resources.GetObject("picCampus.Image"), System.Drawing.Image)
-        Me.picCampus.Location = New System.Drawing.Point(17, 128)
+        Me.picCampus.Location = New System.Drawing.Point(26, 138)
         Me.picCampus.Name = "picCampus"
-        Me.picCampus.Size = New System.Drawing.Size(270, 155)
+        Me.picCampus.Size = New System.Drawing.Size(233, 155)
         Me.picCampus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picCampus.TabIndex = 1
         Me.picCampus.TabStop = False
@@ -514,7 +515,7 @@ Partial Class frmRegister
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(45, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(60, 62)
+        Me.Label1.Location = New System.Drawing.Point(59, 61)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(203, 16)
         Me.Label1.TabIndex = 25

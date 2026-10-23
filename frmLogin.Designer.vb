@@ -57,7 +57,8 @@ Partial Class frmLogin
         '
         Me.lnkRegister.AutoSize = True
         Me.lnkRegister.Font = New System.Drawing.Font("Segoe UI", 9.5!)
-        Me.lnkRegister.Location = New System.Drawing.Point(430, 615)
+        Me.lnkRegister.LinkColor = System.Drawing.Color.White
+        Me.lnkRegister.Location = New System.Drawing.Point(386, 618)
         Me.lnkRegister.Name = "lnkRegister"
         Me.lnkRegister.Size = New System.Drawing.Size(145, 21)
         Me.lnkRegister.TabIndex = 29
@@ -178,6 +179,7 @@ Partial Class frmLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(45, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1710, 840)
         Me.Controls.Add(Me.pnlCenterCard)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
