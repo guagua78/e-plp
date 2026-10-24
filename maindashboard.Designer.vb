@@ -17,7 +17,7 @@ Partial Class maindashboard
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.btnGenerateReport = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
@@ -36,6 +36,7 @@ Partial Class maindashboard
         Me.lblSubBrand = New System.Windows.Forms.Label()
         Me.lblAppBrand = New System.Windows.Forms.Label()
         Me.pnlTopHeader = New System.Windows.Forms.Panel()
+        Me.lblStudentDetails = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnAddEntry = New System.Windows.Forms.Button()
         Me.cmbCategoryFilter = New System.Windows.Forms.ComboBox()
@@ -108,7 +109,7 @@ Partial Class maindashboard
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(240, 45)
         Me.btnLogout.TabIndex = 5
-        Me.btnLogout.Text = "   Logout"
+        Me.btnLogout.Text = "    Logout"
         Me.btnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnLogout.UseVisualStyleBackColor = False
         '
@@ -123,7 +124,7 @@ Partial Class maindashboard
         Me.btnNavEditProfile.Name = "btnNavEditProfile"
         Me.btnNavEditProfile.Size = New System.Drawing.Size(240, 45)
         Me.btnNavEditProfile.TabIndex = 4
-        Me.btnNavEditProfile.Text = "   Edit Student Profile"
+        Me.btnNavEditProfile.Text = "    Edit Student Profile"
         Me.btnNavEditProfile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnNavEditProfile.UseVisualStyleBackColor = True
         '
@@ -154,7 +155,7 @@ Partial Class maindashboard
         Me.btnSubPersonalDev.Name = "btnSubPersonalDev"
         Me.btnSubPersonalDev.Size = New System.Drawing.Size(240, 32)
         Me.btnSubPersonalDev.TabIndex = 6
-        Me.btnSubPersonalDev.Text = "      └ Personal Dev."
+        Me.btnSubPersonalDev.Text = "       └ Personal Dev."
         Me.btnSubPersonalDev.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSubPersonalDev.UseVisualStyleBackColor = True
         '
@@ -169,7 +170,7 @@ Partial Class maindashboard
         Me.btnSubCommunity.Name = "btnSubCommunity"
         Me.btnSubCommunity.Size = New System.Drawing.Size(240, 32)
         Me.btnSubCommunity.TabIndex = 5
-        Me.btnSubCommunity.Text = "      ├ Community Engagement"
+        Me.btnSubCommunity.Text = "       ├ Community Engagement"
         Me.btnSubCommunity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSubCommunity.UseVisualStyleBackColor = True
         '
@@ -184,7 +185,7 @@ Partial Class maindashboard
         Me.btnSubProfDev.Name = "btnSubProfDev"
         Me.btnSubProfDev.Size = New System.Drawing.Size(240, 32)
         Me.btnSubProfDev.TabIndex = 4
-        Me.btnSubProfDev.Text = "      ├ Professional Dev."
+        Me.btnSubProfDev.Text = "       ├ Professional Dev."
         Me.btnSubProfDev.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSubProfDev.UseVisualStyleBackColor = True
         '
@@ -199,7 +200,7 @@ Partial Class maindashboard
         Me.btnSubTechnical.Name = "btnSubTechnical"
         Me.btnSubTechnical.Size = New System.Drawing.Size(240, 32)
         Me.btnSubTechnical.TabIndex = 3
-        Me.btnSubTechnical.Text = "      ├ Technical Skills"
+        Me.btnSubTechnical.Text = "       ├ Technical Skills"
         Me.btnSubTechnical.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSubTechnical.UseVisualStyleBackColor = True
         '
@@ -214,7 +215,7 @@ Partial Class maindashboard
         Me.btnSubTeamwork.Name = "btnSubTeamwork"
         Me.btnSubTeamwork.Size = New System.Drawing.Size(240, 32)
         Me.btnSubTeamwork.TabIndex = 2
-        Me.btnSubTeamwork.Text = "      ├ Teamwork"
+        Me.btnSubTeamwork.Text = "       ├ Teamwork"
         Me.btnSubTeamwork.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSubTeamwork.UseVisualStyleBackColor = True
         '
@@ -229,7 +230,7 @@ Partial Class maindashboard
         Me.btnSubCommunication.Name = "btnSubCommunication"
         Me.btnSubCommunication.Size = New System.Drawing.Size(240, 32)
         Me.btnSubCommunication.TabIndex = 1
-        Me.btnSubCommunication.Text = "      ├ Communication"
+        Me.btnSubCommunication.Text = "       ├ Communication"
         Me.btnSubCommunication.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSubCommunication.UseVisualStyleBackColor = True
         '
@@ -244,7 +245,7 @@ Partial Class maindashboard
         Me.btnSubLeadership.Name = "btnSubLeadership"
         Me.btnSubLeadership.Size = New System.Drawing.Size(240, 32)
         Me.btnSubLeadership.TabIndex = 0
-        Me.btnSubLeadership.Text = "      ├ Leadership"
+        Me.btnSubLeadership.Text = "       ├ Leadership"
         Me.btnSubLeadership.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSubLeadership.UseVisualStyleBackColor = True
         '
@@ -259,7 +260,7 @@ Partial Class maindashboard
         Me.btnToggleCompetencies.Name = "btnToggleCompetencies"
         Me.btnToggleCompetencies.Size = New System.Drawing.Size(240, 45)
         Me.btnToggleCompetencies.TabIndex = 2
-        Me.btnToggleCompetencies.Text = "   Skill Competencies  ▼"
+        Me.btnToggleCompetencies.Text = "    Skill Competencies  ▼"
         Me.btnToggleCompetencies.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnToggleCompetencies.UseVisualStyleBackColor = True
         '
@@ -274,7 +275,7 @@ Partial Class maindashboard
         Me.btnNavDashboard.Name = "btnNavDashboard"
         Me.btnNavDashboard.Size = New System.Drawing.Size(240, 45)
         Me.btnNavDashboard.TabIndex = 1
-        Me.btnNavDashboard.Text = "   Dashboard"
+        Me.btnNavDashboard.Text = "    Dashboard"
         Me.btnNavDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnNavDashboard.UseVisualStyleBackColor = True
         '
@@ -314,6 +315,7 @@ Partial Class maindashboard
         'pnlTopHeader
         '
         Me.pnlTopHeader.BackColor = System.Drawing.Color.White
+        Me.pnlTopHeader.Controls.Add(Me.lblStudentDetails)
         Me.pnlTopHeader.Controls.Add(Me.Label2)
         Me.pnlTopHeader.Controls.Add(Me.btnAddEntry)
         Me.pnlTopHeader.Controls.Add(Me.cmbCategoryFilter)
@@ -322,15 +324,26 @@ Partial Class maindashboard
         Me.pnlTopHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlTopHeader.Location = New System.Drawing.Point(240, 0)
         Me.pnlTopHeader.Name = "pnlTopHeader"
-        Me.pnlTopHeader.Size = New System.Drawing.Size(960, 65)
+        Me.pnlTopHeader.Size = New System.Drawing.Size(960, 80)
         Me.pnlTopHeader.TabIndex = 1
+        '
+        'lblStudentDetails
+        '
+        Me.lblStudentDetails.AutoSize = True
+        Me.lblStudentDetails.Font = New System.Drawing.Font("Segoe UI", 8.5!)
+        Me.lblStudentDetails.ForeColor = System.Drawing.Color.DimGray
+        Me.lblStudentDetails.Location = New System.Drawing.Point(20, 38)
+        Me.lblStudentDetails.Name = "lblStudentDetails"
+        Me.lblStudentDetails.Size = New System.Drawing.Size(259, 40)
+        Me.lblStudentDetails.TabIndex = 5
+        Me.lblStudentDetails.Text = "BS Information Technology • 2nd Year" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "25-00760"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.ForeColor = System.Drawing.Color.Gray
-        Me.Label2.Location = New System.Drawing.Point(604, 26)
+        Me.Label2.Location = New System.Drawing.Point(604, 30)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(125, 16)
         Me.Label2.TabIndex = 4
@@ -343,9 +356,9 @@ Partial Class maindashboard
         Me.btnAddEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddEntry.Font = New System.Drawing.Font("Segoe UI", 9.5!, System.Drawing.FontStyle.Bold)
         Me.btnAddEntry.ForeColor = System.Drawing.Color.White
-        Me.btnAddEntry.Location = New System.Drawing.Point(795, 18)
+        Me.btnAddEntry.Location = New System.Drawing.Point(795, 22)
         Me.btnAddEntry.Name = "btnAddEntry"
-        Me.btnAddEntry.Size = New System.Drawing.Size(145, 32)
+        Me.btnAddEntry.Size = New System.Drawing.Size(145, 34)
         Me.btnAddEntry.TabIndex = 3
         Me.btnAddEntry.Text = "+ Add New Entry"
         Me.btnAddEntry.UseVisualStyleBackColor = False
@@ -356,7 +369,7 @@ Partial Class maindashboard
         Me.cmbCategoryFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCategoryFilter.Font = New System.Drawing.Font("Segoe UI", 9.5!)
         Me.cmbCategoryFilter.FormattingEnabled = True
-        Me.cmbCategoryFilter.Location = New System.Drawing.Point(575, 20)
+        Me.cmbCategoryFilter.Location = New System.Drawing.Point(575, 24)
         Me.cmbCategoryFilter.Name = "cmbCategoryFilter"
         Me.cmbCategoryFilter.Size = New System.Drawing.Size(205, 29)
         Me.cmbCategoryFilter.TabIndex = 2
@@ -365,7 +378,7 @@ Partial Class maindashboard
         '
         Me.txtSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSearch.Font = New System.Drawing.Font("Segoe UI", 9.5!)
-        Me.txtSearch.Location = New System.Drawing.Point(345, 20)
+        Me.txtSearch.Location = New System.Drawing.Point(345, 24)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(215, 29)
         Me.txtSearch.TabIndex = 1
@@ -373,25 +386,25 @@ Partial Class maindashboard
         'lblGreeting
         '
         Me.lblGreeting.AutoSize = True
-        Me.lblGreeting.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.lblGreeting.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
         Me.lblGreeting.ForeColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
-        Me.lblGreeting.Location = New System.Drawing.Point(20, 20)
+        Me.lblGreeting.Location = New System.Drawing.Point(20, 10)
         Me.lblGreeting.Name = "lblGreeting"
-        Me.lblGreeting.Size = New System.Drawing.Size(210, 25)
+        Me.lblGreeting.Size = New System.Drawing.Size(223, 28)
         Me.lblGreeting.TabIndex = 0
         Me.lblGreeting.Text = "Hello, Student Profile!"
         '
         'pnlMainContainer
         '
-        Me.pnlMainContainer.BackColor = System.Drawing.Color.FromArgb(CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(243, Byte), Integer))
+        Me.pnlMainContainer.BackColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.pnlMainContainer.Controls.Add(Me.pnlPortfolioCard)
         Me.pnlMainContainer.Controls.Add(Me.pnlChartCard)
         Me.pnlMainContainer.Controls.Add(Me.pnlSummaryCard)
         Me.pnlMainContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMainContainer.Location = New System.Drawing.Point(240, 65)
+        Me.pnlMainContainer.Location = New System.Drawing.Point(240, 80)
         Me.pnlMainContainer.Name = "pnlMainContainer"
         Me.pnlMainContainer.Padding = New System.Windows.Forms.Padding(20)
-        Me.pnlMainContainer.Size = New System.Drawing.Size(960, 655)
+        Me.pnlMainContainer.Size = New System.Drawing.Size(960, 640)
         Me.pnlMainContainer.TabIndex = 2
         '
         'pnlPortfolioCard
@@ -401,10 +414,10 @@ Partial Class maindashboard
         Me.pnlPortfolioCard.Controls.Add(Me.dgvPortfolio)
         Me.pnlPortfolioCard.Controls.Add(Me.lblPortfolioTitle)
         Me.pnlPortfolioCard.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlPortfolioCard.Location = New System.Drawing.Point(20, 355)
+        Me.pnlPortfolioCard.Location = New System.Drawing.Point(20, 391)
         Me.pnlPortfolioCard.Name = "pnlPortfolioCard"
         Me.pnlPortfolioCard.Padding = New System.Windows.Forms.Padding(12)
-        Me.pnlPortfolioCard.Size = New System.Drawing.Size(920, 280)
+        Me.pnlPortfolioCard.Size = New System.Drawing.Size(920, 229)
         Me.pnlPortfolioCard.TabIndex = 2
         '
         'dgvPortfolio
@@ -415,14 +428,14 @@ Partial Class maindashboard
         Me.dgvPortfolio.BackgroundColor = System.Drawing.Color.White
         Me.dgvPortfolio.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvPortfolio.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPortfolio.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(25, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPortfolio.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvPortfolio.ColumnHeadersHeight = 32
         Me.dgvPortfolio.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvPortfolio.EnableHeadersVisualStyles = False
@@ -432,7 +445,7 @@ Partial Class maindashboard
         Me.dgvPortfolio.RowHeadersVisible = False
         Me.dgvPortfolio.RowHeadersWidth = 51
         Me.dgvPortfolio.RowTemplate.Height = 28
-        Me.dgvPortfolio.Size = New System.Drawing.Size(894, 231)
+        Me.dgvPortfolio.Size = New System.Drawing.Size(894, 180)
         Me.dgvPortfolio.TabIndex = 1
         '
         'lblPortfolioTitle
@@ -458,7 +471,7 @@ Partial Class maindashboard
         Me.pnlChartCard.Location = New System.Drawing.Point(20, 180)
         Me.pnlChartCard.Name = "pnlChartCard"
         Me.pnlChartCard.Padding = New System.Windows.Forms.Padding(12)
-        Me.pnlChartCard.Size = New System.Drawing.Size(920, 175)
+        Me.pnlChartCard.Size = New System.Drawing.Size(920, 211)
         Me.pnlChartCard.TabIndex = 3
         '
         'btnViewAcademicChart
@@ -538,6 +551,7 @@ Partial Class maindashboard
         '
         'maindashboard
         '
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1200, 720)
         Me.Controls.Add(Me.pnlMainContainer)
         Me.Controls.Add(Me.pnlTopHeader)
@@ -582,6 +596,7 @@ Partial Class maindashboard
     Friend WithEvents btnLogout As Button
     Friend WithEvents pnlTopHeader As System.Windows.Forms.Panel
     Friend WithEvents lblGreeting As System.Windows.Forms.Label
+    Friend WithEvents lblStudentDetails As System.Windows.Forms.Label
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents cmbCategoryFilter As System.Windows.Forms.ComboBox
     Friend WithEvents btnAddEntry As Button

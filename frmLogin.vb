@@ -1,20 +1,65 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports System.Drawing.Drawing2D
 
 Public Class frmLogin
 
-    Private Sub login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private isPasswordVisible As Boolean = False
+
+    Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.DoubleBuffered = True
+        Me.SetStyle(ControlStyles.AllPaintingInWmPaint Or ControlStyles.UserPaint Or ControlStyles.OptimizedDoubleBuffer, True)
+        Me.UpdateStyles()
+
+        ' Reset input fields
         txtUsername.Text = ""
         txtPass.Text = ""
         txtPass.UseSystemPasswordChar = True
+        isPasswordVisible = False
     End Sub
 
-    ' Toggle Password Visibility
-    Private Sub chckShowPass_CheckedChanged(sender As Object, e As EventArgs) Handles chckShowPass.CheckedChanged
-        txtPass.UseSystemPasswordChar = Not chckShowPass.Checked
+    ' Display Support Desk Info Message
+    Private Sub lblSupportDesk_Click(sender As Object, e As EventArgs) Handles lblSupportDesk.Click
+        Dim supportMsg As String = "PLP College of Computer Studies — Support Desk" & vbCrLf & vbCrLf &
+                               "Please proceed to the MIS Office at the 1st Floor in the Main Building, " &
+                               "or email ccs.support@plpasig.edu.ph for login assistance."
+
+        MessageBox.Show(supportMsg, "CCS Support Desk", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
+    ' Optional: Interactive Link Hover Effect
+    Private Sub lblSupportDesk_MouseEnter(sender As Object, e As EventArgs) Handles lblSupportDesk.MouseEnter
+        lblSupportDesk.ForeColor = Color.FromArgb(20, 160, 90)
+        lblSupportDesk.Font = New Font(lblSupportDesk.Font, FontStyle.Underline Or FontStyle.Bold)
+    End Sub
+
+    Private Sub lblSupportDesk_MouseLeave(sender As Object, e As EventArgs) Handles lblSupportDesk.MouseLeave
+        lblSupportDesk.ForeColor = Color.FromArgb(12, 105, 60)
+        lblSupportDesk.Font = New Font(lblSupportDesk.Font, FontStyle.Bold)
+    End Sub
+    ' Background GDI+ Grid Pattern
+    Private Sub frmLogin_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+        Dim g As Graphics = e.Graphics
+        g.SmoothingMode = SmoothingMode.AntiAlias
+
+        Using gridPen As New Pen(Color.FromArgb(18, 55, 36), 1.0F)
+            For x As Integer = 0 To Me.Width Step 30
+                g.DrawLine(gridPen, x, 0, x, Me.Height)
+            Next
+            For y As Integer = 0 To Me.Height Step 30
+                g.DrawLine(gridPen, 0, y, Me.Width, y)
+            Next
+        End Using
+    End Sub
+
+    ' Password Toggle Icon Click
+    Private Sub lblEyeToggle_Click(sender As Object, e As EventArgs) Handles lblEyeToggle.Click
+        isPasswordVisible = Not isPasswordVisible
+        txtPass.UseSystemPasswordChar = Not isPasswordVisible
+        lblEyeToggle.Text = If(isPasswordVisible, "🙈", "👁")
     End Sub
 
     ' Sign In Action
-    Private Sub btnSignIn_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Dim inputIdentifier As String = txtUsername.Text.Trim().ToLower()
         Dim passwordInput As String = txtPass.Text
 
@@ -72,10 +117,11 @@ Public Class frmLogin
         End Try
     End Sub
 
+    ' Open Registration Form
     Private Sub lnkRegister_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkRegister.LinkClicked
-        ' Open Registration Form
         Dim regForm As New frmRegister()
         regForm.Show()
         Me.Hide()
     End Sub
+
 End Class

@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Drawing.Drawing2D
 Imports MySql.Data.MySqlClient
 Imports iTextSharp.text
 Imports iTextSharp.text.pdf
@@ -219,8 +220,12 @@ Public Class maindashboard
         FilterPortfolioEntries()
     End Sub
 
+    ' -------------------------------------------------------------
+    ' DYNAMIC PROGRESS CARDS BUILDER (NO PERCENTAGES)
+    ' -------------------------------------------------------------
     Private Sub LoadCompetencyProgress()
         Try
+            flpProgressCards.SuspendLayout()
             flpProgressCards.Controls.Clear()
 
             Using conn As MySqlConnection = database.GetConnection()
@@ -236,55 +241,111 @@ Public Class maindashboard
                         Using rdr As MySqlDataReader = cmd.ExecuteReader()
                             While rdr.Read()
                                 Dim catName As String = rdr("category_name").ToString()
-                                Dim countLogged As Integer = Convert.ToInt32(rdr("total_logged"))
-                                Dim isActiveCat As Boolean = catName.Equals(activeFilterCategoryName, StringComparison.OrdinalIgnoreCase)
+                                Dim entryCount As Integer = Convert.ToInt32(rdr("total_logged"))
+                                Dim isSelected As Boolean = catName.Equals(activeFilterCategoryName, StringComparison.OrdinalIgnoreCase)
 
-                                Dim pnlCard As New Panel() With {
-                                    .Size = New Size(170, 75),
-                                    .Margin = New Padding(6),
-                                    .BorderStyle = BorderStyle.FixedSingle,
-                                    .Tag = catName
+                                ' Card Panel Container
+                                Dim card As New Panel With {
+                                    .Size = New Size(140, 110),
+                                    .Margin = New Padding(0, 0, 10, 0),
+                                    .BackColor = Color.White,
+                                    .Cursor = Cursors.Hand
                                 }
 
-                                If isActiveCat Then
-                                    pnlCard.BackColor = Color.FromArgb(220, 242, 228)
-                                ElseIf countLogged > 0 Then
-                                    pnlCard.BackColor = Color.FromArgb(240, 248, 243)
-                                Else
-                                    pnlCard.BackColor = Color.FromArgb(250, 250, 250)
-                                End If
+                                ' Custom GDI+ Border Drawing & Selection Highlight
+                                AddHandler card.Paint, Sub(s, pe)
+                                                           pe.Graphics.SmoothingMode = SmoothingMode.AntiAlias
+                                                           If isSelected Then
+                                                               Using penActive As New Pen(Color.FromArgb(24, 128, 70), 2.0F)
+                                                                   pe.Graphics.DrawRectangle(penActive, 1, 1, card.Width - 3, card.Height - 3)
+                                                               End Using
+                                                           Else
+                                                               Using penBorder As New Pen(Color.FromArgb(228, 233, 230), 1.0F)
+                                                                   pe.Graphics.DrawRectangle(penBorder, 0, 0, card.Width - 1, card.Height - 1)
+                                                               End Using
+                                                           End If
+                                                       End Sub
 
-                                Dim lblTitle As New Label() With {
-                                    .Text = catName,
-                                    .Font = New System.Drawing.Font("Segoe UI", 9.0F, FontStyle.Bold),
-                                    .ForeColor = Color.FromArgb(10, 40, 25),
-                                    .Location = New Point(10, 10),
-                                    .Size = New Size(150, 20),
-                                    .AutoEllipsis = True
+                                ' Category Name Label
+                                Dim lblTitle As New Label With {
+                                    .Text = If(catName.Length > 11, catName.Substring(0, 9) & "...", catName),
+                                    .Font = New System.Drawing.Font("Segoe UI", 8.5F, FontStyle.Bold),
+                                    .ForeColor = Color.FromArgb(45, 55, 50),
+                                    .Location = New Point(12, 12),
+                                    .AutoSize = True
                                 }
 
-                                Dim lblCount As New Label() With {
-                                    .Text = If(countLogged = 1, "1 Record Logged", $"{countLogged} Records Logged"),
-                                    .Font = New System.Drawing.Font("Segoe UI", 8.0F, If(countLogged > 0, FontStyle.Bold, FontStyle.Regular)),
-                                    .ForeColor = If(countLogged > 0, Color.FromArgb(24, 88, 54), Color.Gray),
-                                    .Location = New Point(10, 38),
-                                    .Size = New Size(150, 20)
+                                ' Status Indicator Dot
+                                Dim picDot As New PictureBox With {
+                                    .Size = New Size(8, 8),
+                                    .Location = New Point(118, 16),
+                                    .BackColor = Color.Transparent
+                                }
+                                AddHandler picDot.Paint, Sub(s, pe)
+                                                             pe.Graphics.SmoothingMode = SmoothingMode.AntiAlias
+                                                             Dim dotColor As Color = If(entryCount > 0, Color.FromArgb(36, 180, 100), Color.FromArgb(210, 215, 212))
+                                                             Using brush As New SolidBrush(dotColor)
+                                                                 pe.Graphics.FillEllipse(brush, 0, 0, 7, 7)
+                                                             End Using
+                                                         End Sub
+
+                                ' Number Count Label (e.g., "9 ACTIVE" or "1" or "0")
+                                Dim lblCount As New Label With {
+                                    .Text = If(entryCount > 0 AndAlso isSelected, $"{entryCount} ACTIVE", entryCount.ToString()),
+                                    .Font = New System.Drawing.Font("Segoe UI", If(entryCount > 0 AndAlso isSelected, 12.0F, 16.0F), FontStyle.Bold),
+                                    .ForeColor = If(entryCount > 0, Color.FromArgb(24, 100, 58), Color.FromArgb(120, 130, 125)),
+                                    .Location = New Point(10, 36),
+                                    .AutoSize = True
                                 }
 
-                                pnlCard.Controls.Add(lblTitle)
-                                pnlCard.Controls.Add(lblCount)
+                                ' "Record Logged" / "Records Logged" Label
+                                Dim lblSubText As New Label With {
+                                    .Text = If(entryCount = 1, "Record Logged", "Records Logged"),
+                                    .Font = New System.Drawing.Font("Segoe UI", 7.5F, FontStyle.Bold),
+                                    .ForeColor = If(isSelected, Color.FromArgb(24, 100, 58), Color.Gray),
+                                    .Location = New Point(12, 64),
+                                    .AutoSize = True
+                                }
 
-                                AddHandler pnlCard.Click, Sub(s, e) FilterByCompetencyName(catName)
-                                AddHandler lblTitle.Click, Sub(s, e) FilterByCompetencyName(catName)
-                                AddHandler lblCount.Click, Sub(s, e) FilterByCompetencyName(catName)
+                                ' Bottom Visual Progress Strip
+                                Dim pnlBottomBar As New Panel With {
+                                    .Location = New Point(12, 88),
+                                    .Size = New Size(116, 4),
+                                    .BackColor = Color.FromArgb(235, 240, 237)
+                                }
+                                AddHandler pnlBottomBar.Paint, Sub(s, pe)
+                                                                   pe.Graphics.SmoothingMode = SmoothingMode.AntiAlias
+                                                                   Dim fillRatio As Single = Math.Min(1.0F, CSng(entryCount) / 10.0F)
+                                                                   Dim fillWidth As Integer = CInt(fillRatio * pnlBottomBar.Width)
+                                                                   If fillWidth > 0 Then
+                                                                       Using b As New SolidBrush(Color.FromArgb(24, 128, 70))
+                                                                           pe.Graphics.FillRectangle(b, 0, 0, fillWidth, pnlBottomBar.Height)
+                                                                       End Using
+                                                                   End If
+                                                               End Sub
 
-                                flpProgressCards.Controls.Add(pnlCard)
+                                ' Category Selection Handlers
+                                AddHandler card.Click, Sub(s, e) FilterByCompetencyName(catName)
+                                For Each ctrl As Control In New Control() {lblTitle, lblCount, lblSubText, picDot, pnlBottomBar}
+                                    AddHandler ctrl.Click, Sub(s, e) FilterByCompetencyName(catName)
+                                Next
+
+                                card.Controls.Add(lblTitle)
+                                card.Controls.Add(picDot)
+                                card.Controls.Add(lblCount)
+                                card.Controls.Add(lblSubText)
+                                card.Controls.Add(pnlBottomBar)
+
+                                flpProgressCards.Controls.Add(card)
                             End While
                         End Using
                     End Using
                 End If
             End Using
+
+            flpProgressCards.ResumeLayout()
         Catch ex As Exception
+            flpProgressCards.ResumeLayout()
         End Try
     End Sub
 
@@ -299,7 +360,7 @@ Public Class maindashboard
         Dim query As String = ""
 
         If currentChartViewMode = 2 Then
-            ' 📚 ACADEMIC SUBJECTS VIEW: Course Code + Course Name Sublabel
+            ' 📚 ACADEMIC SUBJECTS VIEW
             lblChartTitle.Text = "Academic Subject Accomplishments & Progress"
 
             query = "SELECT c.course_code AS label_name, " &
@@ -396,7 +457,7 @@ Public Class maindashboard
             Return
         End If
 
-        ' Draw background subtle horizontal gridlines
+        ' Draw background horizontal gridlines
         Dim maxVal As Single = Math.Max(4, chartValues.Max())
         Using gridPen As New Pen(Color.FromArgb(235, 238, 236), 1.0F)
             gridPen.DashStyle = Drawing2D.DashStyle.Dot
@@ -416,11 +477,10 @@ Public Class maindashboard
             Dim barX As Single = marginX + (i * itemWidth) + ((itemWidth - barWidth) / 2.0F)
             Dim barY As Single = (pnlChartCard.Height - marginBottom) - barHeight
 
-            ' Store exact bounding rectangle for mouse click hit testing
             Dim barRect As New RectangleF(barX, barY, barWidth, Math.Max(barHeight, 20.0F))
             barBounds.Add(barRect)
 
-            ' Render Gradient Bar (Dark Green to Emerald Green)
+            ' Render Gradient Bar
             If barHeight > 0 Then
                 Dim renderRect As New RectangleF(barX, barY, barWidth, barHeight)
                 Using barBrush As New Drawing2D.LinearGradientBrush(renderRect, Color.FromArgb(24, 88, 54), Color.FromArgb(45, 125, 80), Drawing2D.LinearGradientMode.Vertical)
@@ -438,14 +498,14 @@ Public Class maindashboard
                 End Using
             End If
 
-            ' Draw Primary Label (e.g., Jun 2026 / COMP 101)
+            ' Primary Label
             Using fontX As New System.Drawing.Font("Segoe UI", 8.0!, FontStyle.Bold)
                 Dim labelStr As String = chartLabels(i)
                 Dim lblSize As SizeF = g.MeasureString(labelStr, fontX)
                 g.DrawString(labelStr, fontX, Brushes.DimGray, barX + ((barWidth - lblSize.Width) / 2.0F), pnlChartCard.Height - marginBottom + 4)
             End Using
 
-            ' Draw Secondary Course Name Sub-Label if in Academic Courses View
+            ' Secondary Course Name Sub-Label
             If currentChartViewMode = 2 AndAlso i < chartSubLabels.Count AndAlso Not String.IsNullOrEmpty(chartSubLabels(i)) Then
                 Using fontSubX As New System.Drawing.Font("Segoe UI", 7.5!, FontStyle.Regular)
                     Dim subLabelStr As String = chartSubLabels(i)
@@ -456,7 +516,7 @@ Public Class maindashboard
             End If
         Next
 
-        ' Draw X-Axis Baseline
+        ' X-Axis Baseline
         Using axisPen As New Pen(Color.FromArgb(180, 190, 185), 1.5F)
             g.DrawLine(axisPen, marginX, pnlChartCard.Height - marginBottom, pnlChartCard.Width - marginX, pnlChartCard.Height - marginBottom)
         End Using
@@ -471,19 +531,16 @@ Public Class maindashboard
                 Dim clickedLabel As String = chartLabels(i)
 
                 If currentChartViewMode = 2 Then
-                    ' Academic View: Filter records by clicked Course Code
                     lblPortfolioTitle.Text = $"Submitted Artifacts Records — Course: {clickedLabel}"
                     FilterPortfolioEntries(courseCodeFilter:=clickedLabel)
                 Else
                     Dim selectedCatId As Integer = If(cmbCategoryFilter.SelectedValue IsNot Nothing AndAlso TypeOf cmbCategoryFilter.SelectedValue Is Integer, Convert.ToInt32(cmbCategoryFilter.SelectedValue), 0)
 
                     If selectedCatId = 0 Then
-                        ' Overall View: Filter records by clicked Month (e.g., Jun 2026)
                         Dim rawMonth As String = chartSubLabels(i)
                         lblPortfolioTitle.Text = $"Submitted Artifacts Records — Month: {clickedLabel}"
                         FilterPortfolioEntries(monthFilter:=rawMonth)
                     Else
-                        ' Category View: Filter records by clicked Activity Type
                         lblPortfolioTitle.Text = $"Submitted Artifacts Records — Activity: {clickedLabel}"
                         FilterPortfolioEntries(activityTypeFilter:=clickedLabel)
                     End If
@@ -494,7 +551,7 @@ Public Class maindashboard
     End Sub
 
     ' -------------------------------------------------------------
-    ' FILTER PORTFOLIO ENTRIES GRID BASED ON SELECTED VIEW MODE & CLICKED BAR
+    ' FILTER PORTFOLIO ENTRIES GRID
     ' -------------------------------------------------------------
     Public Sub FilterPortfolioEntries(Optional monthFilter As String = "", Optional courseCodeFilter As String = "", Optional activityTypeFilter As String = "")
         Try
@@ -510,7 +567,6 @@ Public Class maindashboard
                                           "INNER JOIN activity_types at ON pe.activity_type_id = at.activity_type_id " &
                                           "WHERE pe.student_number = @stud "
 
-                    ' Interactive Bar Click Filters
                     If Not String.IsNullOrEmpty(monthFilter) Then
                         query &= "AND DATE_FORMAT(pe.date_completed, '%Y-%m') = @monthFilter "
                     End If
@@ -523,7 +579,6 @@ Public Class maindashboard
                         query &= "AND at.type_name = @activityFilter "
                     End If
 
-                    ' Default View Filters
                     If currentChartViewMode = 2 AndAlso String.IsNullOrEmpty(courseCodeFilter) Then
                         query &= "AND pe.course_code IS NOT NULL AND pe.course_code <> '' AND pe.course_code <> 'N/A' "
                     ElseIf cmbCategoryFilter.SelectedIndex > 0 AndAlso String.IsNullOrEmpty(activityTypeFilter) Then
@@ -626,7 +681,6 @@ Public Class maindashboard
                             Dim yearLevel As String = reader("year_level").ToString()
                             Dim email As String = reader("email").ToString()
 
-                            ' Student Profile Info Table
                             Dim profileTable As New PdfPTable(2)
                             profileTable.WidthPercentage = 100
                             profileTable.SetWidths(New Single() {1.5F, 3.5F})
@@ -641,9 +695,7 @@ Public Class maindashboard
                             doc.Add(profileTable)
                             doc.Add(New Paragraph(" "))
 
-                            ' -------------------------------------------------------------
-                            ' PERSONAL STUDENT INTRODUCTORY STATEMENT
-                            ' -------------------------------------------------------------
+                            ' Intro Statement Box
                             Dim introBox As New PdfPTable(1)
                             introBox.WidthPercentage = 100
 
@@ -666,7 +718,6 @@ Public Class maindashboard
                 doc.Add(New Paragraph("PORTFOLIO ACCOMPLISHMENTS & ARTIFACT DESCRIPTIONS", subHeaderFont))
                 doc.Add(New Paragraph(" "))
 
-                ' Query includes pe.description to render full artifact details
                 Dim queryItems As String = "SELECT pe.title, pe.description, c.category_name, IFNULL(pe.course_code, 'N/A') AS course_code, at.type_name, pe.date_completed " &
                                            "FROM portfolio_entries pe " &
                                            "INNER JOIN categories c ON pe.category_id = c.category_id " &
@@ -690,21 +741,15 @@ Public Class maindashboard
                         While readerItems.Read()
                             hasItems = True
 
-                            ' Title
                             itemsTable.AddCell(New PdfPCell(New Phrase(readerItems("title").ToString(), boldFont)))
 
-                            ' Description / Details
                             Dim descStr As String = readerItems("description").ToString()
                             If String.IsNullOrWhiteSpace(descStr) Then descStr = "No detailed description provided."
                             itemsTable.AddCell(New PdfPCell(New Phrase(descStr, bodyFont)))
 
-                            ' Competency
                             itemsTable.AddCell(New PdfPCell(New Phrase(readerItems("category_name").ToString(), bodyFont)))
-
-                            ' Activity Type
                             itemsTable.AddCell(New PdfPCell(New Phrase(readerItems("type_name").ToString(), bodyFont)))
 
-                            ' Date
                             Dim dateVal As String = ""
                             If Not IsDBNull(readerItems("date_completed")) Then
                                 dateVal = Convert.ToDateTime(readerItems("date_completed")).ToString("yyyy-MM-dd")

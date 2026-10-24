@@ -114,4 +114,6 @@ Public Class frmRegister
     Private Sub txtStudentNum_TextChanged(sender As Object, e As EventArgs) Handles txtStudentNum.TextChanged
 
     End Sub
+
+
 End Class
