@@ -1,6 +1,5 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Text.RegularExpressions
-Imports System.Windows.Forms
 
 Public Class frmRegister
 

@@ -17,6 +17,7 @@ Partial Class frmLogin
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
         Me.pnlTopNav = New System.Windows.Forms.Panel()
         Me.lblTopLeftNav = New System.Windows.Forms.Label()
         Me.lblServerStatus = New System.Windows.Forms.Label()
@@ -126,7 +127,7 @@ Partial Class frmLogin
         Me.lblBadgePill.BackColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(30, Byte), Integer))
         Me.lblBadgePill.Font = New System.Drawing.Font("Segoe UI", 7.5!, System.Drawing.FontStyle.Bold)
         Me.lblBadgePill.ForeColor = System.Drawing.Color.FromArgb(CType(CType(75, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.lblBadgePill.Location = New System.Drawing.Point(310, 30)
+        Me.lblBadgePill.Location = New System.Drawing.Point(333, 21)
         Me.lblBadgePill.Name = "lblBadgePill"
         Me.lblBadgePill.Size = New System.Drawing.Size(145, 17)
         Me.lblBadgePill.TabIndex = 0
@@ -134,9 +135,10 @@ Partial Class frmLogin
         '
         'picCenterLogo
         '
-        Me.picCenterLogo.Location = New System.Drawing.Point(180, 160)
+        Me.picCenterLogo.Image = CType(resources.GetObject("picCenterLogo.Image"), System.Drawing.Image)
+        Me.picCenterLogo.Location = New System.Drawing.Point(167, 103)
         Me.picCenterLogo.Name = "picCenterLogo"
-        Me.picCenterLogo.Size = New System.Drawing.Size(140, 140)
+        Me.picCenterLogo.Size = New System.Drawing.Size(212, 180)
         Me.picCenterLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picCenterLogo.TabIndex = 1
         Me.picCenterLogo.TabStop = False

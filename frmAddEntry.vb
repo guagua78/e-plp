@@ -1,5 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.IO
+Imports System.Windows.Forms
 
 Public Class frmAddEntry
     Private selectedFilePath As String = ""
@@ -14,7 +15,7 @@ Public Class frmAddEntry
         Try
             Using conn As MySqlConnection = database.GetConnection()
                 If conn IsNot Nothing Then
-                    ' Load Categories
+                    ' Load Categories / Competencies
                     Dim catCmd As New MySqlCommand("SELECT category_id, category_name FROM categories ORDER BY category_name ASC", conn)
                     Dim catAdapter As New MySqlDataAdapter(catCmd)
                     Dim catTable As New DataTable()
@@ -40,30 +41,52 @@ Public Class frmAddEntry
         End Try
     End Sub
 
+    ' 2. Populate Course Dropdown directly from courses table based on Student Program and Year Level
+    ' Populate Course Dropdown directly from courses table matching the student's program and year level
     Private Sub PopulateCoursesDropdown()
         Try
             Using conn As MySqlConnection = database.GetConnection()
                 If conn IsNot Nothing Then
-                    ' Selects courses matching student's program AND up to their current year level
-                    Dim query As String = "SELECT c.course_code, CONCAT(c.course_code, ' - ', c.course_name) AS display_name " &
-                                      "FROM courses c " &
-                                      "INNER JOIN students s ON (c.program = s.degree_program OR c.program = 'BOTH') " &
-                                      "WHERE s.student_number = @stud " &
-                                      "AND c.year_level <= CASE " &
-                                      "    WHEN s.year_level LIKE '%1st%' THEN 1 " &
-                                      "    WHEN s.year_level LIKE '%2nd%' THEN 2 " &
-                                      "    WHEN s.year_level LIKE '%3rd%' THEN 3 " &
-                                      "    WHEN s.year_level LIKE '%4th%' THEN 4 " &
-                                      "    ELSE 1 END " &
-                                      "ORDER BY c.year_level ASC, c.course_code ASC"
+                    ' 1. Determine numerical year level from Globals session (e.g., "2nd Year" -> 2)
+                    Dim yearNum As Integer = 1
+                    If Not String.IsNullOrWhiteSpace(CurrentUserYearLevel) Then
+                        If CurrentUserYearLevel.Contains("1") Then
+                            yearNum = 1
+                        ElseIf CurrentUserYearLevel.Contains("2") Then
+                            yearNum = 2
+                        ElseIf CurrentUserYearLevel.Contains("3") Then
+                            yearNum = 3
+                        ElseIf CurrentUserYearLevel.Contains("4") Then
+                            yearNum = 4
+                        End If
+                    End If
+
+                    ' 2. Normalize Program string (e.g., "BS Information Technology" -> "BSIT", "BS Computer Science" -> "BSCS")
+                    Dim progCode As String = "BSIT"
+                    If Not String.IsNullOrWhiteSpace(CurrentUserProgram) Then
+                        If CurrentUserProgram.ToUpper().Contains("COMPUTER SCIENCE") OrElse CurrentUserProgram.ToUpper().Contains("BSCS") Then
+                            progCode = "BSCS"
+                        ElseIf CurrentUserProgram.ToUpper().Contains("INFORMATION TECHNOLOGY") OrElse CurrentUserProgram.ToUpper().Contains("BSIT") Then
+                            progCode = "BSIT"
+                        End If
+                    End If
+
+                    ' 3. Direct query on courses matching program code or 'BOTH', up to current year level
+                    Dim query As String = "SELECT course_code, CONCAT(course_code, ' - ', course_name) AS display_name " &
+                                          "FROM courses " &
+                                          "WHERE (UPPER(program) = @prog OR UPPER(program) = 'BOTH') " &
+                                          "  AND year_level <= @yearLvl " &
+                                          "ORDER BY year_level ASC, course_code ASC"
 
                     Using cmd As New MySqlCommand(query, conn)
-                        cmd.Parameters.AddWithValue("@stud", CurrentStudentNumber)
+                        cmd.Parameters.AddWithValue("@prog", progCode)
+                        cmd.Parameters.AddWithValue("@yearLvl", yearNum)
+
                         Dim adapter As New MySqlDataAdapter(cmd)
                         Dim dt As New DataTable()
                         adapter.Fill(dt)
 
-                        ' Add default General / Non-Academic option at top
+                        ' Add default General / Non-Academic option at position 0
                         Dim dr As DataRow = dt.NewRow()
                         dr("course_code") = DBNull.Value
                         dr("display_name") = "-- General / Non-Academic --"
@@ -72,11 +95,12 @@ Public Class frmAddEntry
                         cmbCourseCode.DataSource = dt
                         cmbCourseCode.DisplayMember = "display_name"
                         cmbCourseCode.ValueMember = "course_code"
+                        cmbCourseCode.SelectedIndex = 0
                     End Using
                 End If
             End Using
         Catch ex As Exception
-            ' Catch silently or handle notice
+            ' Fallback error handling
         End Try
     End Sub
 
@@ -168,4 +192,5 @@ Public Class frmAddEntry
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
     End Sub
+
 End Class
