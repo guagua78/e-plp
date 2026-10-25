@@ -28,7 +28,6 @@ Partial Class frmLogin
         Me.lblRightTitle = New System.Windows.Forms.Label()
         Me.lblRightSubtitle = New System.Windows.Forms.Label()
         Me.lblMotto = New System.Windows.Forms.Label()
-        Me.lblPortalVersion = New System.Windows.Forms.Label()
         Me.pnlLeftForm = New System.Windows.Forms.Panel()
         Me.flpRegisterContainer = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblRegisterPrompt = New System.Windows.Forms.Label()
@@ -81,11 +80,11 @@ Partial Class frmLogin
         Me.lblServerStatus.AutoSize = True
         Me.lblServerStatus.Font = New System.Drawing.Font("Segoe UI", 8.5!, System.Drawing.FontStyle.Bold)
         Me.lblServerStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(75, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.lblServerStatus.Location = New System.Drawing.Point(960, 18)
+        Me.lblServerStatus.Location = New System.Drawing.Point(1131, 18)
         Me.lblServerStatus.Name = "lblServerStatus"
         Me.lblServerStatus.Size = New System.Drawing.Size(114, 20)
         Me.lblServerStatus.TabIndex = 1
-        Me.lblServerStatus.Text = " AY 2024-2025"
+        Me.lblServerStatus.Text = " AY 2025-2026"
         '
         'pnlBottomFooter
         '
@@ -115,7 +114,6 @@ Partial Class frmLogin
         Me.pnlRightSide.Controls.Add(Me.lblRightTitle)
         Me.pnlRightSide.Controls.Add(Me.lblRightSubtitle)
         Me.pnlRightSide.Controls.Add(Me.lblMotto)
-        Me.pnlRightSide.Controls.Add(Me.lblPortalVersion)
         Me.pnlRightSide.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlRightSide.Location = New System.Drawing.Point(540, 0)
         Me.pnlRightSide.Name = "pnlRightSide"
@@ -176,17 +174,6 @@ Partial Class frmLogin
         Me.lblMotto.Text = """Center of Academic Excellence, Technological Leadership, and Community Innovatio" &
     "n."""
         Me.lblMotto.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'lblPortalVersion
-        '
-        Me.lblPortalVersion.AutoSize = True
-        Me.lblPortalVersion.Font = New System.Drawing.Font("Segoe UI", 7.5!)
-        Me.lblPortalVersion.ForeColor = System.Drawing.Color.FromArgb(CType(CType(120, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.lblPortalVersion.Location = New System.Drawing.Point(145, 595)
-        Me.lblPortalVersion.Name = "lblPortalVersion"
-        Me.lblPortalVersion.Size = New System.Drawing.Size(232, 17)
-        Me.lblPortalVersion.TabIndex = 5
-        Me.lblPortalVersion.Text = "🛡 Encrypted Institutional Portal • v2.4"
         '
         'pnlLeftForm
         '
@@ -431,6 +418,5 @@ Partial Class frmLogin
     Friend WithEvents lblRightTitle As System.Windows.Forms.Label
     Friend WithEvents lblRightSubtitle As System.Windows.Forms.Label
     Friend WithEvents lblMotto As System.Windows.Forms.Label
-    Friend WithEvents lblPortalVersion As System.Windows.Forms.Label
 
 End Class

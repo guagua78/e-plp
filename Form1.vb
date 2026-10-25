@@ -1,4 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports System.Text.RegularExpressions
+Imports System.Windows.Forms
 
 Public Class frmRegister
 
@@ -18,6 +20,21 @@ Public Class frmRegister
         Dim hidePassword As Boolean = Not chkShowPass.Checked
         txtPassword.UseSystemPasswordChar = hidePassword
         txtConfirmPass.UseSystemPasswordChar = hidePassword
+    End Sub
+
+    ' Restrict Key Input: Allow only numbers and a single hyphen (-)
+    Private Sub txtStudentNum_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtStudentNum.KeyPress
+        ' Allow Control keys (Backspace, Delete, etc.)
+        If Char.IsControl(e.KeyChar) Then Return
+
+        ' Allow Digits
+        If Char.IsDigit(e.KeyChar) Then Return
+
+        ' Allow single hyphen (-) if not already entered
+        If e.KeyChar = "-"c AndAlso Not txtStudentNum.Text.Contains("-") Then Return
+
+        ' Block all other characters (such as '=')
+        e.Handled = True
     End Sub
 
     ' Navigation to Login
@@ -47,7 +64,7 @@ Public Class frmRegister
             Dim password As String = txtPassword.Text
             Dim confirmPwd As String = txtConfirmPass.Text
 
-            ' Basic Input Validation
+            ' 1. Basic Field Validation
             If String.IsNullOrWhiteSpace(studentNum) OrElse String.IsNullOrWhiteSpace(email) OrElse
                String.IsNullOrWhiteSpace(firstName) OrElse String.IsNullOrWhiteSpace(lastName) OrElse
                String.IsNullOrWhiteSpace(password) Then
@@ -55,6 +72,22 @@ Public Class frmRegister
                 Return
             End If
 
+            ' 2. Enforce Strict Student Number Format (Must be YY-XXXXX using a hyphen)
+            Dim studentNoPattern As String = "^\d{2}-\d{5}$"
+            If Not Regex.IsMatch(studentNum, studentNoPattern) Then
+                MessageBox.Show("Invalid Student Number format. It must follow the format 'YY-XXXXX' (e.g., 25-00123) using a hyphen (-).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtStudentNum.Focus()
+                Return
+            End If
+
+            ' 3. PLP Webmail Domain Validation
+            If Not email.EndsWith("@plpasig.edu.ph", StringComparison.OrdinalIgnoreCase) Then
+                MessageBox.Show("Please use a valid PLP webmail address (@plpasig.edu.ph).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtEmail.Focus()
+                Return
+            End If
+
+            ' 4. Password Length & Match Validation
             If password.Length < 8 Then
                 MessageBox.Show("Password must be at least 8 characters long.", "Weak Password", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
@@ -65,7 +98,7 @@ Public Class frmRegister
                 Return
             End If
 
-            ' Insert Into Database
+            ' 5. Insert Into Database
             Using conn As MySqlConnection = database.GetConnection()
                 If conn IsNot Nothing Then
                     Dim checkQuery As String = "SELECT COUNT(*) FROM students WHERE student_number = @stud OR email = @email"
@@ -100,20 +133,15 @@ Public Class frmRegister
 
                     MessageBox.Show("Account registered successfully! You may now log in.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                    ' Navigate to login screen without terminating the app thread
+                    ' Navigate to login screen
                     Dim loginForm As New frmLogin()
                     loginForm.Show()
-                    Me.Hide() ' Keeps the primary application process running
+                    Me.Hide()
                 End If
             End Using
         Catch ex As Exception
             MessageBox.Show("Registration error: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-    Private Sub txtStudentNum_TextChanged(sender As Object, e As EventArgs) Handles txtStudentNum.TextChanged
-
-    End Sub
-
 
 End Class

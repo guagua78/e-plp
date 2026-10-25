@@ -18,6 +18,6 @@
         CurrentUserCollege = ""
         CurrentUserProgram = ""
         CurrentUserYearLevel = ""
-        CurrentUserRole = ""
+        CurrentUserRole = "Student"
     End Sub
 End Module

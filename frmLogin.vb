@@ -84,8 +84,9 @@ Public Class frmLogin
                             If reader.Read() Then
                                 Dim storedHash As String = reader("password_hash").ToString()
 
+                                ' Inside frmLogin.vb -> btnLogin_Click
                                 If BCrypt.Net.BCrypt.Verify(passwordInput, storedHash) Then
-                                    ' Set Session Variables in Globals.vb
+                                    ' Save session attributes to Globals
                                     CurrentStudentNumber = reader("student_number").ToString()
                                     CurrentUserFullName = $"{reader("first_name")} {reader("last_name")}".Trim()
                                     CurrentUserEmail = reader("email").ToString()
@@ -95,14 +96,10 @@ Public Class frmLogin
 
                                     MessageBox.Show($"Welcome back, {CurrentUserFullName}!", "Authentication Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                                    ' Launch Main Dashboard Form
+                                    ' Launch Dashboard
                                     Dim mainDashboard As New maindashboard()
                                     mainDashboard.Show()
-
-                                    ' Hide Login Window
                                     Me.Hide()
-                                Else
-                                    MessageBox.Show("Invalid password. Please try again.", "Authentication Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 End If
                             Else
                                 MessageBox.Show("No account found matching that Student Number or Webmail.", "Authentication Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)

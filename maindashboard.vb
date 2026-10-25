@@ -17,7 +17,13 @@ Public Class maindashboard
     Private barBounds As New List(Of RectangleF)()
 
     Private Sub maindashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' 1. Bind Dynamic Header Labels for the Logged-In Student
         lblGreeting.Text = "Hello, " & CurrentUserFullName & "!"
+
+        ' Dynamic Subtitle with Student ID and Program
+        If lblStudentDetails IsNot Nothing Then
+            lblStudentDetails.Text = $"{CurrentUserProgram} • {CurrentUserYearLevel}{vbCrLf}{CurrentStudentNumber}"
+        End If
 
         pnlCompetenciesSubMenu.BringToFront()
         btnAddEntry.BringToFront()
