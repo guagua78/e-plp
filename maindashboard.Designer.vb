@@ -343,7 +343,7 @@ Partial Class maindashboard
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.ForeColor = System.Drawing.Color.Gray
-        Me.Label2.Location = New System.Drawing.Point(604, 30)
+        Me.Label2.Location = New System.Drawing.Point(572, 31)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(125, 16)
         Me.Label2.TabIndex = 4

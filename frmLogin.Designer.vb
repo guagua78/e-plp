@@ -30,6 +30,7 @@ Partial Class frmLogin
         Me.lblRightSubtitle = New System.Windows.Forms.Label()
         Me.lblMotto = New System.Windows.Forms.Label()
         Me.pnlLeftForm = New System.Windows.Forms.Panel()
+        Me.btnExit = New System.Windows.Forms.Button()
         Me.flpRegisterContainer = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblRegisterPrompt = New System.Windows.Forms.Label()
         Me.lnkRegister = New System.Windows.Forms.LinkLabel()
@@ -180,6 +181,7 @@ Partial Class frmLogin
         'pnlLeftForm
         '
         Me.pnlLeftForm.BackColor = System.Drawing.Color.White
+        Me.pnlLeftForm.Controls.Add(Me.btnExit)
         Me.pnlLeftForm.Controls.Add(Me.flpRegisterContainer)
         Me.pnlLeftForm.Controls.Add(Me.lblEyeToggle)
         Me.pnlLeftForm.Controls.Add(Me.lblHeaderSub)
@@ -198,6 +200,21 @@ Partial Class frmLogin
         Me.pnlLeftForm.Name = "pnlLeftForm"
         Me.pnlLeftForm.Size = New System.Drawing.Size(540, 640)
         Me.pnlLeftForm.TabIndex = 0
+        '
+        'btnExit
+        '
+        Me.btnExit.BackColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        Me.btnExit.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnExit.FlatAppearance.BorderSize = 0
+        Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExit.Font = New System.Drawing.Font("Segoe UI", 10.5!, System.Drawing.FontStyle.Bold)
+        Me.btnExit.ForeColor = System.Drawing.Color.White
+        Me.btnExit.Location = New System.Drawing.Point(380, 445)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(100, 46)
+        Me.btnExit.TabIndex = 13
+        Me.btnExit.Text = "❌ EXIT"
+        Me.btnExit.UseVisualStyleBackColor = False
         '
         'flpRegisterContainer
         '
@@ -361,7 +378,7 @@ Partial Class frmLogin
         Me.btnLogin.ForeColor = System.Drawing.Color.White
         Me.btnLogin.Location = New System.Drawing.Point(40, 445)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(440, 46)
+        Me.btnLogin.Size = New System.Drawing.Size(330, 46)
         Me.btnLogin.TabIndex = 10
         Me.btnLogin.Text = "LOGIN  →"
         Me.btnLogin.UseVisualStyleBackColor = False
@@ -412,6 +429,7 @@ Partial Class frmLogin
     Friend WithEvents txtPass As System.Windows.Forms.TextBox
     Friend WithEvents lblEyeToggle As System.Windows.Forms.Label
     Friend WithEvents btnLogin As System.Windows.Forms.Button
+    Friend WithEvents btnExit As System.Windows.Forms.Button
     Friend WithEvents flpRegisterContainer As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents lblRegisterPrompt As System.Windows.Forms.Label
     Friend WithEvents lnkRegister As System.Windows.Forms.LinkLabel

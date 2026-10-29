@@ -25,6 +25,7 @@ Partial Class frmRegister
         Me.btnNavLogin = New System.Windows.Forms.Button()
         Me.pnlMainCard = New System.Windows.Forms.Panel()
         Me.pnlRightForm = New System.Windows.Forms.Panel()
+        Me.btnExit = New System.Windows.Forms.Button()
         Me.PictureBox7 = New System.Windows.Forms.PictureBox()
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
@@ -161,6 +162,7 @@ Partial Class frmRegister
         '
         'pnlRightForm
         '
+        Me.pnlRightForm.Controls.Add(Me.btnExit)
         Me.pnlRightForm.Controls.Add(Me.PictureBox7)
         Me.pnlRightForm.Controls.Add(Me.PictureBox6)
         Me.pnlRightForm.Controls.Add(Me.PictureBox3)
@@ -203,6 +205,21 @@ Partial Class frmRegister
         Me.pnlRightForm.Padding = New System.Windows.Forms.Padding(35, 25, 35, 25)
         Me.pnlRightForm.Size = New System.Drawing.Size(800, 740)
         Me.pnlRightForm.TabIndex = 1
+        '
+        'btnExit
+        '
+        Me.btnExit.BackColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        Me.btnExit.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnExit.FlatAppearance.BorderSize = 0
+        Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExit.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.btnExit.ForeColor = System.Drawing.Color.White
+        Me.btnExit.Location = New System.Drawing.Point(630, 650)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(135, 52)
+        Me.btnExit.TabIndex = 36
+        Me.btnExit.Text = "❌ EXIT"
+        Me.btnExit.UseVisualStyleBackColor = False
         '
         'PictureBox7
         '
@@ -321,7 +338,7 @@ Partial Class frmRegister
         Me.btnRegister.ForeColor = System.Drawing.Color.White
         Me.btnRegister.Location = New System.Drawing.Point(35, 650)
         Me.btnRegister.Name = "btnRegister"
-        Me.btnRegister.Size = New System.Drawing.Size(730, 52)
+        Me.btnRegister.Size = New System.Drawing.Size(580, 52)
         Me.btnRegister.TabIndex = 24
         Me.btnRegister.Text = "REGISTER ACCOUNT"
         Me.btnRegister.UseVisualStyleBackColor = False
@@ -738,6 +755,7 @@ Partial Class frmRegister
     Friend WithEvents txtConfirmPass As System.Windows.Forms.TextBox
     Friend WithEvents chkShowPass As System.Windows.Forms.CheckBox
     Friend WithEvents btnRegister As System.Windows.Forms.Button
+    Friend WithEvents btnExit As System.Windows.Forms.Button
     Friend WithEvents Label1 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Panel3 As Panel
